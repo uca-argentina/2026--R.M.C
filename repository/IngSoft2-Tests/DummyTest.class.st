@@ -1,10 +1,16 @@
 Class {
-	#name : #DummyTest,
-	#superclass : #TestCase,
-	#category : #'IngSoft2-Tests'
+	#name : 'DummyTest',
+	#superclass : 'TestCase',
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
+DummyTest >> testBanana [
+self assert: true
+]
+
+{ #category : 'tests' }
 DummyTest >> testDummy [
 
 	self assert: Dummy new isDummy
