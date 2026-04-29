@@ -9,7 +9,7 @@ Class {
 DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
 
 	| aDice |
-	aDice := Dice new.
+	aDice := Dice default.
 	self assert: aDice throw positive
 ]
 

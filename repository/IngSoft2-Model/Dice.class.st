@@ -15,6 +15,12 @@ Dice class >> cannotBeLowerThan: amountOfFaces [
 		Error signal: 'Number of faces cannot be lower that two' ]
 ]
 
+{ #category : 'accessing' }
+Dice class >> default [
+
+	^ self withTotalNumberFaces: 6
+]
+
 { #category : 'as yet unclassified' }
 Dice class >> withTotalNumberFaces: amountOfFaces [
 
@@ -30,6 +36,6 @@ Dice >> initializeWith: amountOfFaces [
 
 { #category : 'as yet unclassified' }
 Dice >> throw [
-	^ 1
-	"^ (1 to: totalNumberFaces) atRandom"
+
+	^ (1 to: totalNumberFaces) atRandom
 ]
