@@ -9,7 +9,7 @@ Class {
 ShipTests >> test01AshipisAtostartingposition [
 
 | aShip |
-aShip:=Ship new.
+aShip:=Ship creatWith:0.
 
 self assert: (aShip isAt:0).
 ]

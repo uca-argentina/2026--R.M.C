@@ -16,7 +16,7 @@ Ship class >> creatWith: anPosition [
 
 { #category : 'as yet unclassified' }
 Ship >> advancesTo: anStep [ 
-	^position + anStep .
+	position:= position + anStep .
 ]
 
 { #category : 'initialization' }
@@ -26,5 +26,5 @@ Ship >> initializeWith: anPosition [
 
 { #category : 'accessing' }
 Ship >> isAt: anPosition [ 
-	^true.
+	^position=anPosition.
 ]
