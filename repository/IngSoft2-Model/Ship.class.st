@@ -28,3 +28,8 @@ Ship >> initializeWith: anPosition [
 Ship >> isAt: anPosition [ 
 	^position=anPosition.
 ]
+
+{ #category : 'testing' }
+Ship >> isHere: aPosition [ 
+	^ aPosition = position .
+]

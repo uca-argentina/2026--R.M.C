@@ -25,7 +25,15 @@ BoardTest >> test01WhenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 ]
 
 { #category : 'tests' }
-BoardTest >> test02WhenABoardIsCreatedWithTenCellsThenItHasTenCells [
+BoardTest >> test02WhenABoardIsCreatedTheItsHasAndState [
+
+	| aBoard |
+	aBoard := Board new.
+	self assert: aBoard actualState = 'not finish'
+]
+
+{ #category : 'tests' }
+BoardTest >> test03WhenABoardIsCreatedWithTenCellsThenItHasTenCells [
 
 	| aBoard |
 	aBoard := Board createWithATotalNumberOfCellsOf: 10.
@@ -34,7 +42,7 @@ BoardTest >> test02WhenABoardIsCreatedWithTenCellsThenItHasTenCells [
 ]
 
 { #category : 'tests' }
-BoardTest >> test03WhenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
+BoardTest >> test04WhenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 0 ]
@@ -44,11 +52,24 @@ BoardTest >> test03WhenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
 ]
 
 { #category : 'tests' }
-BoardTest >> test04WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated [
+BoardTest >> test05WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated [
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 'a' ]
 		raise: Error
 		withMessageText:
 		'The board must have an integer number of cells greater than two'
+]
+
+{ #category : 'tests' }
+BoardTest >> test06WhenAShipReachesTheLastCellThenTheBoardSaysTheGameIsOver [
+
+    | aBoard aShip |
+
+    aBoard := Board createWithATotalNumberOfCellsOf: 8.
+    aShip := Ship creatWith: 0.
+
+    aBoard move: aShip by: 8.
+
+    self assert: (aBoard actualState = 'finish').
 ]
