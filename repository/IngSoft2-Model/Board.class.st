@@ -9,8 +9,18 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells [ 
-	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells.
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells [
+
+	^ self new initializeWithATotalNumberOfCellsOf:
+		  (self validate: aNumberOfCells)
+]
+
+{ #category : 'testing' }
+Board class >> validate: aNumber [
+    (aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
+        Error signal: 'The board must have an integer number of cells greater than two'
+    ].
+	^aNumber.
 ]
 
 { #category : 'initialization' }
