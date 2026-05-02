@@ -24,7 +24,11 @@ Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollec
 Board class >> validateCollection: aCollection [
 
 	aCollection isEmpty ifTrue: [
-		Error signal: 'There must be at least one ship in the board' ]
+		Error signal: 'There must be at least one ship in the board' ].
+	
+	(aCollection asSet size ~= aCollection size) ifTrue: [
+        Error signal: 'There cant be two equals ships in the board'
+    ].
 ]
 
 { #category : 'testing' }

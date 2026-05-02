@@ -112,3 +112,26 @@ BoardTest >> test07whenAnEmptyCollectiosOfShipsAreCreatedThenTheBoardCreationsFa
 		raise: Error
 		withMessageText: 'There must be at least one ship in the board'.
 ]
+
+{ #category : 'tests' }
+BoardTest >> test08WhenABoardIsCreatedWithDuplicatedShipsThenTheBoardCreationFails [
+
+	| aBoard aShip aCollectionOfShips aSecondShip |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aSecondShip := Ship creatWithposition: 0 name: 'juan'.
+
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aShip .
+	
+	self
+		should: [
+			Board
+				createWithATotalNumberOfCellsOf: 8
+				andShips: aCollectionOfShips ]
+		raise: Error
+		withMessageText: 'There cant be two equals ships in the board'.
+	
+	
+
+]
