@@ -41,3 +41,8 @@ Ship >> initializeWith: anPosition and:anName [
 Ship >> isAt: anPosition [ 
 	^position=anPosition.
 ]
+
+{ #category : 'as yet unclassified' }
+Ship >> nameIs: aName [
+	^name == aName .
+]
