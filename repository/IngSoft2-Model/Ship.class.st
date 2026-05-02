@@ -10,12 +10,6 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Ship class >> creatWith: anPosition [ 
-	
-	^self new initializeWith:anPosition.
-]
-
-{ #category : 'as yet unclassified' }
 Ship class >> creatWithposition:anPosition name:anName [
 	
 	^self new initializeWith: anPosition and:anName .

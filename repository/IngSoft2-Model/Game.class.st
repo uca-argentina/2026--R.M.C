@@ -18,8 +18,12 @@ Game class >> createWithName: aName [
 
 { #category : 'as yet unclassified' }
 Game class >> createWithName: aName andShips: aShip [
-	| aBoard |
-	aBoard := Board createWithATotalNumberOfCellsOf: 10.
+	| aBoard aCollectionOfShips |
+
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	
+	aBoard := Board createWithATotalNumberOfCellsOf: 3 andShips: aCollectionOfShips.
 ^	self new initializeWithName: aName andShips: aShip andBoard: aBoard
 ]
 

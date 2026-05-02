@@ -9,7 +9,7 @@ Class {
 ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
 	| aShip |
-	aShip := Ship creatWith: 0.
+	aShip := Ship creatWithposition: 0 name: 'juan'.
 	self assert: (aShip isAt: 0)
 ]
 
@@ -17,7 +17,7 @@ ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
 
 	| aShip |
-	aShip := Ship creatWith: 0.
+	aShip := Ship creatWithposition: 0 name: 'juan'.
 	aShip advancesTo: 5.
 	self assert: (aShip isAt: 5)
 ]
@@ -34,9 +34,13 @@ ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 { #category : 'tests' }
 ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 
-	| aShip aBoard |
+	| aShip aBoard aCollectionOfShips |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aShip.
+	
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aCollectionOfShips.
+
 	aShip advancesTo: 5 in: aBoard.
 	self assert: (aShip isAt: 5 in: aBoard)
 ]
