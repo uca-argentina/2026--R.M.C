@@ -20,3 +20,13 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 	aGame := Game createWithName: 'Generala'.
 	self assert: aGame start equals: 'Generala'
 ]
+
+{ #category : 'tests' }
+GameTest >> test03whenTheGameTellsTheShipToMoveThenTheShipsChanges [
+
+	| aGame aShip |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aGame := Game createWithName: 'Ludo' andShips: aShip.
+	aGame moves: aShip.
+	self assert: (aShip isAt: 2)
+]
