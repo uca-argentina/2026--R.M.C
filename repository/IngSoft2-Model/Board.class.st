@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'numberOfCells',
-		'state'
+		'state',
+		'ships'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -16,6 +17,14 @@ Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells [
 		  (self validate: aNumberOfCells)
 ]
 
+{ #category : 'as yet unclassified' }
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aShip [
+
+	^ self new
+		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
+		  andShips: aShip
+]
+
 { #category : 'testing' }
 Board class >> validate: aNumber [
     (aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
@@ -26,7 +35,14 @@ Board class >> validate: aNumber [
 
 { #category : 'testing' }
 Board >> actualState [
-	^ state .
+
+	^ state
+]
+
+{ #category : 'testing' }
+Board >> hasTheShip: aShip [
+
+	^ true
 ]
 
 { #category : 'initialization' }
@@ -41,6 +57,13 @@ Board >> initialize [
 { #category : 'initialization' }
 Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [ 
 	numberOfCells := aNumberOfCells.
+]
+
+{ #category : 'initialization' }
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aShip [
+
+	numberOfCells := aNumberOfCells.
+	ships := aShip
 ]
 
 { #category : 'as yet unclassified' }

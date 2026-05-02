@@ -68,3 +68,12 @@ BoardTest >> test06whenAShipReachesTheLastCellThenTheBoardSaysTheGameIsOver [
 	aBoard move: aShip by: 8.
 	self assert: aBoard actualState = 'finish'
 ]
+
+{ #category : 'tests' }
+BoardTest >> test07whenAShipIsCreatedThenTheBoardKnowsItsWhereabout [
+
+	| aBoard aShip |
+	aShip := Ship creatWith: 0.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aShip.
+	self assert: (aBoard hasTheShip: aShip)
+]
