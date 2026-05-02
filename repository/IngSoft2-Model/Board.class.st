@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'numberOfCells',
 		'state',
-		'ships'
+		'ships',
+		'shipsWhereabout'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -45,6 +46,12 @@ Board >> hasTheShip: aShip [
 	^ true
 ]
 
+{ #category : 'testing' }
+Board >> hasTheShip: aShip atThePosition: aPosition [
+
+	^ (shipsWhereabout at: aShip) = aPosition
+]
+
 { #category : 'initialization' }
 Board >> initialize [
 
@@ -63,13 +70,15 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [
 Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aShip [
 
 	numberOfCells := aNumberOfCells.
-	ships := aShip
+	ships := aShip.
+	shipsWhereabout := Dictionary new.
+	shipsWhereabout at: aShip put: 0
 ]
 
 { #category : 'as yet unclassified' }
-Board >> move: aShip by: cellToMove [ 
-	aShip advancesTo: cellToMove.
-	(aShip isHere: numberOfCells) ifTrue: [ state:= 'finish' ].
+Board >> move: aShip by: cellToMove [
+
+	shipsWhereabout at: aShip put: cellToMove
 ]
 
 { #category : 'as yet unclassified' }

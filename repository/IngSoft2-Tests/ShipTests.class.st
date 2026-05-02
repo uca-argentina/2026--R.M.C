@@ -30,3 +30,13 @@ ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 	aShip advancesTo: 5.
 	self assert: (aShip nameIs: 'juan')
 ]
+
+{ #category : 'tests' }
+ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
+
+	| aShip aBoard |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aShip.
+	aShip advancesTo: 5 in: aBoard.
+	self assert: (aShip isAt: 5 in: aBoard)
+]

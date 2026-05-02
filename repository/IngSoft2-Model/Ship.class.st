@@ -26,6 +26,12 @@ Ship >> advancesTo: anStep [
 	position:= position + anStep .
 ]
 
+{ #category : 'as yet unclassified' }
+Ship >> advancesTo: aPosition in: aBoard [
+
+	aBoard move: self by: aPosition
+]
+
 { #category : 'initialization' }
 Ship >> initializeWith: anPosition [ 
 	position :=anPosition .
@@ -40,6 +46,12 @@ Ship >> initializeWith: anPosition and:anName [
 { #category : 'accessing' }
 Ship >> isAt: anPosition [ 
 	^position=anPosition.
+]
+
+{ #category : 'accessing' }
+Ship >> isAt: aPosition in: aBoard [
+
+	^ aBoard hasTheShip: self atThePosition: aPosition
 ]
 
 { #category : 'testing' }

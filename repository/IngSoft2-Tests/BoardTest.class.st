@@ -77,3 +77,12 @@ BoardTest >> test07whenAShipIsCreatedThenTheBoardKnowsItsWhereabout [
 	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aShip.
 	self assert: (aBoard hasTheShip: aShip)
 ]
+
+{ #category : 'tests' }
+BoardTest >> test08whenMultipleShipsAreCreatedThenTheirWhereaboutAtTheBoardIsZero [
+
+	| aBoard aShip |
+	aShip := Ship creatWith: 0.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aShip.
+	self assert: (aBoard hasTheShip: aShip atThePosition: 0)
+]
