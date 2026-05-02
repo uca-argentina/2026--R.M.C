@@ -31,7 +31,7 @@ BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 ]
 
 { #category : 'tests' }
-BoardTest >> test03whenABoardIsCreatedWithTenCellsThenItHasTenCells [
+BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 	"| aBoard |
 	aBoard := Board createWithATotalNumberOfCellsOf: 10."
 
@@ -46,7 +46,7 @@ BoardTest >> test03whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 ]
 
 { #category : 'tests' }
-BoardTest >> test04whenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
+BoardTest >> test03whenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
 
 	| aShip |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
@@ -58,7 +58,7 @@ BoardTest >> test04whenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
 ]
 
 { #category : 'tests' }
-BoardTest >> test05whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated [
+BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated [
 
 	| aShip |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
@@ -71,7 +71,7 @@ BoardTest >> test05whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated 
 ]
 
 { #category : 'tests' }
-BoardTest >> test08whenAShipsIsInGameThenTheirWhereaboutAtTheBoardIsZero [
+BoardTest >> test05whenAShipsIsInGameThenTheirWhereaboutAtTheBoardIsZero [
 
 	| aBoard aShip aCollectionOfShips |
 	
@@ -84,7 +84,7 @@ BoardTest >> test08whenAShipsIsInGameThenTheirWhereaboutAtTheBoardIsZero [
 ]
 
 { #category : 'tests' }
-BoardTest >> test08whenMultipleShipsAreCreatedThenTheirWhereaboutAtTheBoardIsZero [
+BoardTest >> test06whenMultipleShipsAreCreatedThenTheirWhereaboutAtTheBoardIsZero [
 
 	| aBoard aShip aCollectionOfShips aSecondShip |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
@@ -96,4 +96,19 @@ BoardTest >> test08whenMultipleShipsAreCreatedThenTheirWhereaboutAtTheBoardIsZer
 	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aCollectionOfShips .
 	self assert: (aBoard hasTheShip: aShip atThePosition: 0).
 	self assert: (aBoard hasTheShip: aSecondShip atThePosition: 0).
+]
+
+{ #category : 'tests' }
+BoardTest >> test07whenAnEmptyCollectiosOfShipsAreCreatedThenTheBoardCreationsFailed [
+
+	| aBoard aShip aCollectionOfShips aSecondShip |
+	aCollectionOfShips := OrderedCollection new.
+
+	self
+		should: [
+			Board
+				createWithATotalNumberOfCellsOf: 8
+				andShips: aCollectionOfShips ]
+		raise: Error
+		withMessageText: 'There must be at least one ship in the board'.
 ]

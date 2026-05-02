@@ -12,15 +12,23 @@ Class {
 { #category : 'as yet unclassified' }
 Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
 
-	self validate: aNumberOfCells .
+	self validateNumber: aNumberOfCells .
+	self validateCollection: aCollectionOfShips .
 
 	^ self new
 		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
 		  andShips: aCollectionOfShips
 ]
 
+{ #category : 'as yet unclassified' }
+Board class >> validateCollection: aCollection [
+
+	aCollection isEmpty ifTrue: [
+		Error signal: 'There must be at least one ship in the board' ]
+]
+
 { #category : 'testing' }
-Board class >> validate: aNumber [
+Board class >> validateNumber: aNumber [
     (aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
         Error signal: 'The board must have an integer number of cells greater than two'
     ].
