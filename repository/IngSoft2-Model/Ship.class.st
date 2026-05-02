@@ -46,3 +46,8 @@ Ship >> isAt: anPosition [
 Ship >> isHere: aPosition [ 
 	^ aPosition = position .
 ]
+
+{ #category : 'as yet unclassified' }
+Ship >> nameIs: aName [
+	^name == aName .
+]
