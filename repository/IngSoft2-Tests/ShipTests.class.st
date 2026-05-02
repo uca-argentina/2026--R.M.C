@@ -22,3 +22,12 @@ aShip:=Ship creatWith:0.
 aShip advancesTo:5.
 self assert: (aShip isAt:5).
 ]
+
+{ #category : 'tests' }
+ShipTests >> test03Ashipwhitname [
+
+| aShip |
+aShip:=Ship creatWithposition:0 name:'juan'.
+aShip advancesTo:5.
+self assert: (aShip isAt:5).
+]
