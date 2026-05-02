@@ -6,28 +6,27 @@ Class {
 }
 
 { #category : 'tests' }
-ShipTests >> test01AshipisAtostartingposition [
+ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
-| aShip |
-aShip:=Ship creatWith:0.
-
-self assert: (aShip isAt:0).
+	| aShip |
+	aShip := Ship creatWith: 0.
+	self assert: (aShip isAt: 0)
 ]
 
 { #category : 'tests' }
-ShipTests >> test02Ashipadvances5steps [
+ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
 
-| aShip |
-aShip:=Ship creatWith:0.
-aShip advancesTo:5.
-self assert: (aShip isAt:5).
+	| aShip |
+	aShip := Ship creatWith: 0.
+	aShip advancesTo: 5.
+	self assert: (aShip isAt: 5)
 ]
 
 { #category : 'tests' }
-ShipTests >> test03Ashipwhitname [
+ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
-| aShip |
-aShip:=Ship creatWithposition:0 name:'juan'.
-aShip advancesTo:5.
-self assert: (aShip nameIs:'juan').
+	| aShip |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip advancesTo: 5.
+	self assert: (aShip nameIs: 'juan')
 ]

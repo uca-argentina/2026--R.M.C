@@ -16,16 +16,15 @@ BoardTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMe
 ]
 
 { #category : 'tests' }
-BoardTest >> test01WhenABoardIsCreatedThenItHasAPositiveNumberOfCells [
+BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
+
 	| aBoard |
 	aBoard := Board new.
-	
-	
 	self assert: aBoard numberOfCells positive
 ]
 
 { #category : 'tests' }
-BoardTest >> test02WhenABoardIsCreatedTheItsHasAndState [
+BoardTest >> test02whenABoardIsCreatedThenItsHasAState [
 
 	| aBoard |
 	aBoard := Board new.
@@ -33,16 +32,15 @@ BoardTest >> test02WhenABoardIsCreatedTheItsHasAndState [
 ]
 
 { #category : 'tests' }
-BoardTest >> test03WhenABoardIsCreatedWithTenCellsThenItHasTenCells [
+BoardTest >> test03whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 
 	| aBoard |
 	aBoard := Board createWithATotalNumberOfCellsOf: 10.
-	
 	self assert: aBoard numberOfCells equals: 10
 ]
 
 { #category : 'tests' }
-BoardTest >> test04WhenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
+BoardTest >> test04whenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 0 ]
@@ -52,7 +50,7 @@ BoardTest >> test04WhenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
 ]
 
 { #category : 'tests' }
-BoardTest >> test05WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated [
+BoardTest >> test05whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated [
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 'a' ]
@@ -62,14 +60,11 @@ BoardTest >> test05WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated 
 ]
 
 { #category : 'tests' }
-BoardTest >> test06WhenAShipReachesTheLastCellThenTheBoardSaysTheGameIsOver [
+BoardTest >> test06whenAShipReachesTheLastCellThenTheBoardSaysTheGameIsOver [
 
-    | aBoard aShip |
-
-    aBoard := Board createWithATotalNumberOfCellsOf: 8.
-    aShip := Ship creatWith: 0.
-
-    aBoard move: aShip by: 8.
-
-    self assert: (aBoard actualState = 'finish').
+	| aBoard aShip |
+	aBoard := Board createWithATotalNumberOfCellsOf: 8.
+	aShip := Ship creatWith: 0.
+	aBoard move: aShip by: 8.
+	self assert: aBoard actualState = 'finish'
 ]
