@@ -24,9 +24,11 @@ BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 	aShip := Ship creatWithposition: 0 name: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aCollectionOfShips.
-	
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
 	self assert: aBoard numberOfCells positive
 ]
 
@@ -39,8 +41,10 @@ BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 	aShip := Ship creatWithposition: 0 name: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	
-	aBoard := Board createWithATotalNumberOfCellsOf: 10 andShips: aCollectionOfShips.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 10
+		          andShips: aCollectionOfShips.
 
 	self assert: aBoard numberOfCells equals: 10
 ]
@@ -64,7 +68,8 @@ BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated 
 	aShip := Ship creatWithposition: 0 name: 'juan'.
 
 	self
-		should: [ Board createWithATotalNumberOfCellsOf: 'a' andShips: aShip ]
+		should: [
+		Board createWithATotalNumberOfCellsOf: 'a' andShips: aShip ]
 		raise: Error
 		withMessageText:
 		'The board must have an integer number of cells greater than two'
@@ -74,12 +79,13 @@ BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated 
 BoardTest >> test05whenAShipsIsInGameThenTheirWhereaboutAtTheBoardIsZero [
 
 	| aBoard aShip aCollectionOfShips |
-	
 	aShip := Ship creatWithposition: 0 name: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aCollectionOfShips.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
 	self assert: (aBoard hasTheShip: aShip atThePosition: 0)
 ]
 
@@ -93,9 +99,11 @@ BoardTest >> test06whenMultipleShipsAreCreatedThenTheirWhereaboutAtTheBoardIsZer
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aCollectionOfShips .
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
 	self assert: (aBoard hasTheShip: aShip atThePosition: 0).
-	self assert: (aBoard hasTheShip: aSecondShip atThePosition: 0).
+	self assert: (aBoard hasTheShip: aSecondShip atThePosition: 0)
 ]
 
 { #category : 'tests' }
@@ -110,7 +118,7 @@ BoardTest >> test07whenAnEmptyCollectiosOfShipsAreCreatedThenTheBoardCreationsFa
 				createWithATotalNumberOfCellsOf: 8
 				andShips: aCollectionOfShips ]
 		raise: Error
-		withMessageText: 'There must be at least one ship in the board'.
+		withMessageText: 'There must be at least one ship in the board'
 ]
 
 { #category : 'tests' }
@@ -122,16 +130,13 @@ BoardTest >> test08WhenABoardIsCreatedWithDuplicatedShipsThenTheBoardCreationFai
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aShip .
-	
+	aCollectionOfShips add: aShip.
+
 	self
 		should: [
 			Board
 				createWithATotalNumberOfCellsOf: 8
 				andShips: aCollectionOfShips ]
 		raise: Error
-		withMessageText: 'There cant be two equals ships in the board'.
-	
-	
-
+		withMessageText: 'There cant be two equals ships in the board'
 ]

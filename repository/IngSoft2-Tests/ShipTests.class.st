@@ -53,10 +53,12 @@ ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 
 	| aShip aBoard aCollectionOfShips |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
-	
+
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andShips: aCollectionOfShips.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
 
 	aShip advancesTo: 5 in: aBoard.
 	self assert: (aShip isAt: 5 in: aBoard)
