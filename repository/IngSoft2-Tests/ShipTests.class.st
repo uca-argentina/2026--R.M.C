@@ -8,26 +8,43 @@ Class {
 { #category : 'tests' }
 ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
-	| aShip |
+	| aShip aCollectionOfShips aBoard |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
-	self assert: (aShip isAt: 0)
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
+	self assert: (aShip isAt: 0 in: aBoard)
 ]
 
 { #category : 'tests' }
 ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
 
-	| aShip |
+	| aShip aCollectionOfShips aBoard |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
-	aShip advancesTo: 5.
-	self assert: (aShip isAt: 5)
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
+	aShip advancesTo: 5 in: aBoard.
+	self assert: (aShip isAt: 5 in: aBoard)
 ]
 
 { #category : 'tests' }
 ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
-	| aShip |
+	| aShip aCollectionOfShips aBoard |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
-	aShip advancesTo: 5.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
 	self assert: (aShip nameIs: 'juan')
 ]
 
