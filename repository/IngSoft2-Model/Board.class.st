@@ -40,6 +40,14 @@ Board class >> validateNumber: aNumber [
 ]
 
 { #category : 'testing' }
+Board >> canPlay [ 
+
+^   shipsWhereabout anySatisfy: [ :position |
+        position >= numberOfCells 
+    ].
+]
+
+{ #category : 'testing' }
 Board >> hasTheShip: aShip atThePosition: aPosition [
 
 	^ (shipsWhereabout at: aShip) = aPosition
@@ -55,12 +63,20 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollecti
 ]
 
 { #category : 'as yet unclassified' }
-Board >> move: aShip by: cellToMove [
+Board >> move: aShip by: amountToAdd [
 
-	shipsWhereabout at: aShip put: cellToMove
+	| currentPosition |
+	currentPosition := shipsWhereabout at: aShip.
+
+	shipsWhereabout at: aShip put: currentPosition + amountToAdd
 ]
 
 { #category : 'as yet unclassified' }
 Board >> numberOfCells [
 	^ numberOfCells .
+]
+
+{ #category : 'as yet unclassified' }
+Board >> winerShip: aShip [
+	^ (self hasTheShip: aShip atThePosition: numberOfCells).
 ]

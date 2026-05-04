@@ -204,3 +204,126 @@ GameTest >> test08WhenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreatio
 		withMessageText:'There of the dices must be lower than the amount of cells'.
 		
 ]
+
+{ #category : 'tests' }
+GameTest >> test09WhenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aSecondShip := Ship creatWithposition: 0 name: 'fran'.
+	
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips  add: aSecondShip.
+	
+	aCollectionOfDice := OrderedCollection new. 
+	aCollectionOfDice add: aChargedDice .
+	
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABordOf: 15
+					andADice: aCollectionOfDice.
+					
+	aGame moves: aShip.
+	aGame moves: aSecondShip .
+
+	self assert: (aGame theShip: aShip isAt: 3).
+	self assert: (aGame theShip: aSecondShip isAt: 3).
+]
+
+{ #category : 'tests' }
+GameTest >> test10WhenAGameMovesTwoShipsTwiceThenThesShipsMovesToTheCells [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aSecondShip := Ship creatWithposition: 0 name: 'fran'.
+	
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips  add: aSecondShip.
+	
+	aCollectionOfDice := OrderedCollection new. 
+	aCollectionOfDice add: aChargedDice .
+	
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABordOf: 15
+					andADice: aCollectionOfDice.
+					
+	aGame moves: aShip.
+	aGame moves: aSecondShip .
+	aGame moves: aShip.
+	aGame moves: aSecondShip.
+
+	self assert: (aGame theShip: aShip isAt: 6).
+	self assert: (aGame theShip: aSecondShip isAt: 6).
+]
+
+{ #category : 'tests' }
+GameTest >> test11WhenAShipMovesToTheFinalCellThenTheGameFished [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice  |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+
+	
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+
+	
+	aCollectionOfDice := OrderedCollection new. 
+	aCollectionOfDice add: aChargedDice .
+	
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABordOf: 12
+					andADice: aCollectionOfDice.
+					
+	aGame moves: aShip.
+	aGame moves: aShip.
+
+
+	self assert: (aGame hasFinishedAndWinnerIs: aShip ).
+	
+]
+
+{ #category : 'tests' }
+GameTest >> test12WhenAShipMovesToTheFinalCellThenTheGameFishedAndWeCantContinue [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice  |
+	aShip := Ship creatWithposition: 0 name: 'juan'.
+
+	
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+
+	
+	aCollectionOfDice := OrderedCollection new. 
+	aCollectionOfDice add: aChargedDice .
+	
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABordOf: 12
+					andADice: aCollectionOfDice.
+					
+	aGame moves: aShip.
+	aGame moves: aShip.
+
+	self should: [ aGame moves: aShip ] 
+	raise: Error 
+	withMessageText: 'The game has finished'.
+
+
+	
+]

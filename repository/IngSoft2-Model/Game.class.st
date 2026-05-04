@@ -51,6 +51,17 @@ Game >> boardSize [
 	^ board  numberOfCells .
 ]
 
+{ #category : 'testing' }
+Game >> canPlay [
+
+	(board canPlay) ifTrue: [Error signal: 'The game has finished'].
+]
+
+{ #category : 'testing' }
+Game >> hasFinishedAndWinnerIs: aShip [ 
+	^ (board winerShip: aShip )
+]
+
 { #category : 'initialization' }
 Game >> initializeWithName: aName andShips: aShip andBoard: aBoard andADice: aCollectionOfDice [
 
@@ -62,9 +73,12 @@ Game >> initializeWithName: aName andShips: aShip andBoard: aBoard andADice: aCo
 
 { #category : 'as yet unclassified' }
 Game >> moves: aShip [
-
 	| total |
+	
+	self canPlay.
+	
 	total := diceCollection sum: [ :aDie | aDie throw ].
+	
 
 	aShip advancesTo: total in: board
 ]
