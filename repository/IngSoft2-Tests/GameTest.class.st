@@ -58,7 +58,7 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 ]
 
 { #category : 'tests' }
-GameTest >> test03whenTheGameTellsTheShipToMoveThenTheShipsChanges [
+GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
 	
