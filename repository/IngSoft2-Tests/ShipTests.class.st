@@ -5,11 +5,21 @@ Class {
 	#package : 'IngSoft2-Tests'
 }
 
+{ #category : 'asserting' }
+ShipTests >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
+
+	self
+		should: argThatShuoldFailed
+		raise: anError
+		withExceptionDo: [ :aPosibleError |
+			self assert: aPosibleError messageText equals: errorMesagge ]
+]
+
 { #category : 'tests' }
 ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
 	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -23,7 +33,7 @@ ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
 
 	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -38,7 +48,7 @@ ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
 ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
 	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -52,7 +62,7 @@ ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 
 	| aShip aBoard aCollectionOfShips |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -62,4 +72,14 @@ ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 
 	aShip advancesTo: 5 in: aBoard.
 	self assert: (aShip isAt: 5 in: aBoard)
+]
+
+{ #category : 'tests' }
+ShipTests >> test05whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
+
+	self should: [ Ship creatWithName: 5. ] 
+	raise: Error  
+	withMessageText:  'The name must be a string'
+
+	
 ]

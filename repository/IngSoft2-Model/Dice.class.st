@@ -12,7 +12,7 @@ Class {
 Dice class >> cannotBeLowerThan: amountOfFaces [
 
 	amountOfFaces < 3 ifTrue: [
-		Error signal: 'Number of faces cannot be lower that two' ]
+		Error signal: 'Number of faces cannot be lower that two (must be integer)' ]
 ]
 
 { #category : 'accessing' }

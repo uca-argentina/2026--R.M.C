@@ -15,6 +15,12 @@ ChargedDice class >> cannotBeLowerThan: amountOfFaces [
 		Error signal: 'Number of faces cannot be lower that two' ]
 ]
 
+{ #category : 'accessing' }
+ChargedDice class >> default [
+
+	^ self withTotalNumberFaces: 6
+]
+
 { #category : 'as yet unclassified' }
 ChargedDice class >> withTotalNumberFaces: amountOfFaces [
 

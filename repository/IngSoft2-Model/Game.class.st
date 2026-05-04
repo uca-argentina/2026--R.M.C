@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'name',
 		'board',
-		'diceCollection'
+		'diceCollection',
+		'shipsInGame',
+		'currentIndexOfShipPlaying'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -23,6 +25,7 @@ Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf
 	^ self new
 		  initializeWithName: aBoardName
 		  andBoard: aBoard
+		  andShips: aCollectionOfShips 
 		  andADice: aCollectionOfDice
 ]
 
@@ -60,23 +63,35 @@ Game >> hasFinishedAndWinnerIs: aShip [
 ]
 
 { #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice [
+Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice [
 
 	name := aName.
 	diceCollection := aCollectionOfDice .
-	board := aBoard
+	board := aBoard.
+	shipsInGame := aCollectionOfShips .
+	currentIndexOfShipPlaying := 0.
+	
 ]
 
 { #category : 'as yet unclassified' }
-Game >> moves: aShip [
+Game >> moves [
 	| total |
-	
 	self canPlay.
-	
 	total := diceCollection sum: [ :aDie | aDie throw ].
 	
 
-	aShip advancesTo: total in: board
+	self nextShipToPlay advancesTo: total in: board
+]
+
+{ #category : 'as yet unclassified' }
+Game >> nextShipToPlay [
+    | ship |
+    
+    ship := shipsInGame at: currentIndexOfShipPlaying + 1.
+    
+    currentIndexOfShipPlaying := (currentIndexOfShipPlaying + 1) \\ shipsInGame size.
+    
+    ^ ship
 ]
 
 { #category : 'accessing' }

@@ -19,7 +19,7 @@ GameTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMes
 GameTest >> test01whenAGameStartsThenItReturnsItsName [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	
 	aCollectionOfShips := OrderedCollection new.
@@ -40,7 +40,7 @@ GameTest >> test01whenAGameStartsThenItReturnsItsName [
 GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	
 	aCollectionOfShips := OrderedCollection new.
@@ -62,7 +62,7 @@ GameTest >> test03whenTheGameTellsTheShipToMoveThenTheShipsChanges [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
 	
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 	
 	aCollectionOfShips := OrderedCollection new.
@@ -77,15 +77,15 @@ GameTest >> test03whenTheGameTellsTheShipToMoveThenTheShipsChanges [
 		         andABordOf: 10
 					andADice: aCollectionOfDice.
 					
-	aGame moves: aShip.
+	aGame moves.
 	self assert: (aGame theShip: aShip isAt: 3)
 ]
 
 { #category : 'tests' }
-GameTest >> test04WhenAGameCreatesAnNBoardThenTheBoardInGameHaveNCells [
+GameTest >> test04whenAGameCreatesAnNBoardThenTheBoardInGameHaveNCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	
 	aCollectionOfShips := OrderedCollection new.
@@ -104,10 +104,10 @@ GameTest >> test04WhenAGameCreatesAnNBoardThenTheBoardInGameHaveNCells [
 ]
 
 { #category : 'tests' }
-GameTest >> test05WhenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
+GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	
 	aCollectionOfShips := OrderedCollection new.
@@ -122,16 +122,16 @@ GameTest >> test05WhenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 		         andABordOf: 10
 					andADice: aCollectionOfDice.
 					
-	aGame moves: aShip.
+	aGame moves.
 
 	self assert: (aGame theShip: aShip isAt: 5)
 ]
 
 { #category : 'tests' }
-GameTest >> test06WhenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
+GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
 
 	| aGame aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	aSecondChargedDice:= ChargedDice  withTotalNumberFaces: 3.
@@ -149,16 +149,16 @@ GameTest >> test06WhenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 		         andABordOf: 10
 					andADice: aCollectionOfDice .
 					
-	aGame moves: aShip.
+	aGame moves.
 
 	self assert: (aGame theShip: aShip isAt: 8)
 ]
 
 { #category : 'tests' }
-GameTest >> test07WhenAGameHasNoneDiceInTheDicesCollectionThenTheCreationFails [
+GameTest >> test07whenAGameHasNoneDiceInTheDicesCollectionThenTheCreationFails [
 
 	|  aShip aCollectionOfShips   aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -178,10 +178,10 @@ GameTest >> test07WhenAGameHasNoneDiceInTheDicesCollectionThenTheCreationFails [
 ]
 
 { #category : 'tests' }
-GameTest >> test08WhenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreationFails [
+GameTest >> test08whenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreationFails [
 
 	| aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 	
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	aSecondChargedDice:= ChargedDice  withTotalNumberFaces: 9.
@@ -206,11 +206,11 @@ GameTest >> test08WhenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreatio
 ]
 
 { #category : 'tests' }
-GameTest >> test09WhenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
+GameTest >> test09whenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
-	aSecondShip := Ship creatWithposition: 0 name: 'fran'.
+	aShip := Ship creatWithName: 'juan'.
+	aSecondShip := Ship creatWithName: 'fran'.
 	
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 	
@@ -227,19 +227,19 @@ GameTest >> test09WhenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
 		         andABordOf: 15
 					andADice: aCollectionOfDice.
 					
-	aGame moves: aShip.
-	aGame moves: aSecondShip .
+	aGame moves.
+	aGame moves.
 
 	self assert: (aGame theShip: aShip isAt: 3).
 	self assert: (aGame theShip: aSecondShip isAt: 3).
 ]
 
 { #category : 'tests' }
-GameTest >> test10WhenAGameMovesTwoShipsTwiceThenThesShipsMovesToTheCells [
+GameTest >> test10whenAGameMovesTwoShipsTwiceThenThesShipsMovesToTheCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
-	aSecondShip := Ship creatWithposition: 0 name: 'fran'.
+	aShip := Ship creatWithName: 'juan'.
+	aSecondShip := Ship creatWithName: 'fran'.
 	
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 	
@@ -256,20 +256,20 @@ GameTest >> test10WhenAGameMovesTwoShipsTwiceThenThesShipsMovesToTheCells [
 		         andABordOf: 15
 					andADice: aCollectionOfDice.
 					
-	aGame moves: aShip.
-	aGame moves: aSecondShip .
-	aGame moves: aShip.
-	aGame moves: aSecondShip.
+	aGame moves.
+	aGame moves.
+	aGame moves.
+	aGame moves.
 
 	self assert: (aGame theShip: aShip isAt: 6).
 	self assert: (aGame theShip: aSecondShip isAt: 6).
 ]
 
 { #category : 'tests' }
-GameTest >> test11WhenAShipMovesToTheFinalCellThenTheGameFished [
+GameTest >> test11whenAShipMovesToTheFinalCellThenTheGameFished [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice  |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	aShip := Ship creatWithName: 'juan'.
 
 	
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
@@ -287,8 +287,8 @@ GameTest >> test11WhenAShipMovesToTheFinalCellThenTheGameFished [
 		         andABordOf: 12
 					andADice: aCollectionOfDice.
 					
-	aGame moves: aShip.
-	aGame moves: aShip.
+	aGame moves.
+	aGame moves.
 
 
 	self assert: (aGame hasFinishedAndWinnerIs: aShip ).
@@ -296,16 +296,18 @@ GameTest >> test11WhenAShipMovesToTheFinalCellThenTheGameFished [
 ]
 
 { #category : 'tests' }
-GameTest >> test12WhenAShipMovesToTheFinalCellThenTheGameFishedAndWeCantContinue [
+GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameFishedAndWeCantContinue [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithposition: 0 name: 'juan'.
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
+	aShip := Ship creatWithName: 'juan'.
+	aSecondShip:= Ship creatWithName: 'fran'.
 
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip .
 
 
 	aCollectionOfDice := OrderedCollection new.
@@ -317,11 +319,12 @@ GameTest >> test12WhenAShipMovesToTheFinalCellThenTheGameFishedAndWeCantContinue
 		         andABordOf: 12
 		         andADice: aCollectionOfDice.
 
-	aGame moves: aShip.
-	aGame moves: aShip.
+	aGame moves.
+	aGame moves.
+	aGame moves.
 
 	self
-		should: [ aGame moves: aShip ]
+		should: [ aGame moves ]
 		raise: Error
 		withMessageText: 'The game has finished'
 ]
