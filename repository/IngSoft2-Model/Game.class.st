@@ -3,9 +3,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'name',
-		'ships',
 		'board',
-		'dice',
 		'diceCollection'
 	],
 	#category : 'IngSoft2-Model',
@@ -24,7 +22,6 @@ Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf
 
 	^ self new
 		  initializeWithName: aBoardName
-		  andShips: aCollectionOfShips
 		  andBoard: aBoard
 		  andADice: aCollectionOfDice
 ]
@@ -63,11 +60,10 @@ Game >> hasFinishedAndWinnerIs: aShip [
 ]
 
 { #category : 'initialization' }
-Game >> initializeWithName: aName andShips: aShip andBoard: aBoard andADice: aCollectionOfDice [
+Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice [
 
 	name := aName.
 	diceCollection := aCollectionOfDice .
-	ships := aShip.
 	board := aBoard
 ]
 
