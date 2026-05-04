@@ -298,32 +298,30 @@ GameTest >> test11WhenAShipMovesToTheFinalCellThenTheGameFished [
 { #category : 'tests' }
 GameTest >> test12WhenAShipMovesToTheFinalCellThenTheGameFishedAndWeCantContinue [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice  |
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
 	aShip := Ship creatWithposition: 0 name: 'juan'.
 
-	
+
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-	
+
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 
-	
-	aCollectionOfDice := OrderedCollection new. 
-	aCollectionOfDice add: aChargedDice .
-	
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
 		         andABordOf: 12
-					andADice: aCollectionOfDice.
-					
+		         andADice: aCollectionOfDice.
+
 	aGame moves: aShip.
 	aGame moves: aShip.
 
-	self should: [ aGame moves: aShip ] 
-	raise: Error 
-	withMessageText: 'The game has finished'.
-
-
-	
+	self
+		should: [ aGame moves: aShip ]
+		raise: Error
+		withMessageText: 'The game has finished'
 ]
