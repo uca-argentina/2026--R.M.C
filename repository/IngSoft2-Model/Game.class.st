@@ -5,25 +5,45 @@ Class {
 		'name',
 		'ships',
 		'board',
-		'dice'
+		'dice',
+		'diceCollection'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf: aNumberOfCells andADice: aChargedDice [
+Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf: aNumberOfCells andADice: aCollectionOfDice [
 
 	| aBoard |
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: aNumberOfCells
 		          andShips: aCollectionOfShips.
 
+	self validateCollection: aCollectionOfDice with: aNumberOfCells.
+
 	^ self new
 		  initializeWithName: aBoardName
 		  andShips: aCollectionOfShips
 		  andBoard: aBoard
-		  andADice: aChargedDice.
+		  andADice: aCollectionOfDice
+]
+
+{ #category : 'as yet unclassified' }
+Game class >> validateCollection: aCollection with: amountOfCells [
+	| total |
+	
+	aCollection isEmpty ifTrue: [
+		Error signal: 'There must be one dice in the game' ].
+	
+    total := 0.
+    aCollection do: [ :aDie |
+        total := total + aDie throw
+    ].
+
+	total > amountOfCells ifTrue: [
+			Error signal:
+				'There of the dices must be lower than the amount of cells' ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -32,10 +52,10 @@ Game >> boardSize [
 ]
 
 { #category : 'initialization' }
-Game >> initializeWithName: aName andShips: aShip andBoard: aBoard andADice: aChargedDice [
+Game >> initializeWithName: aName andShips: aShip andBoard: aBoard andADice: aCollectionOfDice [
 
 	name := aName.
-	dice := aChargedDice .
+	diceCollection := aCollectionOfDice .
 	ships := aShip.
 	board := aBoard
 ]
@@ -43,7 +63,10 @@ Game >> initializeWithName: aName andShips: aShip andBoard: aBoard andADice: aCh
 { #category : 'as yet unclassified' }
 Game >> moves: aShip [
 
-	aShip advancesTo: (dice throw) in: board.
+	| total |
+	total := diceCollection sum: [ :aDie | aDie throw ].
+
+	aShip advancesTo: total in: board
 ]
 
 { #category : 'accessing' }
