@@ -1,43 +1,41 @@
 Class {
-	#name : 'Dice',
+	#name : 'ChargedDice',
 	#superclass : 'Object',
 	#instVars : [
 		'totalNumberFaces'
 	],
-	#category : 'IngSoft2-Model',
-	#package : 'IngSoft2-Model'
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
 { #category : 'as yet unclassified' }
-Dice class >> cannotBeLowerThan: amountOfFaces [
+ChargedDice class >> cannotBeLowerThan: amountOfFaces [
 
 	amountOfFaces < 3 ifTrue: [
-
-		Error signal: 'Number of faces cannot be lower that two (must be integer)' ]
-
+		Error signal: 'Number of faces cannot be lower that two' ]
 ]
 
 { #category : 'accessing' }
-Dice class >> default [
+ChargedDice class >> default [
 
 	^ self withTotalNumberFaces: 6
 ]
 
 { #category : 'as yet unclassified' }
-Dice class >> withTotalNumberFaces: amountOfFaces [
+ChargedDice class >> withTotalNumberFaces: amountOfFaces [
 
 	self cannotBeLowerThan: amountOfFaces.
 	^ self new initializeWith: amountOfFaces
 ]
 
 { #category : 'initialization' }
-Dice >> initializeWith: amountOfFaces [
+ChargedDice >> initializeWith: amountOfFaces [
 
 	totalNumberFaces := amountOfFaces
 ]
 
 { #category : 'as yet unclassified' }
-Dice >> throw [
+ChargedDice >> throw [
 
-	^ (1 to: totalNumberFaces) atRandom
+	^  totalNumberFaces.
 ]

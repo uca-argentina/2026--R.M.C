@@ -5,6 +5,16 @@ Class {
 	#package : 'IngSoft2-Tests'
 }
 
+{ #category : 'asserting' }
+DiceTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
+
+	self
+		should: argThatShuoldFailed
+		raise: anError
+		withExceptionDo: [ :aPosibleError |
+			self assert: aPosibleError messageText equals: errorMesagge ]
+]
+
 { #category : 'tests' }
 DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
 
@@ -27,8 +37,15 @@ DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 	self
 		should: [ Dice withTotalNumberFaces: 2 ]
 		raise: Error
-		withExceptionDo: [ :error |
-				self
-					assert: error messageText
-					equals: 'Number of faces cannot be lower that two' ]
+
+		withMessageText: 'Number of faces cannot be lower that two (must be integer)' .
+]
+
+{ #category : 'tests' }
+DiceTest >> test04whenADiceHasNonValidNumberOfFacesThenItCannotBeCreated [
+
+	self
+		should: [ Dice withTotalNumberFaces: 2 ]
+		raise: Error
+		withMessageText: 'Number of faces cannot be lower that two (must be integer)' .
 ]

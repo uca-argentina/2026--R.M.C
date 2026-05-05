@@ -2,7 +2,6 @@ Class {
 	#name : 'Ship',
 	#superclass : 'Object',
 	#instVars : [
-		'position',
 		'name'
 	],
 	#category : 'IngSoft2-Model',
@@ -10,36 +9,32 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Ship class >> creatWith: anPosition [ 
-	
-	^self new initializeWith:anPosition.
+Ship class >> creatWithName:anName [
+
+	self validate: anName.	
+	^self new initializeWith:anName .
 ]
 
 { #category : 'as yet unclassified' }
-Ship class >> creatWithposition:anPosition name:anName [
-	
-	^self new initializeWith: anPosition and:anName .
+Ship class >> validate: aName [
+ (aName isString) ifFalse: [Error signal: 'The name must be a string'].
 ]
 
 { #category : 'as yet unclassified' }
-Ship >> advancesTo: anStep [ 
-	position:= position + anStep .
+Ship >> advancesTo: aPosition in: aBoard [
+
+	aBoard move: self by: aPosition
 ]
 
 { #category : 'initialization' }
-Ship >> initializeWith: anPosition [ 
-	position :=anPosition .
-]
-
-{ #category : 'initialization' }
-Ship >> initializeWith: anPosition and:anName [
-	position :=anPosition .
+Ship >> initializeWith: anName [
 	name:= anName.
 ]
 
 { #category : 'accessing' }
-Ship >> isAt: anPosition [ 
-	^position=anPosition.
+Ship >> isAt: aPosition in: aBoard [
+
+	^ aBoard hasTheShip: self atThePosition: aPosition
 ]
 
 { #category : 'as yet unclassified' }
