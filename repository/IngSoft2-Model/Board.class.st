@@ -12,8 +12,8 @@ Class {
 { #category : 'as yet unclassified' }
 Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
 
-	self validateNumber: aNumberOfCells .
-	self validateCollection: aCollectionOfShips .
+	self validateNumber: aNumberOfCells.
+	self validateCollection: aCollectionOfShips.
 
 	^ self new
 		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
@@ -25,26 +25,25 @@ Board class >> validateCollection: aCollection [
 
 	aCollection isEmpty ifTrue: [
 		Error signal: 'There must be at least one ship in the board' ].
-	
-	(aCollection asSet size ~= aCollection size) ifTrue: [
-        Error signal: 'There cant be two equals ships in the board'
-    ].
+
+	aCollection asSet size ~= aCollection size ifTrue: [
+		Error signal: 'There cant be two equals ships in the board' ]
 ]
 
 { #category : 'testing' }
 Board class >> validateNumber: aNumber [
-    (aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
-        Error signal: 'The board must have an integer number of cells greater than two'
-    ].
-	^aNumber.
+
+	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
+			Error signal:
+				'The board must have an integer number of cells greater than two' ].
+	^ aNumber
 ]
 
 { #category : 'testing' }
-Board >> canPlay [ 
+Board >> canPlay [
 
-^   shipsWhereabout anySatisfy: [ :position |
-        position >= numberOfCells 
-    ].
+	^ shipsWhereabout anySatisfy: [ :position |
+		  position >= numberOfCells ]
 ]
 
 { #category : 'testing' }
@@ -73,10 +72,12 @@ Board >> move: aShip by: amountToAdd [
 
 { #category : 'as yet unclassified' }
 Board >> numberOfCells [
-	^ numberOfCells .
+
+	^ numberOfCells
 ]
 
 { #category : 'as yet unclassified' }
-Board >> winerShip: aShip [
-	^ (self hasTheShip: aShip atThePosition: numberOfCells).
+Board >> winnerShip: aShip [
+
+	^ self hasTheShip: aShip atThePosition: numberOfCells
 ]

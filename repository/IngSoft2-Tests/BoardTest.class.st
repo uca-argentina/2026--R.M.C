@@ -17,8 +17,6 @@ BoardTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMe
 
 { #category : 'tests' }
 BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
-	"| aBoard |
-	aBoard := Board new."
 
 	| aBoard aShip aCollectionOfShips |
 	aShip := Ship creatWithName: 'juan'.
@@ -34,8 +32,6 @@ BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 
 { #category : 'tests' }
 BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
-	"| aBoard |
-	aBoard := Board createWithATotalNumberOfCellsOf: 10."
 
 	| aBoard aShip aCollectionOfShips |
 	aShip := Ship creatWithName: 'juan'.
@@ -50,19 +46,19 @@ BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 ]
 
 { #category : 'tests' }
-BoardTest >> test03whenABoardHasLessThanTwoCellsThenTheBoardCantBeCreated [
+BoardTest >> test03whenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 
 	| aShip |
 	aShip := Ship creatWithName: 'juan'.
+
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 0 andShips: aShip ]
 		raise: Error
-		withMessageText:
-		'The board must have an integer number of cells greater than two'
+		withMessageText: 'The board must have an integer number of cells greater than two'
 ]
 
 { #category : 'tests' }
-BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated [
+BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreated [
 
 	| aShip |
 	aShip := Ship creatWithName: 'juan'.
@@ -71,12 +67,11 @@ BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCantBeCreated 
 		should: [
 		Board createWithATotalNumberOfCellsOf: 'a' andShips: aShip ]
 		raise: Error
-		withMessageText:
-		'The board must have an integer number of cells greater than two'
+		withMessageText: 'The board must have an integer number of cells greater than two'
 ]
 
 { #category : 'tests' }
-BoardTest >> test05whenAShipsIsInGameThenTheirWhereaboutAtTheBoardIsZero [
+BoardTest >> test05whenAShipsIsCreatedInTheGameThenTheirWhereaboutAtTheBoardIsZero [
 
 	| aBoard aShip aCollectionOfShips |
 	aShip := Ship creatWithName: 'juan'.
@@ -107,7 +102,7 @@ BoardTest >> test06whenMultipleShipsAreCreatedThenTheirWhereaboutAtTheBoardIsZer
 ]
 
 { #category : 'tests' }
-BoardTest >> test07whenAnEmptyCollectiosOfShipsAreCreatedThenTheBoardCreationsFailed [
+BoardTest >> test07whenAnEmptyCollectionOfShipsIsCreatedThenTheBoardCreationFails [
 
 	| aCollectionOfShips |
 	aCollectionOfShips := OrderedCollection new.

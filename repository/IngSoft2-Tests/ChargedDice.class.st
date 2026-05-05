@@ -37,5 +37,5 @@ ChargedDice >> initializeWith: amountOfFaces [
 { #category : 'as yet unclassified' }
 ChargedDice >> throw [
 
-	^  totalNumberFaces.
+	^ totalNumberFaces
 ]
