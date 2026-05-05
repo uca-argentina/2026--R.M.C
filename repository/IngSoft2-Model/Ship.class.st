@@ -9,15 +9,16 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Ship class >> creatWithName:anName [
+Ship class >> creatWithName: anName [
 
-	self validate: anName.	
-	^self new initializeWith:anName .
+	self validate: anName.
+	^ self new initializeWith: anName
 ]
 
 { #category : 'as yet unclassified' }
 Ship class >> validate: aName [
- (aName isString) ifFalse: [Error signal: 'The name must be a string'].
+
+	aName isString ifFalse: [ Error signal: 'The name must be a string' ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -28,7 +29,8 @@ Ship >> advancesTo: aPosition in: aBoard [
 
 { #category : 'initialization' }
 Ship >> initializeWith: anName [
-	name:= anName.
+
+	name := anName
 ]
 
 { #category : 'accessing' }
@@ -39,5 +41,6 @@ Ship >> isAt: aPosition in: aBoard [
 
 { #category : 'as yet unclassified' }
 Ship >> nameIs: aName [
-	^name == aName .
+
+	^ name == aName
 ]

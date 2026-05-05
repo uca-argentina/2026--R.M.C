@@ -63,7 +63,6 @@ ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 
 	| aShip aBoard aCollectionOfShips |
 	aShip := Ship creatWithName: 'juan'.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -77,9 +76,8 @@ ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 { #category : 'tests' }
 ShipTests >> test05whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
 
-	self should: [ Ship creatWithName: 5. ] 
-	raise: Error  
-	withMessageText:  'The name must be a string'
-
-	
+	self
+		should: [ Ship creatWithName: 5 ]
+		raise: Error
+		withMessageText: 'The name must be a string'
 ]
