@@ -37,6 +37,7 @@ DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 	self
 		should: [ Dice withTotalNumberFaces: 2 ]
 		raise: Error
+
 		withMessageText: 'Number of faces cannot be lower that two (must be integer)' .
 ]
 
