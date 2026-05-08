@@ -80,7 +80,7 @@ Game >> moves [
 	total := diceCollection sum: [ :aDie | aDie throw ].
 
 
-	self nextShipToPlay advancesTo: total in: board
+	self nextShipToPlay advancesTo: total  in: board
 ]
 
 { #category : 'as yet unclassified' }

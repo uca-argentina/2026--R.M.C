@@ -3,7 +3,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'numberOfCells',
-		'shipsWhereabout'
+		'cells'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -42,14 +42,13 @@ Board class >> validateNumber: aNumber [
 { #category : 'testing' }
 Board >> canPlay [
 
-	^ shipsWhereabout anySatisfy: [ :position |
-		  position >= numberOfCells ]
+	^ (cells last) hasShips.
 ]
 
 { #category : 'testing' }
 Board >> hasTheShip: aShip atThePosition: aPosition [
 
-	^ (shipsWhereabout at: aShip) = aPosition
+	^ (cells at: aPosition +1) hasTheShip: aShip .
 ]
 
 { #category : 'initialization' }
@@ -57,17 +56,24 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollecti
 
 	numberOfCells := aNumberOfCells.
 
-	shipsWhereabout := Dictionary new.
-	aCollectionOfShips do: [ :aShip | shipsWhereabout at: aShip put: 0 ]
+	cells := (0 to: aNumberOfCells) collect: [ :index |
+		         Cell createWithPosition: index ].
+	
+	aCollectionOfShips do: [ :aShip | cells first received: aShip ].
+
 ]
 
 { #category : 'as yet unclassified' }
 Board >> move: aShip by: amountToAdd [
 
-	| currentPosition |
-	currentPosition := shipsWhereabout at: aShip.
+	| currentCell newPosition |
 
-	shipsWhereabout at: aShip put: currentPosition + amountToAdd
+	currentCell := cells detect: [ :aCell | aCell hasTheShip: aShip ].
+
+	newPosition := currentCell numberOfCell + amountToAdd.
+
+	currentCell lose: aShip.
+	(cells at: newPosition + 1) received: aShip.
 ]
 
 { #category : 'as yet unclassified' }

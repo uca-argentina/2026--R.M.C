@@ -71,6 +71,19 @@ BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreate
 ]
 
 { #category : 'tests' }
+BoardTest >> test05whenAShipsIsCreatedInTheGameThenTheirInitialCellIsAtZero [
+	| aBoard aShip aCollectionOfShips |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+	self assert: (aBoard hasTheShip: aShip atThePosition: 0)
+]
+
+{ #category : 'tests' }
 BoardTest >> test05whenAShipsIsCreatedInTheGameThenTheirWhereaboutAtTheBoardIsZero [
 
 	| aBoard aShip aCollectionOfShips |

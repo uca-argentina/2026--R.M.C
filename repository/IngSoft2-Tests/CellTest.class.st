@@ -20,7 +20,7 @@ CellTest >> test01whenTheCellIsCreatedThenItKnowsItsPosition [
 
 	| aCell |
 	aCell := Cell createWithPosition: 1.
-	self assert: (aCell isAt: 1)
+	self assert: (aCell numberOfCell )equals: 1
 ]
 
 { #category : 'tests' }
@@ -28,7 +28,7 @@ CellTest >> test02whenTheCellIsCreatedAtAnExactPositionThenItCannotBeInAnotherPo
 
 	| aCell |
 	aCell := Cell createWithPosition: 1.
-	self deny: (aCell isAt: 2)
+	self deny: (aCell numberOfCell )equals: 2
 ]
 
 { #category : 'tests' }
@@ -37,7 +37,7 @@ CellTest >> test03whenTheCellReceivesAShipThenTheCellKnowsItsTotalAmountOfShips 
 	| aCell aShip |
 	aCell := Cell createWithPosition: 1.
 	aShip := Ship createWithName: 'juan'.
-	aCell hasReceived: aShip.
+	aCell received: aShip.
 	self assert: (aCell hasAmountOfShips: 1)
 ]
 
@@ -47,7 +47,25 @@ CellTest >> test04whenTheCellLosesAShipThenTheTotalAmountOfShipsIsReducedByOne [
 	| aCell aShip |
 	aCell := Cell createWithPosition: 1.
 	aShip := Ship createWithName: 'juan'.
-	aCell hasReceived: aShip.
-	aCell hasLost: aShip.
+	aCell received: aShip.
+	aCell lose: aShip.
 	self assert: (aCell hasAmountOfShips: 0)
+]
+
+{ #category : 'tests' }
+CellTest >> test05whenACellHasNonValidPositionThenItCannotBeCreated [
+
+	self
+		should: [ Cell createWithPosition: 'A' ]
+		raise: Error
+		withMessageText: 'Position cannot be negative (must be integer)'
+]
+
+{ #category : 'tests' }
+CellTest >> test06whenACellHasNegativePositionThenItCannotBeCreated [
+
+	self
+		should: [ Cell createWithPosition: -5 ]
+		raise: Error
+		withMessageText: 'Position cannot be negative (must be integer)'
 ]

@@ -12,7 +12,16 @@ Class {
 { #category : 'as yet unclassified' }
 Cell class >> createWithPosition: aPosition [
 
+	self verificate: aPosition.
 	^ self new initializeWithPosition: aPosition
+]
+
+{ #category : 'as yet unclassified' }
+Cell class >> verificate: aNumber [
+
+	(aNumber isInteger and: [ aNumber >= 0 ]) ifFalse: [
+			Error signal:
+				'Position cannot be negative (must be integer)' ]
 ]
 
 { #category : 'testing' }
@@ -22,15 +31,15 @@ Cell >> hasAmountOfShips: anAmountOfShips [
 ]
 
 { #category : 'testing' }
-Cell >> hasLost: aShip [
+Cell >> hasShips [
 
-	shipsInCell remove: aShip
+ ^(shipsInCell size > 0) 
 ]
 
 { #category : 'testing' }
-Cell >> hasReceived: aShip [
+Cell >> hasTheShip: aShip [
 
-	shipsInCell add: aShip
+^ shipsInCell includes: aShip .
 ]
 
 { #category : 'initialization' }
@@ -40,8 +49,20 @@ Cell >> initializeWithPosition: aPosition [
 	shipsInCell := OrderedCollection new
 ]
 
-{ #category : 'accessing' }
-Cell >> isAt: anInteger [
+{ #category : 'testing' }
+Cell >> lose: aShip [
 
-	^ position = anInteger
+	shipsInCell remove: aShip
+]
+
+{ #category : 'as yet unclassified' }
+Cell >> numberOfCell [
+
+	^ position
+]
+
+{ #category : 'testing' }
+Cell >> received: aShip [
+
+	shipsInCell add: aShip
 ]
