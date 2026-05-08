@@ -3,53 +3,81 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'numberOfCells',
-		'state'
+		'shipsWhereabout'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells [
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
 
-	^ self new initializeWithATotalNumberOfCellsOf:
-		  (self validate: aNumberOfCells)
-]
+	self validateNumber: aNumberOfCells.
+	self validateCollection: aCollectionOfShips.
 
-{ #category : 'testing' }
-Board class >> validate: aNumber [
-    (aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
-        Error signal: 'The board must have an integer number of cells greater than two'
-    ].
-	^aNumber.
-]
-
-{ #category : 'testing' }
-Board >> actualState [
-	^ state .
-]
-
-{ #category : 'initialization' }
-Board >> initialize [
-
-	super initialize.
-	numberOfCells := 2.
-	state := 'not finish'
-	"Es un valor por default, para que si creo mi tablero con new lo haga de forma default"
-]
-
-{ #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [ 
-	numberOfCells := aNumberOfCells.
+	^ self new
+		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
+		  andShips: aCollectionOfShips
 ]
 
 { #category : 'as yet unclassified' }
-Board >> move: aShip by: cellToMove [ 
-	aShip advancesTo: cellToMove.
-	(aShip isHere: numberOfCells) ifTrue: [ state:= 'finish' ].
+Board class >> validateCollection: aCollection [
+
+	aCollection isEmpty ifTrue: [
+		Error signal: 'There must be at least one ship in the board' ].
+
+	aCollection asSet size ~= aCollection size ifTrue: [
+		Error signal: 'There cant be two equals ships in the board' ]
+]
+
+{ #category : 'testing' }
+Board class >> validateNumber: aNumber [
+
+	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
+			Error signal:
+				'The board must have an integer number of cells greater than two' ].
+	^ aNumber
+]
+
+{ #category : 'testing' }
+Board >> canPlay [
+
+	^ shipsWhereabout anySatisfy: [ :position |
+		  position >= numberOfCells ]
+]
+
+{ #category : 'testing' }
+Board >> hasTheShip: aShip atThePosition: aPosition [
+
+	^ (shipsWhereabout at: aShip) = aPosition
+]
+
+{ #category : 'initialization' }
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
+
+	numberOfCells := aNumberOfCells.
+
+	shipsWhereabout := Dictionary new.
+	aCollectionOfShips do: [ :aShip | shipsWhereabout at: aShip put: 0 ]
+]
+
+{ #category : 'as yet unclassified' }
+Board >> move: aShip by: amountToAdd [
+
+	| currentPosition |
+	currentPosition := shipsWhereabout at: aShip.
+
+	shipsWhereabout at: aShip put: currentPosition + amountToAdd
 ]
 
 { #category : 'as yet unclassified' }
 Board >> numberOfCells [
-	^ numberOfCells .
+
+	^ numberOfCells
+]
+
+{ #category : 'as yet unclassified' }
+Board >> winnerShip: aShip [
+
+	^ self hasTheShip: aShip atThePosition: numberOfCells
 ]

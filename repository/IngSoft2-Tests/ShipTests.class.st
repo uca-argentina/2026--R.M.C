@@ -5,20 +5,79 @@ Class {
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
-ShipTests >> test01AshipisAtostartingposition [
+{ #category : 'asserting' }
+ShipTests >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
 
-| aShip |
-aShip:=Ship creatWith:0.
-
-self assert: (aShip isAt:0).
+	self
+		should: argThatShuoldFailed
+		raise: anError
+		withExceptionDo: [ :aPosibleError |
+			self assert: aPosibleError messageText equals: errorMesagge ]
 ]
 
 { #category : 'tests' }
-ShipTests >> test02Ashipadvances5steps [
+ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
-| aShip |
-aShip:=Ship creatWith:0.
-aShip advancesTo:5.
-self assert: (aShip isAt:5).
+	| aShip aCollectionOfShips aBoard |
+	aShip := Ship creatWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
+	self assert: (aShip isAt: 0 in: aBoard)
+]
+
+{ #category : 'tests' }
+ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
+
+	| aShip aCollectionOfShips aBoard |
+	aShip := Ship creatWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
+	aShip advancesTo: 5 in: aBoard.
+	self assert: (aShip isAt: 5 in: aBoard)
+]
+
+{ #category : 'tests' }
+ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
+
+	| aShip aCollectionOfShips aBoard |
+	aShip := Ship creatWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
+	self assert: (aShip nameIs: 'juan')
+]
+
+{ #category : 'tests' }
+ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
+
+	| aShip aBoard aCollectionOfShips |
+	aShip := Ship creatWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andShips: aCollectionOfShips.
+
+	aShip advancesTo: 5 in: aBoard.
+	self assert: (aShip isAt: 5 in: aBoard)
+]
+
+{ #category : 'tests' }
+ShipTests >> test05whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
+
+	self
+		should: [ Ship creatWithName: 5 ]
+		raise: Error
+		withMessageText: 'The name must be a string'
 ]
