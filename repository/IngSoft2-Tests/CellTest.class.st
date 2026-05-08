@@ -51,3 +51,7 @@ CellTest >> test04whenTheCellLosesAShipThenTheTotalAmountOfShipsIsReducedByOne [
 	aCell hasLost: aShip.
 	self assert: (aCell hasAmountOfShips: 0)
 ]
+
+{ #category : 'tests' }
+CellTest >> test05 [
+]
