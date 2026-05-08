@@ -33,7 +33,7 @@ GameTest >> test01whenAGameStartsThenItReturnsItsName [
 		         andShips: aCollectionOfShips
 		         andABordOf: 10
 		         andADice: aCollectionOfDice.
-	self assert: aGame start equals: 'Ludo'
+	self assert: (aGame start) equals: 'Ludo'
 ]
 
 { #category : 'tests' }
@@ -54,7 +54,7 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 		         andShips: aCollectionOfShips
 		         andABordOf: 10
 		         andADice: aCollectionOfDice.
-	self assert: aGame start equals: 'Generala'
+	self assert: (aGame start) equals: 'Generala'
 ]
 
 { #category : 'tests' }
@@ -99,7 +99,7 @@ GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 		         andABordOf: 10
 		         andADice: aCollectionOfDice.
 
-	self assert: aGame boardSize equals: 10
+	self assert: (aGame boardSize) equals: 10
 ]
 
 { #category : 'tests' }
