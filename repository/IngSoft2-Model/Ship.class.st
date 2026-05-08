@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Ship class >> creatWithName: anName [
+Ship class >> createWithName: anName [
 
 	self validate: anName.
 	^ self new initializeWith: anName

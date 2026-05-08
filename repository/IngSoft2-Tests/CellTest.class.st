@@ -30,3 +30,24 @@ CellTest >> test02whenTheCellIsCreatedAtAnExactPositionThenItCannotBeInAnotherPo
 	aCell := Cell createWithPosition: 1.
 	self deny: (aCell isAt: 2)
 ]
+
+{ #category : 'tests' }
+CellTest >> test03whenTheCellReceivesAShipThenTheCellKnowsItsTotalAmountOfShips [
+
+	| aCell aShip |
+	aCell := Cell createWithPosition: 1.
+	aShip := Ship createWithName: 'juan'.
+	aCell hasReceived: aShip.
+	self assert: (aCell hasAmountOfShips: 1)
+]
+
+{ #category : 'tests' }
+CellTest >> test04whenTheCellLosesAShipThenTheTotalAmountOfShipsIsReducedByOne [
+
+	| aCell aShip |
+	aCell := Cell createWithPosition: 1.
+	aShip := Ship createWithName: 'juan'.
+	aCell hasReceived: aShip.
+	aCell hasLost: aShip.
+	self assert: (aCell hasAmountOfShips: 0)
+]

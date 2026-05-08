@@ -19,7 +19,7 @@ ShipTests >> should: argThatShuoldFailed raise: anError withMessageText: errorMe
 ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
 	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -33,7 +33,7 @@ ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
 
 	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -48,7 +48,7 @@ ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
 ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
 	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -62,7 +62,7 @@ ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 
 	| aShip aBoard aCollectionOfShips |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aBoard := Board
@@ -77,7 +77,7 @@ ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
 ShipTests >> test05whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
 
 	self
-		should: [ Ship creatWithName: 5 ]
+		should: [ Ship createWithName: 5 ]
 		raise: Error
 		withMessageText: 'The name must be a string'
 ]

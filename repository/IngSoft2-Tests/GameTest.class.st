@@ -19,7 +19,7 @@ GameTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMes
 GameTest >> test01whenAGameStartsThenItReturnsItsName [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 
 	aCollectionOfShips := OrderedCollection new.
@@ -33,14 +33,14 @@ GameTest >> test01whenAGameStartsThenItReturnsItsName [
 		         andShips: aCollectionOfShips
 		         andABordOf: 10
 		         andADice: aCollectionOfDice.
-	self assert: (aGame start) equals: 'Ludo'
+	self assert: aGame start equals: 'Ludo'
 ]
 
 { #category : 'tests' }
 GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 
 	aCollectionOfShips := OrderedCollection new.
@@ -54,14 +54,14 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 		         andShips: aCollectionOfShips
 		         andABordOf: 10
 		         andADice: aCollectionOfDice.
-	self assert: (aGame start) equals: 'Generala'
+	self assert: aGame start equals: 'Generala'
 ]
 
 { #category : 'tests' }
 GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 
 	aCollectionOfShips := OrderedCollection new.
@@ -84,7 +84,7 @@ GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
 GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 
 	aCollectionOfShips := OrderedCollection new.
@@ -99,14 +99,14 @@ GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 		         andABordOf: 10
 		         andADice: aCollectionOfDice.
 
-	self assert: (aGame boardSize) equals: 10
+	self assert: aGame boardSize equals: 10
 ]
 
 { #category : 'tests' }
 GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 
 	aCollectionOfShips := OrderedCollection new.
@@ -130,7 +130,7 @@ GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
 
 	| aGame aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	aSecondChargedDice := ChargedDice withTotalNumberFaces: 3.
@@ -157,7 +157,7 @@ GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 GameTest >> test07whenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 
 	| aShip aCollectionOfShips aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -179,7 +179,7 @@ GameTest >> test07whenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 GameTest >> test08whenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreationFails [
 
 	| aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	aSecondChargedDice := ChargedDice withTotalNumberFaces: 9.
@@ -207,8 +207,8 @@ GameTest >> test08whenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreatio
 GameTest >> test09whenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithName: 'juan'.
-	aSecondShip := Ship creatWithName: 'fran'.
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 
@@ -236,8 +236,8 @@ GameTest >> test09whenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
 GameTest >> test10whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithName: 'juan'.
-	aSecondShip := Ship creatWithName: 'fran'.
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 
@@ -267,7 +267,7 @@ GameTest >> test10whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 GameTest >> test11whenAShipMovesToTheFinalCellThenTheGameIsFished [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
@@ -296,8 +296,8 @@ GameTest >> test11whenAShipMovesToTheFinalCellThenTheGameIsFished [
 GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithName: 'juan'.
-	aSecondShip := Ship creatWithName: 'fran'.
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
 
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.

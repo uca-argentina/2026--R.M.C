@@ -19,7 +19,7 @@ BoardTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMe
 BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 
 	| aBoard aShip aCollectionOfShips |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 
@@ -34,7 +34,7 @@ BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 
 	| aBoard aShip aCollectionOfShips |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 
@@ -49,7 +49,7 @@ BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 BoardTest >> test03whenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 
 	| aShip |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 0 andShips: aShip ]
@@ -61,7 +61,7 @@ BoardTest >> test03whenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreated [
 
 	| aShip |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 
 	self
 		should: [
@@ -74,7 +74,7 @@ BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreate
 BoardTest >> test05whenAShipsIsCreatedInTheGameThenTheirWhereaboutAtTheBoardIsZero [
 
 	| aBoard aShip aCollectionOfShips |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 
@@ -88,8 +88,8 @@ BoardTest >> test05whenAShipsIsCreatedInTheGameThenTheirWhereaboutAtTheBoardIsZe
 BoardTest >> test06whenMultipleShipsAreCreatedThenTheirWhereaboutAtTheBoardIsZero [
 
 	| aBoard aShip aCollectionOfShips aSecondShip |
-	aShip := Ship creatWithName: 'juan'.
-	aSecondShip := Ship creatWithName: 'fran'.
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -120,7 +120,7 @@ BoardTest >> test07whenAnEmptyCollectionOfShipsIsCreatedThenTheBoardCreationFail
 BoardTest >> test08whenABoardIsCreatedWithDuplicatedShipsThenTheBoardCreationFails [
 
 	| aShip aCollectionOfShips |
-	aShip := Ship creatWithName: 'juan'.
+	aShip := Ship createWithName: 'juan'.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
