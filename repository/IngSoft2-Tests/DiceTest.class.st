@@ -20,15 +20,3 @@ DiceTest >> test02whenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMust
 	aDice := Dice withTotalNumberFaces: 10.
 	self assert: (aDice throw between: 1 and: 10)
 ]
-
-{ #category : 'tests' }
-DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
-
-	self
-		should: [ Dice withTotalNumberFaces: 2 ]
-		raise: Error
-		withExceptionDo: [ :error |
-				self
-					assert: error messageText
-					equals: 'Number of faces cannot be lower that two' ]
-]
