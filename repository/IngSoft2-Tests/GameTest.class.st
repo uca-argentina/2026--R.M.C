@@ -60,21 +60,24 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 { #category : 'tests' }
 GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aLapManager|
 	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
+ 
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
+	aLapManager:= Lapmanager CreatWith: aCollectionOfShips.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
 		         andABordOf: 10
-		         andADice: aCollectionOfDice.
+		         andADice: aCollectionOfDice
+		         andALapManager:aLapManager.
 
 	aGame moves.
 	self assert: (aGame theShip: aShip isAt: 3)
@@ -105,7 +108,7 @@ GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 { #category : 'tests' }
 GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aLapManager|
 	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 
@@ -114,12 +117,13 @@ GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
-
+   aLapManager:= Lapmanager CreatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
 		         andABordOf: 10
-		         andADice: aCollectionOfDice.
+		         andADice: aCollectionOfDice
+					andALapManager:aLapManager.
 
 	aGame moves.
 
@@ -129,7 +133,7 @@ GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 { #category : 'tests' }
 GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
 
-	| aGame aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice |
+	| aGame aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice aLapManager|
 	aShip := Ship createWithName: 'juan'.
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
@@ -141,15 +145,15 @@ GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aSecondChargedDice.
 	aCollectionOfDice add: aChargedDice.
-
+	 aLapManager:= Lapmanager CreatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
 		         andABordOf: 10
-		         andADice: aCollectionOfDice.
+		         andADice: aCollectionOfDice
+					andALapManager:aLapManager.
 
 	aGame moves.
-
 	self assert: (aGame theShip: aShip isAt: 8)
 ]
 
@@ -324,4 +328,33 @@ GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 		should: [ aGame moves ]
 		raise: Error
 		withMessageText: 'The game has finished'
+]
+
+{ #category : 'tests' }
+GameTest >> test13GameKnowsinwhichLapsAreWe [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aLapManager|
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+	aLapManager:= Lapmanager CreatWith:aCollectionOfShips.
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABordOf: 12
+		         andADice: aCollectionOfDice
+					andALapManager:aLapManager.
+
+	aGame moves.
+	aGame moves.
+	aGame moves.
+
+	self assert:  (((aGame whatLapAmI) Lap)=0).
 ]
