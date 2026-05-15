@@ -40,6 +40,17 @@ Game class >> validateCollection: aCollection with: amountOfCells [
 ]
 
 { #category : 'as yet unclassified' }
+Game >> _moves [
+
+	| total |
+	self canPlay.
+	total := diceCollection sum: [ :aDie | aDie throw ].
+
+
+	self nextShipToPlay advancesTo: total  in: board of: self.
+]
+
+{ #category : 'as yet unclassified' }
 Game >> boardSize [
 
 	^ board numberOfCells
@@ -70,17 +81,6 @@ Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips 
 { #category : 'as yet unclassified' }
 Game >> moveWithoutEffect: aShip by: aNumber [
 	aShip advancesToWithoutEffect: aNumber in: board .
-]
-
-{ #category : 'as yet unclassified' }
-Game >> moves [
-
-	| total |
-	self canPlay.
-	total := diceCollection sum: [ :aDie | aDie throw ].
-
-
-	self nextShipToPlay advancesTo: total  in: board of: self.
 ]
 
 { #category : 'as yet unclassified' }

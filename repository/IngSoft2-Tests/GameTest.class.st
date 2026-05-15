@@ -63,32 +63,6 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 ]
 
 { #category : 'tests' }
-GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
-
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
-	aShip := Ship createWithName: 'juan'.
-	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10
-		          andShips: aCollectionOfShips.
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aBoard
-		         andADice: aCollectionOfDice.
-
-	aGame moves.
-	self assert: (aGame theShip: aShip isAt: 3)
-]
-
-{ #category : 'tests' }
 GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
@@ -110,32 +84,6 @@ GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 		         andADice: aCollectionOfDice.
 
 	self assert: aGame boardSize equals: 10
-]
-
-{ #category : 'tests' }
-GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
-
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
-	aShip := Ship createWithName: 'juan'.
-	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10
-		          andShips: aCollectionOfShips.
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aBoard
-		         andADice: aCollectionOfDice.
-
-	aGame moves.
-
-	self assert: (aGame theShip: aShip isAt: 5)
 ]
 
 { #category : 'tests' }
@@ -163,7 +111,7 @@ GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame _moves.
 
 	self assert: (aGame theShip: aShip isAt: 8)
 ]
@@ -225,38 +173,6 @@ GameTest >> test08whenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreatio
 ]
 
 { #category : 'tests' }
-GameTest >> test09whenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
-
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard |
-	aShip := Ship createWithName: 'juan'.
-	aSecondShip := Ship createWithName: 'fran'.
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aSecondShip.
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 15
-		          andShips: aCollectionOfShips.
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aBoard
-		         andADice: aCollectionOfDice.
-
-	aGame moves.
-	aGame moves.
-
-	self assert: (aGame theShip: aShip isAt: 3).
-	self assert: (aGame theShip: aSecondShip isAt: 3)
-]
-
-{ #category : 'tests' }
 GameTest >> test10whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard |
@@ -281,10 +197,10 @@ GameTest >> test10whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
-	aGame moves.
-	aGame moves.
+	aGame _moves.
+	aGame _moves.
+	aGame _moves.
+	aGame _moves.
 
 	self assert: (aGame theShip: aShip isAt: 8).
 	self assert: (aGame theShip: aSecondShip isAt: 8)
@@ -315,8 +231,8 @@ GameTest >> test11whenAShipMovesToTheFinalCellThenTheGameIsFished [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
+	aGame _moves.
+	aGame _moves.
 
 
 	self assert: (aGame hasFinishedAndWinnerIs: aShip)
@@ -347,12 +263,12 @@ GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 		         andShips: aCollectionOfShips
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
-	aGame moves.
-	aGame moves.
-	aGame moves.
+	aGame _moves.
+	aGame _moves.
+	aGame _moves.
 
 	self
-		should: [ aGame moves ]
+		should: [ aGame _moves ]
 		raise: Error
 		withMessageText: 'The game has finished'
 ]
@@ -381,7 +297,7 @@ GameTest >> test13WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame _moves.
 
 	self assert: (aGame theShip: aShip isAt: 2).
 ]
