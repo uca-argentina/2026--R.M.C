@@ -13,14 +13,9 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf: aNumberOfCells andADice: aCollectionOfDice [
+Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: aBoard andADice: aCollectionOfDice [ 
 
-	| aBoard |
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: aNumberOfCells
-		          andShips: aCollectionOfShips.
-
-	self validateCollection: aCollectionOfDice with: aNumberOfCells.
+	self validateCollection: aCollectionOfDice with: aBoard numberOfCells .
 
 	^ self new
 		  initializeWithName: aBoardName
@@ -73,6 +68,11 @@ Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips 
 ]
 
 { #category : 'as yet unclassified' }
+Game >> moveWithoutEffect: aShip by: aNumber [
+	aShip advancesToWithoutEffect: aNumber in: board .
+]
+
+{ #category : 'as yet unclassified' }
 Game >> moves [
 
 	| total |
@@ -80,7 +80,7 @@ Game >> moves [
 	total := diceCollection sum: [ :aDie | aDie throw ].
 
 
-	self nextShipToPlay advancesTo: total  in: board
+	self nextShipToPlay advancesTo: total  in: board of: self.
 ]
 
 { #category : 'as yet unclassified' }

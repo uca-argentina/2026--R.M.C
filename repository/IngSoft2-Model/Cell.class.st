@@ -24,6 +24,12 @@ Cell class >> verificate: aNumber [
 				'Position cannot be negative (must be integer)' ]
 ]
 
+{ #category : 'as yet unclassified' }
+Cell >> effectTo: aShip in: aGame [
+
+ ^self.
+]
+
 { #category : 'testing' }
 Cell >> hasAmountOfShips: anAmountOfShips [
 

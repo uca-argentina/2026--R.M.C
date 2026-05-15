@@ -1,16 +1,18 @@
 Class {
-	#name : 'Board',
+	#name : 'ChargedBoard',
 	#superclass : 'Object',
 	#instVars : [
-		'numberOfCells',
-		'cells'
+		'totalNumberFaces',
+		'cells',
+		'shipsInCell',
+		'numberOfCells'
 	],
-	#category : 'IngSoft2-Model',
-	#package : 'IngSoft2-Model'
+	#category : 'IngSoft2-Tests',
+	#package : 'IngSoft2-Tests'
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
+ChargedBoard class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
 
 	self validateNumber: aNumberOfCells.
 	self validateCollection: aCollectionOfShips.
@@ -21,7 +23,7 @@ Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollec
 ]
 
 { #category : 'as yet unclassified' }
-Board class >> validateCollection: aCollection [
+ChargedBoard class >> validateCollection: aCollection [
 
 	aCollection isEmpty ifTrue: [
 		Error signal: 'There must be at least one ship in the board' ].
@@ -31,7 +33,7 @@ Board class >> validateCollection: aCollection [
 ]
 
 { #category : 'testing' }
-Board class >> validateNumber: aNumber [
+ChargedBoard class >> validateNumber: aNumber [
 
 	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
 			Error signal:
@@ -40,19 +42,25 @@ Board class >> validateNumber: aNumber [
 ]
 
 { #category : 'testing' }
-Board >> canPlay [
+ChargedBoard >> canPlay [
 
 	^ (cells last) hasShips.
 ]
 
 { #category : 'testing' }
-Board >> hasTheShip: aShip atThePosition: aPosition [
+ChargedBoard >> hasAmountOfShips: anAmountOfShips [
+
+	^ shipsInCell size = anAmountOfShips
+]
+
+{ #category : 'testing' }
+ChargedBoard >> hasTheShip: aShip atThePosition: aPosition [
 
 	^ (cells at: aPosition +1) hasTheShip: aShip .
 ]
 
 { #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
+ChargedBoard >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
 
 	numberOfCells := aNumberOfCells.
 
@@ -64,7 +72,7 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollecti
 ]
 
 { #category : 'as yet unclassified' }
-Board >> move: aShip by: amountToAdd in: aGame [
+ChargedBoard >> move: aShip by: amountToAdd in: aGame [
 
 	| currentCell newPosition |
 
@@ -79,7 +87,7 @@ Board >> move: aShip by: amountToAdd in: aGame [
 ]
 
 { #category : 'as yet unclassified' }
-Board >> moveWithoutEffect: aShip by: amountToAdd [
+ChargedBoard >> moveWithoutEffect: aShip by: amountToAdd [
 
 	| currentCell newPosition |
 	currentCell := cells detect: [ :aCell | aCell hasTheShip: aShip ].
@@ -89,14 +97,20 @@ Board >> moveWithoutEffect: aShip by: amountToAdd [
 
 ]
 
-{ #category : 'as yet unclassified' }
-Board >> numberOfCells [
+{ #category : 'accessing' }
+ChargedBoard >> numberOfCells [
 
 	^ numberOfCells
 ]
 
 { #category : 'as yet unclassified' }
-Board >> winnerShip: aShip [
+ChargedBoard >> putThe: aEspecificCell at: aPosition [.
+
+cells at: aPosition put: aEspecificCell .
+]
+
+{ #category : 'as yet unclassified' }
+ChargedBoard >> winnerShip: aShip [
 
 	^ self hasTheShip: aShip atThePosition: numberOfCells
 ]

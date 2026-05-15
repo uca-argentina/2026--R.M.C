@@ -22,9 +22,15 @@ Ship class >> validate: aName [
 ]
 
 { #category : 'as yet unclassified' }
-Ship >> advancesTo: aPosition in: aBoard [
+Ship >> advancesTo: aPosition in: aBoard of: aGame [
 
-	aBoard move: self by: aPosition
+	aBoard move: self by: aPosition in: aGame
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> advancesToWithoutEffect: aNumber in: aBoard [ 
+
+	aBoard moveWithoutEffect: self by: aNumber
 ]
 
 { #category : 'initialization' }

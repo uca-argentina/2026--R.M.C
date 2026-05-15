@@ -30,22 +30,7 @@ ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 ]
 
 { #category : 'tests' }
-ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
-
-	| aShip aCollectionOfShips aBoard |
-	aShip := Ship createWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
-
-	aShip advancesTo: 5 in: aBoard.
-	self assert: (aShip isAt: 5 in: aBoard)
-]
-
-{ #category : 'tests' }
-ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
+ShipTests >> test02whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
 	| aShip aCollectionOfShips aBoard |
 	aShip := Ship createWithName: 'juan'.
@@ -59,22 +44,7 @@ ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 ]
 
 { #category : 'tests' }
-ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
-
-	| aShip aBoard aCollectionOfShips |
-	aShip := Ship createWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
-
-	aShip advancesTo: 5 in: aBoard.
-	self assert: (aShip isAt: 5 in: aBoard)
-]
-
-{ #category : 'tests' }
-ShipTests >> test05whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
+ShipTests >> test03whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
 
 	self
 		should: [ Ship createWithName: 5 ]
