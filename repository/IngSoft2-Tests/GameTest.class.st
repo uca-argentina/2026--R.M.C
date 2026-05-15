@@ -274,6 +274,35 @@ GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 ]
 
 { #category : 'tests' }
+GameTest >> test13GameKnowsinwhichLapsAreWe [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aLapManager|
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+	aLapManager:= Lapmanager CreatWith:aCollectionOfShips.
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABordOf: 12
+		         andADice: aCollectionOfDice
+					andALapManager:aLapManager.
+
+	aGame moves.
+	aGame moves.
+	aGame moves.
+
+	self assert:  (((aGame whatLapAmI) Lap)=0).
+]
+
+{ #category : 'tests' }
 GameTest >> test13WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |

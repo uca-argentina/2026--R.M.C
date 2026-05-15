@@ -6,7 +6,8 @@ Class {
 		'board',
 		'diceCollection',
 		'shipsInGame',
-		'currentIndexOfShipPlaying'
+		'currentIndexOfShipPlaying',
+		'lapmanager'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -22,6 +23,24 @@ Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: 
 		  andBoard: aBoard
 		  andShips: aCollectionOfShips
 		  andADice: aCollectionOfDice
+]
+
+{ #category : 'as yet unclassified' }
+Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf: aNumberOfCells andADice: aCollectionOfDice andALapManager: aLapmanager [ 
+	
+	| aBoard |
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: aNumberOfCells
+		          andShips: aCollectionOfShips.
+
+	self validateCollection: aCollectionOfDice with: aNumberOfCells.
+
+	^ self new
+		  initializeWithName: aBoardName
+		  andBoard: aBoard
+		  andShips: aCollectionOfShips
+		  andADice: aCollectionOfDice
+		  andALap:aLapmanager.
 ]
 
 { #category : 'as yet unclassified' }
@@ -78,6 +97,16 @@ Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips 
 	currentIndexOfShipPlaying := 0
 ]
 
+{ #category : 'initialization' }
+Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andALap: aLapmanager [ 
+		name := aName.
+	diceCollection := aCollectionOfDice.
+	board := aBoard.
+	shipsInGame := aCollectionOfShips.
+	currentIndexOfShipPlaying := 0.
+	lapmanager:=aLapmanager.
+]
+
 { #category : 'as yet unclassified' }
 Game >> moveWithoutEffect: aShip by: aNumber [
 	aShip advancesToWithoutEffect: aNumber in: board .
@@ -105,4 +134,11 @@ Game >> start [
 Game >> theShip: aShip isAt: aPosition [
 
 	^ board hasTheShip: aShip atThePosition: aPosition
+]
+
+{ #category : 'as yet unclassified' }
+Game >> whatLapAmI [
+	| copyLapmanager |
+	copyLapmanager:=lapmanager deepCopy .
+	^copyLapmanager 
 ]
