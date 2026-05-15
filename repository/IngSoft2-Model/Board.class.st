@@ -19,16 +19,6 @@ Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells [.
 		  initializeWithATotalNumberOfCellsOf: aNumberOfCells.
 ]
 
-{ #category : 'as yet unclassified' }
-Board class >> validateCollection: aCollection [
-
-	aCollection isEmpty ifTrue: [
-		Error signal: 'There must be at least one ship in the board' ].
-
-	aCollection asSet size ~= aCollection size ifTrue: [
-		Error signal: 'There cant be two equals ships in the board' ]
-]
-
 { #category : 'testing' }
 Board class >> validateNumber: aNumber [
 
@@ -52,17 +42,6 @@ Board >> hasTheShip: aShip atThePosition: aPosition [
 
 { #category : 'initialization' }
 Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [ 
-
-	numberOfCells := aNumberOfCells.
-
-	cells := (0 to: aNumberOfCells) collect: [ :index |
-		         Cell createWithPosition: index ].
-	
-
-]
-
-{ #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
 
 	numberOfCells := aNumberOfCells.
 

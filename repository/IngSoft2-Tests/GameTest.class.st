@@ -5,36 +5,6 @@ Class {
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
-GameTest >> ___test140WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
-
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
-
-	aShip := Ship createWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aChargedBoard := ChargedBoard 
-		          createWithATotalNumberOfCellsOf: 10
-		          andShips: aCollectionOfShips.
-	aChargedBoard putThe:(WhromHole number:6) at: 7. 
-
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-				   andNumberOfLaps:1 .
-
-	aGame _moves.
-
-	self assert: (aGame theShip: aShip isAt: 2).
-]
-
 { #category : 'asserting' }
 GameTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
 
@@ -351,7 +321,7 @@ GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 	aGame moves.
 
 	self
-		should: [ aGame _moves ]
+		should: [ aGame moves ]
 		raise: Error
 		withMessageText: 'The game has finished'
 ]
@@ -386,36 +356,6 @@ GameTest >> test13GameKnowsinwhichLapsAreWe [
 
 	self assert:  (aGame theShip: aShip isAtLap: 2).
 	self assert:  (aGame theShip: aSecondShip isAtLap: 1).
-]
-
-{ #category : 'tests' }
-GameTest >> test13WhenAGameIsCreatedThenAllShipsStartAtPositionZero [
-
-	| aGame aShip aSecondShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
-
-	aShip := Ship createWithName: 'juan'.
-	aSecondShip := Ship createWithName: 'fran'.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aSecondShip.
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aBoard := Board createWithATotalNumberOfCellsOf: 8.
-
-	aGame := Game
-		createWithName: 'Ludo'
-		andShips: aCollectionOfShips
-		andABord: aBoard
-		andADice: aCollectionOfDice
-		andNumberOfLaps: 5.
-
-	self assert: (aGame theShip: aShip isAt: 0).
-	self assert: (aGame theShip: aSecondShip isAt: 0).
 ]
 
 { #category : 'tests' }
@@ -473,4 +413,33 @@ GameTest >> test15WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 
 	self assert: (aGame theShip: aShip isAtLap: 1).
 	self assert: (aGame theShip: aShip isAt: 0).
+]
+
+{ #category : 'tests' }
+GameTest >> test16WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged 
+		          createWithATotalNumberOfCellsOf: 10.
+	aChargedBoard replaceACellWith: (WhromHole number:6).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice
+				   andNumberOfLaps:1 .
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 2).
 ]

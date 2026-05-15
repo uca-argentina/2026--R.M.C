@@ -14,7 +14,19 @@ Class {
 
 { #category : 'as yet unclassified' }
 PositionShipManager class >> createWith: aCollectionOfShips andNumberOfLaps: aNumberOfLaps [
+
+	self validate: aCollectionOfShips and: aNumberOfLaps .
 	^ self new initializeWith: aCollectionOfShips and:aNumberOfLaps .
+]
+
+{ #category : 'as yet unclassified' }
+PositionShipManager class >> validate: aCollection and: aNumber [
+
+	aCollection isEmpty ifTrue: [
+		Error signal: 'There must be one ship in de manager of positions' ].
+	
+	(aNumber >= 0) ifFalse: [
+		Error signal: 'There must be a lap in race' ].
 ]
 
 { #category : 'as yet unclassified' }
