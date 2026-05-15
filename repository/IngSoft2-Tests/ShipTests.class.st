@@ -18,28 +18,34 @@ ShipTests >> should: argThatShuoldFailed raise: anError withMessageText: errorMe
 { #category : 'tests' }
 ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
-	| aShip aCollectionOfShips aBoard |
+	| aGame aShip aCollectionOfShips aCollectionOfDice aBoard aChargedDice |
+
 	aShip := Ship createWithName: 'juan'.
+
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
 
-	self assert: (aShip isAt: 0 in: aBoard)
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aBoard := Board createWithATotalNumberOfCellsOf: 8.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andShips: aCollectionOfShips
+		andABord: aBoard
+		andADice: aCollectionOfDice
+		andNumberOfLaps: 5.
+
+	self assert: (aGame theShip: aShip isAt: 0).
 ]
 
 { #category : 'tests' }
 ShipTests >> test02whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
-	| aShip aCollectionOfShips aBoard |
+	| aShip  |
 	aShip := Ship createWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
-
 	self assert: (aShip nameIs: 'juan')
 ]
 

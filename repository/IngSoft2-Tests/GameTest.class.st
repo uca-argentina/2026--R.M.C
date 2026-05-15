@@ -359,6 +359,36 @@ GameTest >> test13GameKnowsinwhichLapsAreWe [
 ]
 
 { #category : 'tests' }
+GameTest >> test13WhenAGameIsCreatedThenAllShipsStartAtPositionZero [
+
+	| aGame aShip aSecondShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
+
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
+
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aBoard := Board createWithATotalNumberOfCellsOf: 8.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andShips: aCollectionOfShips
+		andABord: aBoard
+		andADice: aCollectionOfDice
+		andNumberOfLaps: 5.
+
+	self assert: (aGame theShip: aShip isAt: 0).
+	self assert: (aGame theShip: aSecondShip isAt: 0).
+]
+
+{ #category : 'tests' }
 GameTest >> test14WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |

@@ -32,28 +32,7 @@ CellTest >> test02whenTheCellIsCreatedAtAnExactPositionThenItCannotBeInAnotherPo
 ]
 
 { #category : 'tests' }
-CellTest >> test03whenTheCellReceivesAShipThenTheCellKnowsItsTotalAmountOfShips [
-
-	| aCell aShip |
-	aCell := Cell createWithPosition: 1.
-	aShip := Ship createWithName: 'juan'.
-	aCell received: aShip.
-	self assert: (aCell hasAmountOfShips: 1)
-]
-
-{ #category : 'tests' }
-CellTest >> test04whenTheCellLosesAShipThenTheTotalAmountOfShipsIsReducedByOne [
-
-	| aCell aShip |
-	aCell := Cell createWithPosition: 1.
-	aShip := Ship createWithName: 'juan'.
-	aCell received: aShip.
-	aCell lose: aShip.
-	self assert: (aCell hasAmountOfShips: 0)
-]
-
-{ #category : 'tests' }
-CellTest >> test05whenACellHasNonValidPositionThenItCannotBeCreated [
+CellTest >> test03whenACellHasNonValidPositionThenItCannotBeCreated [
 
 	self
 		should: [ Cell createWithPosition: 'A' ]
@@ -62,7 +41,7 @@ CellTest >> test05whenACellHasNonValidPositionThenItCannotBeCreated [
 ]
 
 { #category : 'tests' }
-CellTest >> test06whenACellHasNegativePositionThenItCannotBeCreated [
+CellTest >> test04whenACellHasNegativePositionThenItCannotBeCreated [
 
 	self
 		should: [ Cell createWithPosition: -5 ]
