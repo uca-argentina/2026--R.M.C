@@ -30,22 +30,6 @@ ShipRaceStatus >> advanceBy: anAmount inBoardOfSize: aBoardSize [
 ]
 
 { #category : 'initialization' }
-ShipRaceStatus >> goBackBy: anAmount inBoardOfSize: aBoardSize [
-
-	| totalPosition |
-
-	totalPosition := boardPosition - anAmount.
-
-	[ totalPosition < 0 ] whileTrue: [
-		totalPosition := totalPosition + aBoardSize.
-		lap := lap - 1.
-	].
-
-	lap := lap max: 0.
-	boardPosition := totalPosition.
-]
-
-{ #category : 'initialization' }
 ShipRaceStatus >> hasCompleted: lapsToWin [
 
 	^ lap >= lapsToWin
@@ -71,14 +55,8 @@ ShipRaceStatus >> isAtPosition: aPosition [
 	^ boardPosition = aPosition
 ]
 
-{ #category : 'initialization' }
+{ #category : 'testing' }
 ShipRaceStatus >> isFor: aShip [
 
 	^ ship = aShip
-]
-
-{ #category : 'initialization' }
-ShipRaceStatus >> sendToStart [
-
-	boardPosition := 0.
 ]

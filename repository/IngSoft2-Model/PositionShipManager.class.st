@@ -66,34 +66,6 @@ PositionShipManager >> move: aShip by: anAmount inBoardOfSize: aBoardSize [
 ]
 
 { #category : 'initialization' }
-PositionShipManager >> moveAllShipsExcept: aShip backBy: anAmount inBoardOfSize: aBoardSize [
-
-	shipStatuses do: [ :aShipStatus |
-		(aShipStatus isFor: aShip) ifFalse: [
-			aShipStatus
-				goBackBy: anAmount
-				inBoardOfSize: aBoardSize
-		]
-	]
-]
-
-{ #category : 'initialization' }
-PositionShipManager >> moveBack: aShip by: anAmount inBoardOfSize: aBoardSize [
-
-	(self statusOf: aShip)
-		goBackBy: anAmount
-		inBoardOfSize: aBoardSize
-]
-
-{ #category : 'initialization' }
-PositionShipManager >> sendAllShipsToStart [
-
-	shipStatuses do: [ :aShipStatus |
-		aShipStatus sendToStart
-	]
-]
-
-{ #category : 'initialization' }
 PositionShipManager >> statusOf: aShip [
 
 	^ shipStatuses detect: [ :aShipStatus |
