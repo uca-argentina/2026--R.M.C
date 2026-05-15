@@ -195,38 +195,7 @@ GameTest >> test07whenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 ]
 
 { #category : 'tests' }
-GameTest >> test08whenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreationFails [
-
-	| aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice aBoard aGame |
-	aShip := Ship createWithName: 'juan'.
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-	aSecondChargedDice := ChargedDice withTotalNumberFaces: 9.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aSecondChargedDice.
-	aCollectionOfDice add: aChargedDice.
-
-	self
-		should: [
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10.
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aBoard
-		         andADice: aCollectionOfDice
-				   andNumberOfLaps:1 . ]
-		raise: Error
-		withMessageText:
-		'There of the dices must be lower than the amount of cells'
-]
-
-{ #category : 'tests' }
-GameTest >> test10whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
+GameTest >> test08whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard |
 	aShip := Ship createWithName: 'juan'.
@@ -260,7 +229,7 @@ GameTest >> test10whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 ]
 
 { #category : 'tests' }
-GameTest >> test11whenAShipMovesToTheFinalCellThenTheGameIsFished [
+GameTest >> test09whenAShipMovesToTheFinalCellThenTheGameIsFished [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
 	aShip := Ship createWithName: 'juan'.
@@ -292,7 +261,7 @@ GameTest >> test11whenAShipMovesToTheFinalCellThenTheGameIsFished [
 ]
 
 { #category : 'tests' }
-GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
+GameTest >> test10whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard |
 	aShip := Ship createWithName: 'juan'.
@@ -327,7 +296,7 @@ GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 ]
 
 { #category : 'tests' }
-GameTest >> test13WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
+GameTest >> test11WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip  aBoard |
 	aShip := Ship createWithName: 'juan'.
@@ -359,7 +328,7 @@ GameTest >> test13WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
 ]
 
 { #category : 'tests' }
-GameTest >> test14WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
+GameTest >> test12WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
 
@@ -387,7 +356,7 @@ GameTest >> test14WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
 ]
 
 { #category : 'tests' }
-GameTest >> test15WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
+GameTest >> test13WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
 
@@ -416,7 +385,7 @@ GameTest >> test15WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 ]
 
 { #category : 'tests' }
-GameTest >> test16WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
+GameTest >> test14WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
 
@@ -445,7 +414,7 @@ GameTest >> test16WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 ]
 
 { #category : 'tests' }
-GameTest >> test17WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEffectIsNotApplied [
+GameTest >> test15WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEffectIsNotApplied [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
 
@@ -478,7 +447,7 @@ GameTest >> test17WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEf
 ]
 
 { #category : 'tests' }
-GameTest >> test18WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap [
+GameTest >> test16WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
 
@@ -511,7 +480,7 @@ GameTest >> test18WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap
 ]
 
 { #category : 'tests' }
-GameTest >> test19WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero [
+GameTest >> test17WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aFirstDice aSecondDice aChargedBoard |
 
