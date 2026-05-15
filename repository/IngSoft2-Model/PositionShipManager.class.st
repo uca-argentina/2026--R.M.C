@@ -77,6 +77,15 @@ PositionShipManager >> move: aShip by: anAmount inBoardOfSize: aBoardSize [
 		inBoardOfSize: aBoardSize
 ]
 
+{ #category : 'as yet unclassified' }
+PositionShipManager >> movementFor: aShip moving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
+
+	^ (self statusOf: aShip)
+		movementAfterMoving: sumOfDices
+		inBoardOfSize: aBoardSize
+		modifiedBy: aFutureBlock
+]
+
 { #category : 'initialization' }
 PositionShipManager >> statusOf: aShip [
 

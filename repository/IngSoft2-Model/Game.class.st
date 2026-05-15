@@ -39,9 +39,23 @@ Game class >> validateCollection: aCollection with: amountOfCells [
 	total := 0.
 	aCollection do: [ :aDie | total := total + aDie throw ].
 
-	total > amountOfCells ifTrue: [
-			Error signal:
-				'There of the dices must be lower than the amount of cells' ]
+]
+
+{ #category : 'as yet unclassified' }
+Game >> __moves [
+
+	| total shipToPlay |
+
+	self canPlay.
+	total := diceCollection sum: [ :aDie | aDie throw ].
+	shipToPlay := self nextShipToPlay.
+
+	shipPositionManager
+		move: shipToPlay
+		by: total
+		inBoardOfSize: board numberOfCells.
+	
+	
 ]
 
 { #category : 'as yet unclassified' }
@@ -75,15 +89,26 @@ Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips 
 { #category : 'as yet unclassified' }
 Game >> moves [
 
-	| total shipToPlay |
+	| sumOfTheDices shipToPlay finalMovement |
 
 	self canPlay.
-	total := diceCollection sum: [ :aDie | aDie throw ].
+
+	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
 	shipToPlay := self nextShipToPlay.
+
+	finalMovement := shipPositionManager
+		movementFor: shipToPlay
+		moving: sumOfTheDices
+		inBoardOfSize: board numberOfCells
+		modifiedBy: [ :futurePosition |
+			board
+				modifyMovementForLandingAt: futurePosition
+				startingWith: sumOfTheDices
+		].
 
 	shipPositionManager
 		move: shipToPlay
-		by: total
+		by: finalMovement
 		inBoardOfSize: board numberOfCells.
 ]
 

@@ -28,18 +28,6 @@ Board class >> validateNumber: aNumber [
 	^ aNumber
 ]
 
-{ #category : 'testing' }
-Board >> canPlay [
-
-	^ (cells last) hasShips.
-]
-
-{ #category : 'testing' }
-Board >> hasTheShip: aShip atThePosition: aPosition [
-
-	^ (cells at: aPosition +1) hasTheShip: aShip .
-]
-
 { #category : 'initialization' }
 Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [ 
 
@@ -51,40 +39,18 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [
 
 ]
 
-{ #category : 'as yet unclassified' }
-Board >> move: aShip by: amountToAdd in: aGame [
+{ #category : 'accessing' }
+Board >> modifyMovementForLandingAt: aPosition startingWith: anAmount [
 
-	| currentCell newPosition |
+	| cell |
 
-	currentCell := cells detect: [ :aCell | aCell hasTheShip: aShip ].
+	cell := cells at: aPosition + 1.
 
-	newPosition := currentCell numberOfCell + amountToAdd.
-
-	currentCell lose: aShip.
-	(cells at: newPosition + 1) received: aShip.
-	(cells at: newPosition + 1) effectTo: aShip in: aGame.
-
-]
-
-{ #category : 'as yet unclassified' }
-Board >> moveWithoutEffect: aShip by: amountToAdd [
-
-	| currentCell newPosition |
-	currentCell := cells detect: [ :aCell | aCell hasTheShip: aShip ].
-	newPosition := currentCell numberOfCell + amountToAdd.
-	currentCell lose: aShip.
-	(cells at: newPosition + 1) received: aShip.
-
+	^ cell modifyMovement: anAmount
 ]
 
 { #category : 'as yet unclassified' }
 Board >> numberOfCells [
 
 	^ numberOfCells
-]
-
-{ #category : 'as yet unclassified' }
-Board >> winnerShip: aShip [
-
-	^ self hasTheShip: aShip atThePosition: numberOfCells
 ]

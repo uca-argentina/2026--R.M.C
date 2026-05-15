@@ -11,7 +11,7 @@ WhromHole class >> number: aPosition [
 ]
 
 { #category : 'as yet unclassified' }
-WhromHole >> effectTo: aShip in: aGame [
+WhromHole >> modifyMovement: anAmount [
 
-	aGame moveWithoutEffect: aShip by: -4.
+	^ anAmount - 4
 ]

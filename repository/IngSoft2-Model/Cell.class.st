@@ -23,16 +23,16 @@ Cell class >> verificate: aNumber [
 				'Position cannot be negative (must be integer)' ]
 ]
 
-{ #category : 'as yet unclassified' }
-Cell >> effectTo: aShip in: aGame [
-
- ^self.
-]
-
 { #category : 'initialization' }
 Cell >> initializeWithPosition: aPosition [
 
 	position := aPosition.
+]
+
+{ #category : 'as yet unclassified' }
+Cell >> modifyMovement: anAmount [
+
+	^ anAmount
 ]
 
 { #category : 'as yet unclassified' }

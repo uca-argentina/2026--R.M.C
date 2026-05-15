@@ -60,3 +60,13 @@ ShipRaceStatus >> isFor: aShip [
 
 	^ ship = aShip
 ]
+
+{ #category : 'as yet unclassified' }
+ShipRaceStatus >> movementAfterMoving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
+
+	| futurePosition |
+
+	futurePosition := (boardPosition + sumOfDices) \\ aBoardSize.
+
+	^ aFutureBlock value: futurePosition
+]
