@@ -5,6 +5,36 @@ Class {
 	#package : 'IngSoft2-Tests'
 }
 
+{ #category : 'tests' }
+GameTest >> ___test140WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := ChargedBoard 
+		          createWithATotalNumberOfCellsOf: 10
+		          andShips: aCollectionOfShips.
+	aChargedBoard putThe:(WhromHole number:6) at: 7. 
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice
+				   andNumberOfLaps:1 .
+
+	aGame _moves.
+
+	self assert: (aGame theShip: aShip isAt: 2).
+]
+
 { #category : 'asserting' }
 GameTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
 
@@ -443,34 +473,4 @@ GameTest >> test15WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 
 	self assert: (aGame theShip: aShip isAtLap: 1).
 	self assert: (aGame theShip: aShip isAt: 0).
-]
-
-{ #category : 'tests' }
-GameTest >> ztest140WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
-
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
-
-	aShip := Ship createWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aChargedBoard := ChargedBoard 
-		          createWithATotalNumberOfCellsOf: 10
-		          andShips: aCollectionOfShips.
-	aChargedBoard putThe:(WhromHole number:6) at: 7. 
-
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-				   andNumberOfLaps:1 .
-
-	aGame _moves.
-
-	self assert: (aGame theShip: aShip isAt: 2).
 ]
