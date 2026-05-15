@@ -10,14 +10,13 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells [. 
 
 	self validateNumber: aNumberOfCells.
-	self validateCollection: aCollectionOfShips.
+	
 
 	^ self new
-		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
-		  andShips: aCollectionOfShips
+		  initializeWithATotalNumberOfCellsOf: aNumberOfCells.
 ]
 
 { #category : 'as yet unclassified' }
@@ -52,6 +51,17 @@ Board >> hasTheShip: aShip atThePosition: aPosition [
 ]
 
 { #category : 'initialization' }
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [ 
+
+	numberOfCells := aNumberOfCells.
+
+	cells := (0 to: aNumberOfCells) collect: [ :index |
+		         Cell createWithPosition: index ].
+	
+
+]
+
+{ #category : 'initialization' }
 Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
 
 	numberOfCells := aNumberOfCells.
@@ -59,7 +69,6 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollecti
 	cells := (0 to: aNumberOfCells) collect: [ :index |
 		         Cell createWithPosition: index ].
 	
-	aCollectionOfShips do: [ :aShip | cells first received: aShip ].
 
 ]
 

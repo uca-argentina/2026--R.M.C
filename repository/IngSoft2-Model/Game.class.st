@@ -7,40 +7,26 @@ Class {
 		'diceCollection',
 		'shipsInGame',
 		'currentIndexOfShipPlaying',
-		'lapmanager'
+		'lapmanager',
+		'shipPositionManager'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: aBoard andADice: aCollectionOfDice [ 
+Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: aBoard andADice: aCollectionOfDice andNumberOfLaps: aNumber [
 
-	self validateCollection: aCollectionOfDice with: aBoard numberOfCells .
-
-	^ self new
-		  initializeWithName: aBoardName
-		  andBoard: aBoard
-		  andShips: aCollectionOfShips
-		  andADice: aCollectionOfDice
-]
-
-{ #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf: aNumberOfCells andADice: aCollectionOfDice andALapManager: aLapmanager [ 
-	
-	| aBoard |
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: aNumberOfCells
-		          andShips: aCollectionOfShips.
-
-	self validateCollection: aCollectionOfDice with: aNumberOfCells.
+	| aPositionShipManager |
+	aPositionShipManager := PositionShipManager createWith: aCollectionOfShips andNumberOfLaps: aNumber.
+	self validateCollection: aCollectionOfDice with: aBoard numberOfCells  .
 
 	^ self new
 		  initializeWithName: aBoardName
 		  andBoard: aBoard
 		  andShips: aCollectionOfShips
 		  andADice: aCollectionOfDice
-		  andALap:aLapmanager.
+		  andAPositionManager: aPositionShipManager.
 ]
 
 { #category : 'as yet unclassified' }
@@ -78,38 +64,38 @@ Game >> boardSize [
 { #category : 'testing' }
 Game >> canPlay [
 
-	board canPlay ifTrue: [ Error signal: 'The game has finished' ]
+	shipPositionManager hasFinished ifTrue: [ Error signal: 'The game has finished' ]
 ]
 
 { #category : 'testing' }
 Game >> hasFinishedAndWinnerIs: aShip [
 
-	^ board winnerShip: aShip
+	^ shipPositionManager hasWon: aShip
 ]
 
 { #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice [
-
+Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andAPositionManager: ashipPositionManager [ 
 	name := aName.
 	diceCollection := aCollectionOfDice.
 	board := aBoard.
 	shipsInGame := aCollectionOfShips.
-	currentIndexOfShipPlaying := 0
-]
-
-{ #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andALap: aLapmanager [ 
-		name := aName.
-	diceCollection := aCollectionOfDice.
-	board := aBoard.
-	shipsInGame := aCollectionOfShips.
 	currentIndexOfShipPlaying := 0.
-	lapmanager:=aLapmanager.
+	shipPositionManager:=ashipPositionManager.
 ]
 
 { #category : 'as yet unclassified' }
-Game >> moveWithoutEffect: aShip by: aNumber [
-	aShip advancesToWithoutEffect: aNumber in: board .
+Game >> moves [
+
+	| total shipToPlay |
+
+	self canPlay.
+	total := diceCollection sum: [ :aDie | aDie throw ].
+	shipToPlay := self nextShipToPlay.
+
+	shipPositionManager
+		move: shipToPlay
+		by: total
+		inBoardOfSize: board numberOfCells.
 ]
 
 { #category : 'as yet unclassified' }
@@ -133,12 +119,15 @@ Game >> start [
 { #category : 'accessing' }
 Game >> theShip: aShip isAt: aPosition [
 
-	^ board hasTheShip: aShip atThePosition: aPosition
+	^ shipPositionManager
+		is: aShip
+		atPosition: aPosition
 ]
 
 { #category : 'as yet unclassified' }
-Game >> whatLapAmI [
-	| copyLapmanager |
-	copyLapmanager:=lapmanager deepCopy .
-	^copyLapmanager 
+Game >> theShip: aShip isAtLap: aLap [
+
+	^ shipPositionManager
+		is: aShip
+		atLap: aLap.
 ]

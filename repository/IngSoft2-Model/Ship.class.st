@@ -21,28 +21,10 @@ Ship class >> validate: aName [
 	aName isString ifFalse: [ Error signal: 'The name must be a string' ]
 ]
 
-{ #category : 'as yet unclassified' }
-Ship >> advancesTo: aPosition in: aBoard of: aGame [
-
-	aBoard move: self by: aPosition in: aGame
-]
-
-{ #category : 'as yet unclassified' }
-Ship >> advancesToWithoutEffect: aNumber in: aBoard [ 
-
-	aBoard moveWithoutEffect: self by: aNumber
-]
-
 { #category : 'initialization' }
 Ship >> initializeWith: anName [
 
 	name := anName
-]
-
-{ #category : 'accessing' }
-Ship >> isAt: aPosition in: aBoard [
-
-	^ aBoard hasTheShip: self atThePosition: aPosition
 ]
 
 { #category : 'as yet unclassified' }
