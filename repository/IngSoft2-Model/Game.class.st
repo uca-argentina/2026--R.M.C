@@ -42,23 +42,6 @@ Game class >> validateCollection: aCollection with: amountOfCells [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> __moves [
-
-	| total shipToPlay |
-
-	self canPlay.
-	total := diceCollection sum: [ :aDie | aDie throw ].
-	shipToPlay := self nextShipToPlay.
-
-	shipPositionManager
-		move: shipToPlay
-		by: total
-		inBoardOfSize: board numberOfCells.
-	
-	
-]
-
-{ #category : 'as yet unclassified' }
 Game >> boardSize [
 
 	^ board numberOfCells
