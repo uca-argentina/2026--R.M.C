@@ -317,7 +317,7 @@ GameTest >> test10whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 { #category : 'tests' }
 GameTest >> test11WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip  aBoard |
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip  aBoard aTurnManager|
 	aShip := Ship createWithName: 'juan'.
 	aSecondShip := Ship createWithName: 'fran'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
@@ -329,12 +329,14 @@ GameTest >> test11WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
 	aCollectionOfDice add: aChargedDice.
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aBoard
-		         andADice: aCollectionOfDice
-				   andNumberOfLaps:5 .
+		      createWithName: 'Ludo'
+        andShips: aCollectionOfShips
+        andABord: aBoard
+        andADice: aCollectionOfDice
+        andATurnManager: aTurnManager
+        andNumberOfLaps: 5.
 
 	aGame moves.
 	aGame moves.
