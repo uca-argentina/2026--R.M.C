@@ -27,6 +27,11 @@ Ship >> initializeWith: anName [
 	name := anName
 ]
 
+{ #category : 'accessing' }
+Ship >> name [
+	 ^name
+]
+
 { #category : 'as yet unclassified' }
 Ship >> nameIs: aName [
 
