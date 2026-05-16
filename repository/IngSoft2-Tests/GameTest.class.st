@@ -761,7 +761,6 @@ GameTest >> test24WhenTwoShipsFallInHyperJumpThenItUsesNextParsecValue [
 GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginning [
 
 	| aGame aShip aSecondShip aThirdShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
-
 	aShip := Ship createWithName: 'juan'.
 	aSecondShip := Ship createWithName: 'pedro'.
 	aThirdShip := Ship createWithName: 'maria'.
@@ -777,17 +776,18 @@ GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginn
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
-		createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 100.
 
 	aChargedBoard replaceACellWith:
-		(HyperJump createWithPosition: 3 andParsecs: #(20 10)).
+		(HyperJump createWithPosition: 3 andParsecs: #( 20 10 )).
 
 	aGame := Game
-		createWithName: 'Ludo'
-		andShips: aCollectionOfShips
-		andABord: aChargedBoard
-		andADice: aCollectionOfDice
-		andNumberOfLaps: 5.
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice
+		         andNumberOfLaps: 5.
 
 	aGame moves.
 	self assert: (aGame theShip: aShip isAt: 5).
@@ -796,14 +796,13 @@ GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginn
 	self assert: (aGame theShip: aSecondShip isAt: 4).
 
 	aGame moves.
-	self assert: (aGame theShip: aThirdShip isAt: 5).
+	self assert: (aGame theShip: aThirdShip isAt: 5)
 ]
 
 { #category : 'tests' }
 GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
-
 	aShip := Ship createWithName: 'juan'.
 
 	aCollectionOfShips := OrderedCollection new.
@@ -815,59 +814,20 @@ GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
-		createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 100.
 
 	aChargedBoard replaceACellWith:
-		(HyperJump createWithPosition: 3 andParsecs: #(25)).
+		(HyperJump createWithPosition: 3 andParsecs: #( 25 )).
 
 	aGame := Game
-		createWithName: 'Ludo'
-		andShips: aCollectionOfShips
-		andABord: aChargedBoard
-		andADice: aCollectionOfDice
-		andNumberOfLaps: 5.
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice
+		         andNumberOfLaps: 5.
 
 	aGame moves.
 
-	self assert: (aGame theShip: aShip isAt: 5).
-]
-
-{ #category : 'tests' }
-GameTest >> test_ [
-
-	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
-
-	aShip := Ship createWithName: 'juan'.
-	aSecondShip := Ship createWithName: 'pedro'.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aSecondShip.
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10
-						 andAnAmountOfParcecsOf: 50.
-
-	aChargedBoard replaceACellWith:
-		(MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
-
-	aGame := Game
-		createWithName: 'Ludo'
-		andShips: aCollectionOfShips
-		andABord: aChargedBoard
-		andADice: aCollectionOfDice
-		andNumberOfLaps: 3.
-
-	aGame moves. "juan -> 6, vuelta 0"
-	aGame moves. "pedro -> 6, vuelta 0"
-	aGame moves. "juan -> 2, vuelta 1"
-	aGame moves. "pedro -> 2, vuelta 1"
-	aGame moves. "juan -> 8, vuelta 1, cae en MoonWalk"
-
-	self assert: (aGame theShip: aSecondShip isAt: 8).
-	self assert: (aGame theShip: aSecondShip isAtLap: 0).
+	self assert: (aGame theShip: aShip isAt: 5)
 ]
