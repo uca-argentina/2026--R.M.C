@@ -3,20 +3,18 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'numberOfCells',
-		'cells'
+		'cells',
+		'amountOfParcecs'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells [. 
-
-	self validateNumber: aNumberOfCells.
-	
-
-	^ self new
-		  initializeWithATotalNumberOfCellsOf: aNumberOfCells.
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs [ 
+	self validateNumber: aNumberOfCells .
+	self validateParcecs: anAmountOfParcecs .
+	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs .
 ]
 
 { #category : 'testing' }
@@ -25,6 +23,15 @@ Board class >> validateNumber: aNumber [
 	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
 			Error signal:
 				'The board must have an integer number of cells greater than two' ].
+	^ aNumber
+]
+
+{ #category : 'testing' }
+Board class >> validateParcecs: aNumber [
+
+	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
+			Error signal:
+				'The board must have an positive integer number of parcecs' ].
 	^ aNumber
 ]
 
@@ -38,16 +45,20 @@ Board >> effectForLandingAt: aPosition startingWith: anAmount [
 ]
 
 { #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [
-
-	numberOfCells := aNumberOfCells.
-
-	cells := (0 to: aNumberOfCells) collect: [ :index |
-		         Cell createWithPosition: index ]
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf:anAmountOfParcecs [ 
+	 numberOfCells  := aNumberOfCells.
+		cells := (0 to: aNumberOfCells) collect: [ :index |
+		         Cell createWithPosition: index ].
+	 amountOfParcecs := anAmountOfParcecs.
 ]
 
 { #category : 'as yet unclassified' }
 Board >> numberOfCells [
 
 	^ numberOfCells
+]
+
+{ #category : 'as yet unclassified' }
+Board >> parcecs [
+^ amountOfParcecs .
 ]

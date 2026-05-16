@@ -19,7 +19,7 @@ ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 
 	aGame := Game
 		createWithName: 'Ludo'

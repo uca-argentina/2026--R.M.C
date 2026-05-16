@@ -18,7 +18,7 @@ GameTest >> test01whenAGameStartsThenItReturnsItsName [
 	aCollectionOfDice add: aChargedDice.
 
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 12.
+		          createWithATotalNumberOfCellsOf: 12 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -34,7 +34,7 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard |
 	aShip := Ship createWithName: 'juan'.
-	aChargedDice := ChargedDice withTotalNumberFaces: 5.
+	aChargedDice := ChargedDice withTotalNumberFaces: 5 .
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -42,7 +42,7 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10.
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Generala'
 		         andShips: aCollectionOfShips
@@ -68,7 +68,7 @@ GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
 
 
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10.
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -94,7 +94,7 @@ GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10.
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -118,7 +118,7 @@ GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10.
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -147,7 +147,7 @@ GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 	aCollectionOfDice add: aSecondChargedDice.
 	aCollectionOfDice add: aChargedDice.
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10.
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -173,7 +173,7 @@ GameTest >> test07whenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 	self
 		should: [
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 10.
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -201,7 +201,7 @@ GameTest >> test08whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 	aCollectionOfDice add: aChargedDice.
 
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 25.
+		          createWithATotalNumberOfCellsOf: 25 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -235,7 +235,7 @@ GameTest >> test09whenAShipMovesToTheFinalCellThenTheGameIsFished [
 	aCollectionOfDice add: aChargedDice.
 
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8.
+		          createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -268,7 +268,7 @@ GameTest >> test10whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8.
+		          createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -299,7 +299,7 @@ GameTest >> test11WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8.
+		          createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andShips: aCollectionOfShips
@@ -331,7 +331,7 @@ GameTest >> test12WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 
 	aGame := Game
 		createWithName: 'Ludo'
@@ -359,7 +359,7 @@ GameTest >> test13WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 
 	aGame := Game
 		createWithName: 'Ludo'
@@ -371,35 +371,6 @@ GameTest >> test13WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 	aGame moves.
 
 	self assert: (aGame theShip: aShip isAtLap: 1).
-	self assert: (aGame theShip: aShip isAt: 0).
-]
-
-{ #category : 'tests' }
-GameTest >> test14BWhenAShipFallsInAWormHoleInTwoThenGameMovesItBackToZero [
-
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
-
-	aShip := Ship createWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	
-	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aChargedBoard := BoardCharged 
-		          createWithATotalNumberOfCellsOf: 10.
-	aChargedBoard replaceACellWith: (WhromHole createWithPosition:3).
-
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-				   andNumberOfLaps:1 .
-
-	aGame moves.
-
 	self assert: (aGame theShip: aShip isAt: 0).
 ]
 
@@ -417,7 +388,7 @@ GameTest >> test14WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged 
-		          createWithATotalNumberOfCellsOf: 10.
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (WhromHole createWithPosition:6).
 
 	aGame := Game
@@ -433,7 +404,36 @@ GameTest >> test14WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 ]
 
 { #category : 'tests' }
-GameTest >> test15WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEffectIsNotApplied [
+GameTest >> test15WhenAShipFallsInAWormHoleInTwoThenGameMovesItBackToZero [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged 
+		          createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (WhromHole createWithPosition:3).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice
+				   andNumberOfLaps:1 .
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 0).
+]
+
+{ #category : 'tests' }
+GameTest >> test16WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEffectIsNotApplied [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
 
@@ -442,13 +442,13 @@ GameTest >> test15WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEf
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6 .
 
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
-		createWithATotalNumberOfCellsOf: 10.
+		createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 
 	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 6).
 	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 2).
@@ -466,7 +466,7 @@ GameTest >> test15WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEf
 ]
 
 { #category : 'tests' }
-GameTest >> test16WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap [
+GameTest >> test17WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
 
@@ -481,7 +481,7 @@ GameTest >> test16WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
-		createWithATotalNumberOfCellsOf: 10.
+		createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 
 	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
 
@@ -499,7 +499,7 @@ GameTest >> test16WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap
 ]
 
 { #category : 'tests' }
-GameTest >> test17WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero [
+GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aFirstDice aSecondDice aChargedBoard |
 
@@ -515,7 +515,7 @@ GameTest >> test17WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 	aCollectionOfDice add: aFirstDice.
 
 	aChargedBoard := BoardCharged
-		createWithATotalNumberOfCellsOf: 10.
+		createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 
 	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
 
@@ -538,7 +538,7 @@ GameTest >> test17WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 ]
 
 { #category : 'tests' }
-GameTest >> test18WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
+GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 
 	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aFirstDice aChargedBoard |
 
@@ -549,12 +549,12 @@ GameTest >> test18WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
 
-	aFirstDice := ChargedDice withTotalNumberFaces: 6.
+	aFirstDice := ChargedDice withTotalNumberFaces: 6 .
 
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aFirstDice.
 
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10.
+	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 2).
 
 	aGame := Game
@@ -570,7 +570,7 @@ GameTest >> test18WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 ]
 
 { #category : 'tests' }
-GameTest >> test19whenAShipFallsInAMoonWalkCellTheTheEffectIsCorrectlyAplied [
+GameTest >> test20whenAShipFallsInAMoonWalkCellTheTheEffectIsCorrectlyAplied [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aFirstDice aChargedBoard aSecondShip |
 
@@ -587,7 +587,7 @@ GameTest >> test19whenAShipFallsInAMoonWalkCellTheTheEffectIsCorrectlyAplied [
 	aCollectionOfDice add: aFirstDice.
 
 	aChargedBoard := BoardCharged
-		createWithATotalNumberOfCellsOf: 10.
+		createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 1).
 
@@ -607,7 +607,7 @@ GameTest >> test19whenAShipFallsInAMoonWalkCellTheTheEffectIsCorrectlyAplied [
 ]
 
 { #category : 'tests' }
-GameTest >> test20WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelowZero [
+GameTest >> test21WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelowZero [
 
 	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aFirstDice aChargedBoard |
 
@@ -624,7 +624,7 @@ GameTest >> test20WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelo
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aFirstDice.
 
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10.
+	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 3).
 
 	aGame := Game
@@ -641,7 +641,7 @@ GameTest >> test20WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelo
 ]
 
 { #category : 'tests' }
-GameTest >> test21WhenAShipFallsInMoonWalkThenOtherShipLosesOneLap [
+GameTest >> test22WhenAShipFallsInMoonWalkThenOtherShipLosesOneLap [
 
 	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
 
@@ -658,7 +658,47 @@ GameTest >> test21WhenAShipFallsInMoonWalkThenOtherShipLosesOneLap [
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
-		createWithATotalNumberOfCellsOf: 10.
+		createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
+
+	aChargedBoard replaceACellWith:
+		(MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andShips: aCollectionOfShips
+		andABord: aChargedBoard
+		andADice: aCollectionOfDice
+		andNumberOfLaps: 3.
+
+	aGame moves. "juan -> 6, vuelta 0"
+	aGame moves. "pedro -> 6, vuelta 0"
+	aGame moves. "juan -> 2, vuelta 1"
+	aGame moves. "pedro -> 2, vuelta 1"
+	aGame moves. "juan -> 8, vuelta 1, cae en MoonWalk"
+
+	self assert: (aGame theShip: aSecondShip isAt: 8).
+	self assert: (aGame theShip: aSecondShip isAtLap: 0).
+]
+
+{ #category : 'tests' }
+GameTest >> test23 [
+
+	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pedro'.
+
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10
+						 andAnAmountOfParcecsOf: 50.
 
 	aChargedBoard replaceACellWith:
 		(MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
