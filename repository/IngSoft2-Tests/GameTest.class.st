@@ -617,6 +617,7 @@ GameTest >> test20WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelo
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
+	
 
 	aFirstDice := ChargedDice withTotalNumberFaces: 6.
 

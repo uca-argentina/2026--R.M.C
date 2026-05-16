@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-BoardCharged >> replaceACellWith: aCell [ 
+BoardCharged >> replaceACellWith: aCell [
 
-cells at:(aCell numberOfCell+1) put: aCell
+	cells at: aCell numberOfCell + 1 put: aCell
 ]

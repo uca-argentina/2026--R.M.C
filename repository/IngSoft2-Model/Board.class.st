@@ -32,21 +32,18 @@ Board class >> validateNumber: aNumber [
 Board >> effectForLandingAt: aPosition startingWith: anAmount [
 
 	| cell |
-
 	cell := cells at: aPosition + 1.
 
 	^ cell effectForMovement: anAmount
 ]
 
 { #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [ 
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [
 
 	numberOfCells := aNumberOfCells.
 
 	cells := (0 to: aNumberOfCells) collect: [ :index |
-		         Cell createWithPosition: index ].
-	
-
+		         Cell createWithPosition: index ]
 ]
 
 { #category : 'as yet unclassified' }

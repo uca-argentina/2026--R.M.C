@@ -7,7 +7,6 @@ Class {
 		'diceCollection',
 		'shipsInGame',
 		'currentIndexOfShipPlaying',
-		'lapmanager',
 		'shipPositionManager'
 	],
 	#category : 'IngSoft2-Model',
@@ -60,13 +59,14 @@ Game >> hasFinishedAndWinnerIs: aShip [
 ]
 
 { #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andAPositionManager: ashipPositionManager [ 
+Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andAPositionManager: ashipPositionManager [
+
 	name := aName.
 	diceCollection := aCollectionOfDice.
 	board := aBoard.
 	shipsInGame := aCollectionOfShips.
 	currentIndexOfShipPlaying := 0.
-	shipPositionManager:=ashipPositionManager.
+	shipPositionManager := ashipPositionManager
 ]
 
 { #category : 'as yet unclassified' }
@@ -83,7 +83,7 @@ Game >> moveAllShipsExcept: aShip by: anAmount [
 
 	shipPositionManager
 		moveAllShipsExcept: aShip
-		backBy: anAmount  
+		by: anAmount  
 		inBoardOfSize: board numberOfCells
 ]
 
@@ -91,23 +91,21 @@ Game >> moveAllShipsExcept: aShip by: anAmount [
 Game >> moves [
 
 	| sumOfTheDices shipToPlay movementEffect |
-
 	self canPlay.
 
 	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
 	shipToPlay := self nextShipToPlay.
 
 	movementEffect := shipPositionManager
-		movementEffectFor: shipToPlay
-		moving: sumOfTheDices
-		inBoardOfSize: board numberOfCells
-		modifiedBy: [ :futurePosition |
-			board
-				effectForLandingAt: futurePosition
-				startingWith: sumOfTheDices
-		].
+		                  movementEffectFor: shipToPlay
+		                  moving: sumOfTheDices
+		                  inBoardOfSize: board numberOfCells
+		                  modifiedBy: [ :futurePosition |
+			                  board
+				                  effectForLandingAt: futurePosition
+				                  startingWith: sumOfTheDices ].
 
-	movementEffect applyTo: shipToPlay in: self.
+	movementEffect applyTo: shipToPlay in: self
 ]
 
 { #category : 'as yet unclassified' }
@@ -131,15 +129,11 @@ Game >> start [
 { #category : 'accessing' }
 Game >> theShip: aShip isAt: aPosition [
 
-	^ shipPositionManager
-		is: aShip
-		atPosition: aPosition
+	^ shipPositionManager is: aShip atPosition: aPosition
 ]
 
 { #category : 'as yet unclassified' }
 Game >> theShip: aShip isAtLap: aLap [
 
-	^ shipPositionManager
-		is: aShip
-		atLap: aLap.
+	^ shipPositionManager is: aShip atLap: aLap
 ]

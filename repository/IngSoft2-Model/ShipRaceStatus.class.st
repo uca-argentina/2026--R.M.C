@@ -2,9 +2,6 @@ Class {
 	#name : 'ShipRaceStatus',
 	#superclass : 'Object',
 	#instVars : [
-		'allShips',
-		'currentIndexOfShipPlaying',
-		'numberOfLaps',
 		'ship',
 		'boardPosition',
 		'lap'
@@ -23,17 +20,14 @@ ShipRaceStatus class >> for: aShip [
 ShipRaceStatus >> advanceBy: anAmount inBoardOfSize: aBoardSize [
 
 	| absolutePosition newAbsolutePosition |
-
-	absolutePosition := (lap * aBoardSize) + boardPosition.
+	absolutePosition := lap * aBoardSize + boardPosition.
 
 	newAbsolutePosition := absolutePosition + anAmount.
 
-	newAbsolutePosition < 0 ifTrue: [
-		newAbsolutePosition := 0
-	].
+	newAbsolutePosition < 0 ifTrue: [ newAbsolutePosition := 0 ].
 
 	lap := newAbsolutePosition // aBoardSize.
-	boardPosition := newAbsolutePosition \\ aBoardSize.
+	boardPosition := newAbsolutePosition \\ aBoardSize
 ]
 
 { #category : 'initialization' }
@@ -72,8 +66,7 @@ ShipRaceStatus >> isFor: aShip [
 ShipRaceStatus >> movementEffectAfterMoving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
 
 	| futurePosition |
-
-	futurePosition := (boardPosition + sumOfDices) \\ aBoardSize.
+	futurePosition := boardPosition + sumOfDices \\ aBoardSize.
 
 	^ aFutureBlock value: futurePosition
 ]

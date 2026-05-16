@@ -25,12 +25,14 @@ MoonWalk class >> verificate: aNumber [
 { #category : 'as yet unclassified' }
 MoonWalk >> effectForMovement: anAmount [
 
-	^ MovementEffectManager moveOneShipBy: anAmount
-		andMoveAllShipsExceptOneBackBy: amountOfBackwardCells
+	^ MovementEffectManager
+		  moveOneShipBy: anAmount
+		  andMoveAllShipsExceptOneBackBy: amountOfBackwardCells
 ]
 
 { #category : 'initialization' }
-MoonWalk >> initializeWithPosition: aPosition withBackwardsMovementOf: anAmountOfBackwardCells [ 
-	position := aPosition .
-	amountOfBackwardCells:= anAmountOfBackwardCells negated .
+MoonWalk >> initializeWithPosition: aPosition withBackwardsMovementOf: anAmountOfBackwardCells [
+
+	position := aPosition.
+	amountOfBackwardCells := anAmountOfBackwardCells negated
 ]

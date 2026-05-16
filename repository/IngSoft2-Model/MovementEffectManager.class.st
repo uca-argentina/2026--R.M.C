@@ -12,17 +12,15 @@ Class {
 MovementEffectManager class >> moveOneShipBy: anAmount [
 
 	^ self new initializeWith: [ :aShip :aGame |
-		aGame move: aShip by: anAmount
-	]
+		  aGame move: aShip by: anAmount ]
 ]
 
 { #category : 'as yet unclassified' }
 MovementEffectManager class >> moveOneShipBy: movementAmount andMoveAllShipsExceptOneBackBy: backwardAmount [
 
 	^ self new initializeWith: [ :aShip :aGame |
-		aGame move: aShip by: movementAmount.
-		aGame moveAllShipsExcept: aShip by: backwardAmount
-	]
+			  aGame move: aShip by: movementAmount.
+			  aGame moveAllShipsExcept: aShip by: backwardAmount ]
 ]
 
 { #category : 'as yet unclassified' }

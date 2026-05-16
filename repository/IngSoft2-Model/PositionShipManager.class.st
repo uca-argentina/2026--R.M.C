@@ -2,9 +2,6 @@ Class {
 	#name : 'PositionShipManager',
 	#superclass : 'Object',
 	#instVars : [
-		'allShips',
-		'currentIndexOfShipPlaying',
-		'numberOfLaps',
 		'lapsToWin',
 		'shipStatuses'
 	],
@@ -29,17 +26,11 @@ PositionShipManager class >> validate: aCollection and: aNumber [
 		Error signal: 'There must be a lap in race' ].
 ]
 
-{ #category : 'as yet unclassified' }
-PositionShipManager >> Lap [
-	^0.
-]
-
 { #category : 'testing' }
 PositionShipManager >> hasFinished [
 
 	^ shipStatuses anySatisfy: [ :aShipStatus |
-		aShipStatus hasCompleted: lapsToWin
-	]
+		  aShipStatus hasCompleted: lapsToWin ]
 ]
 
 { #category : 'initialization' }
@@ -50,10 +41,10 @@ PositionShipManager >> hasWon: aShip [
 
 { #category : 'initialization' }
 PositionShipManager >> initializeWith: aCollectionOfShips and: aNumberOfLaps [
+
 	lapsToWin := aNumberOfLaps.
 	shipStatuses := aCollectionOfShips collect: [ :aShip |
-		ShipRaceStatus for: aShip
-	].
+		                ShipRaceStatus for: aShip ]
 ]
 
 { #category : 'testing' }
@@ -72,13 +63,11 @@ PositionShipManager >> is: aShip atPosition: aPosition [
 { #category : 'initialization' }
 PositionShipManager >> move: aShip by: anAmount inBoardOfSize: aBoardSize [
 
-	(self statusOf: aShip)
-		advanceBy: anAmount
-		inBoardOfSize: aBoardSize
+	(self statusOf: aShip) advanceBy: anAmount inBoardOfSize: aBoardSize
 ]
 
 { #category : 'as yet unclassified' }
-PositionShipManager >> moveAllShipsExcept: aShip backBy: anAmount inBoardOfSize: aBoardSize [
+PositionShipManager >> moveAllShipsExcept: aShip by: anAmount inBoardOfSize: aBoardSize [
 
 	shipStatuses do: [ :aShipStatus |
 			(aShipStatus isFor: aShip) ifFalse: [
@@ -89,15 +78,13 @@ PositionShipManager >> moveAllShipsExcept: aShip backBy: anAmount inBoardOfSize:
 PositionShipManager >> movementEffectFor: aShip moving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
 
 	^ (self statusOf: aShip)
-		movementEffectAfterMoving: sumOfDices
-		inBoardOfSize: aBoardSize
-		modifiedBy: aFutureBlock
+		  movementEffectAfterMoving: sumOfDices
+		  inBoardOfSize: aBoardSize
+		  modifiedBy: aFutureBlock
 ]
 
 { #category : 'initialization' }
 PositionShipManager >> statusOf: aShip [
 
-	^ shipStatuses detect: [ :aShipStatus |
-		aShipStatus isFor: aShip
-	]
+	^ shipStatuses detect: [ :aShipStatus | aShipStatus isFor: aShip ]
 ]
