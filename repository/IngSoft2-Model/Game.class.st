@@ -79,11 +79,11 @@ Game >> move: aShip by: anAmount [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> moveAllShipsExcept: aShip backBy: anAmount [
+Game >> moveAllShipsExcept: aShip by: anAmount [
 
 	shipPositionManager
 		moveAllShipsExcept: aShip
-		backBy: anAmount
+		backBy: anAmount  
 		inBoardOfSize: board numberOfCells
 ]
 

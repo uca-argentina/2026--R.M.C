@@ -81,12 +81,8 @@ PositionShipManager >> move: aShip by: anAmount inBoardOfSize: aBoardSize [
 PositionShipManager >> moveAllShipsExcept: aShip backBy: anAmount inBoardOfSize: aBoardSize [
 
 	shipStatuses do: [ :aShipStatus |
-		(aShipStatus isFor: aShip) ifFalse: [
-			aShipStatus
-				goBackBy: anAmount
-				inBoardOfSize: aBoardSize
-		]
-	]
+			(aShipStatus isFor: aShip) ifFalse: [
+				aShipStatus advanceBy: anAmount inBoardOfSize: aBoardSize ] ]
 ]
 
 { #category : 'as yet unclassified' }

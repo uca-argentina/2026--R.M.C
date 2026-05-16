@@ -1,19 +1,9 @@
 Class {
 	#name : 'DiceTest',
-	#superclass : 'TestCase',
+	#superclass : 'TestsTools',
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
-
-{ #category : 'asserting' }
-DiceTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
-
-	self
-		should: argThatShuoldFailed
-		raise: anError
-		withExceptionDo: [ :aPosibleError |
-			self assert: aPosibleError messageText equals: errorMesagge ]
-]
 
 { #category : 'tests' }
 DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [

@@ -21,7 +21,7 @@ MovementEffectManager class >> moveOneShipBy: movementAmount andMoveAllShipsExce
 
 	^ self new initializeWith: [ :aShip :aGame |
 		aGame move: aShip by: movementAmount.
-		aGame moveAllShipsExcept: aShip backBy: backwardAmount
+		aGame moveAllShipsExcept: aShip by: backwardAmount
 	]
 ]
 

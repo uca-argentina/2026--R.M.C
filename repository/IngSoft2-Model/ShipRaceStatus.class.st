@@ -22,28 +22,18 @@ ShipRaceStatus class >> for: aShip [
 { #category : 'initialization' }
 ShipRaceStatus >> advanceBy: anAmount inBoardOfSize: aBoardSize [
 
-	| totalPosition |
+	| absolutePosition newAbsolutePosition |
 
-	totalPosition := boardPosition + anAmount.
-	lap := lap + (totalPosition // aBoardSize).
-	boardPosition := totalPosition \\ aBoardSize.
-]
+	absolutePosition := (lap * aBoardSize) + boardPosition.
 
-{ #category : 'as yet unclassified' }
-ShipRaceStatus >> goBackBy: anAmount inBoardOfSize: aBoardSize [
+	newAbsolutePosition := absolutePosition + anAmount.
 
-	| totalPosition |
-
-	totalPosition := boardPosition - anAmount.
-
-	[ totalPosition < 0 ] whileTrue: [
-		totalPosition := totalPosition + aBoardSize.
-		lap := lap - 1.
+	newAbsolutePosition < 0 ifTrue: [
+		newAbsolutePosition := 0
 	].
 
-	lap := lap max: 0.
-	boardPosition := totalPosition.
-
+	lap := newAbsolutePosition // aBoardSize.
+	boardPosition := newAbsolutePosition \\ aBoardSize.
 ]
 
 { #category : 'initialization' }
