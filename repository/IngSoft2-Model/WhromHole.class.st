@@ -11,7 +11,7 @@ WhromHole class >> createWithPosition: aPosition [
 ]
 
 { #category : 'as yet unclassified' }
-WhromHole >> effectForMovement: anAmount [
+WhromHole >> effectForMovement: anAmount in: aBoard [
 
 	^ MovementEffectManager moveOneShipBy: anAmount - 4
 ]

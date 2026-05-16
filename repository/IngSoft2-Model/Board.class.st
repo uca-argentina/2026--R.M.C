@@ -35,13 +35,19 @@ Board class >> validateParcecs: aNumber [
 	^ aNumber
 ]
 
+{ #category : 'as yet unclassified' }
+Board >> amountOfCellsForParsecs: anAmountOfParsecs [
+
+	^ anAmountOfParsecs // (amountOfParcecs / self numberOfCells)
+]
+
 { #category : 'accessing' }
 Board >> effectForLandingAt: aPosition startingWith: anAmount [
 
 	| cell |
 	cell := cells at: aPosition + 1.
 
-	^ cell effectForMovement: anAmount
+	^ cell effectForMovement: anAmount in: self.
 ]
 
 { #category : 'initialization' }

@@ -24,7 +24,7 @@ Cell class >> verificate: aNumber [
 ]
 
 { #category : 'as yet unclassified' }
-Cell >> effectForMovement: anAmount [
+Cell >> effectForMovement: anAmount in: aBoard [
 
 	^ MovementEffectManager moveOneShipBy: anAmount
 ]

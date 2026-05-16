@@ -23,7 +23,7 @@ MoonWalk class >> verificate: aNumber [
 ]
 
 { #category : 'as yet unclassified' }
-MoonWalk >> effectForMovement: anAmount [
+MoonWalk >> effectForMovement: anAmount in:aBoard [
 
 	^ MovementEffectManager
 		  moveOneShipBy: anAmount
