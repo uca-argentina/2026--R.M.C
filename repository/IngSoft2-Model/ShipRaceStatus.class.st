@@ -29,6 +29,23 @@ ShipRaceStatus >> advanceBy: anAmount inBoardOfSize: aBoardSize [
 	boardPosition := totalPosition \\ aBoardSize.
 ]
 
+{ #category : 'as yet unclassified' }
+ShipRaceStatus >> goBackBy: anAmount inBoardOfSize: aBoardSize [
+
+	| totalPosition |
+
+	totalPosition := boardPosition - anAmount.
+
+	[ totalPosition < 0 ] whileTrue: [
+		totalPosition := totalPosition + aBoardSize.
+		lap := lap - 1.
+	].
+
+	lap := lap max: 0.
+	boardPosition := totalPosition.
+
+]
+
 { #category : 'initialization' }
 ShipRaceStatus >> hasCompleted: lapsToWin [
 
@@ -62,7 +79,7 @@ ShipRaceStatus >> isFor: aShip [
 ]
 
 { #category : 'as yet unclassified' }
-ShipRaceStatus >> movementAfterMoving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
+ShipRaceStatus >> movementEffectAfterMoving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
 
 	| futurePosition |
 

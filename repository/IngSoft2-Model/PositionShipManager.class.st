@@ -78,10 +78,22 @@ PositionShipManager >> move: aShip by: anAmount inBoardOfSize: aBoardSize [
 ]
 
 { #category : 'as yet unclassified' }
-PositionShipManager >> movementFor: aShip moving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
+PositionShipManager >> moveAllShipsExcept: aShip backBy: anAmount inBoardOfSize: aBoardSize [
+
+	shipStatuses do: [ :aShipStatus |
+		(aShipStatus isFor: aShip) ifFalse: [
+			aShipStatus
+				goBackBy: anAmount
+				inBoardOfSize: aBoardSize
+		]
+	]
+]
+
+{ #category : 'as yet unclassified' }
+PositionShipManager >> movementEffectFor: aShip moving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
 
 	^ (self statusOf: aShip)
-		movementAfterMoving: sumOfDices
+		movementEffectAfterMoving: sumOfDices
 		inBoardOfSize: aBoardSize
 		modifiedBy: aFutureBlock
 ]

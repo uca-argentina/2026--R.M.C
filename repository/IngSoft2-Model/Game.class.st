@@ -70,29 +70,44 @@ Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips 
 ]
 
 { #category : 'as yet unclassified' }
+Game >> move: aShip by: anAmount [
+
+	shipPositionManager
+		move: aShip
+		by: anAmount
+		inBoardOfSize: board numberOfCells
+]
+
+{ #category : 'as yet unclassified' }
+Game >> moveAllShipsExcept: aShip backBy: anAmount [
+
+	shipPositionManager
+		moveAllShipsExcept: aShip
+		backBy: anAmount
+		inBoardOfSize: board numberOfCells
+]
+
+{ #category : 'as yet unclassified' }
 Game >> moves [
 
-	| sumOfTheDices shipToPlay finalMovement |
+	| sumOfTheDices shipToPlay movementEffect |
 
 	self canPlay.
 
 	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
 	shipToPlay := self nextShipToPlay.
 
-	finalMovement := shipPositionManager
-		movementFor: shipToPlay
+	movementEffect := shipPositionManager
+		movementEffectFor: shipToPlay
 		moving: sumOfTheDices
 		inBoardOfSize: board numberOfCells
 		modifiedBy: [ :futurePosition |
 			board
-				modifyMovementForLandingAt: futurePosition
+				effectForLandingAt: futurePosition
 				startingWith: sumOfTheDices
 		].
 
-	shipPositionManager
-		move: shipToPlay
-		by: finalMovement
-		inBoardOfSize: board numberOfCells.
+	movementEffect applyTo: shipToPlay in: self.
 ]
 
 { #category : 'as yet unclassified' }

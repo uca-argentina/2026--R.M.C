@@ -28,6 +28,16 @@ Board class >> validateNumber: aNumber [
 	^ aNumber
 ]
 
+{ #category : 'accessing' }
+Board >> effectForLandingAt: aPosition startingWith: anAmount [
+
+	| cell |
+
+	cell := cells at: aPosition + 1.
+
+	^ cell effectForMovement: anAmount
+]
+
 { #category : 'initialization' }
 Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [ 
 
@@ -37,16 +47,6 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells [
 		         Cell createWithPosition: index ].
 	
 
-]
-
-{ #category : 'accessing' }
-Board >> modifyMovementForLandingAt: aPosition startingWith: anAmount [
-
-	| cell |
-
-	cell := cells at: aPosition + 1.
-
-	^ cell modifyMovement: anAmount
 ]
 
 { #category : 'as yet unclassified' }

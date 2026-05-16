@@ -6,12 +6,12 @@ Class {
 }
 
 { #category : 'api' }
-WhromHole class >> number: aPosition [ 
+WhromHole class >> createWithPosition: aPosition [ 
 	^ self new  initializeWithPosition: aPosition.
 ]
 
 { #category : 'as yet unclassified' }
-WhromHole >> modifyMovement: anAmount [
+WhromHole >> effectForMovement: anAmount [
 
-	^ anAmount - 4
+	^ MovementEffectManager moveOneShipBy: anAmount - 4
 ]
