@@ -88,6 +88,12 @@ Game >> moveAllShipsExcept: aShip by: anAmount [
 ]
 
 { #category : 'as yet unclassified' }
+Game >> moveBackToZero: aShip [
+
+	shipPositionManager moveToZero: aShip
+]
+
+{ #category : 'as yet unclassified' }
 Game >> moves [
 
 	| sumOfTheDices shipToPlay movementEffect |

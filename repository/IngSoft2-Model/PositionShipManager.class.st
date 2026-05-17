@@ -75,6 +75,12 @@ PositionShipManager >> moveAllShipsExcept: aShip by: anAmount inBoardOfSize: aBo
 ]
 
 { #category : 'as yet unclassified' }
+PositionShipManager >> moveToZero: aShip [
+
+	(self statusOf: aShip) moveToZero
+]
+
+{ #category : 'as yet unclassified' }
 PositionShipManager >> movementEffectFor: aShip moving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
 
 	^ (self statusOf: aShip)

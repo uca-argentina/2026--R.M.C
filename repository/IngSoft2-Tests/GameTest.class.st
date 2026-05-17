@@ -831,3 +831,61 @@ GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
 
 	self assert: (aGame theShip: aShip isAt: 5)
 ]
+
+{ #category : 'tests' }
+GameTest >> test27WhenAShipFallsInASpeedUpThenGameMovesItForwardFourCells [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (SpeedUp createWithPosition: 6).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice
+		         andNumberOfLaps: 1.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 10)
+]
+
+{ #category : 'tests' }
+GameTest >> test28WhenAShipFallsInAnAtomicBombThenGameMovesItToTheFirstPosition [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 6).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andShips: aCollectionOfShips
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice
+		         andNumberOfLaps: 1.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 0)
+]

@@ -9,6 +9,13 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+MovementEffectManager class >> moveAllShipsBackToZero [
+
+	^ self new initializeWith: [ :aShip :aGame |
+		  aGame moveBackToZero: aShip ]
+]
+
+{ #category : 'as yet unclassified' }
 MovementEffectManager class >> moveOneShipBy: anAmount [
 
 	^ self new initializeWith: [ :aShip :aGame |

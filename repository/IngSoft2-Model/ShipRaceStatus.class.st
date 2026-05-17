@@ -63,6 +63,12 @@ ShipRaceStatus >> isFor: aShip [
 ]
 
 { #category : 'as yet unclassified' }
+ShipRaceStatus >> moveToZero [
+
+	boardPosition := 0
+]
+
+{ #category : 'as yet unclassified' }
 ShipRaceStatus >> movementEffectAfterMoving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
 
 	| futurePosition |
