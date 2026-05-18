@@ -5,9 +5,6 @@ Class {
 		'name',
 		'board',
 		'diceCollection',
-		'shipsInGame',
-		'currentIndexOfShipPlaying',
-		'lapmanager',
 		'shipPositionManager',
 		'aShipTurnManager'
 	],
