@@ -16,26 +16,22 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [ 
+Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [
 
+	self validateCollection: aCollectionOfDice.
 	^ self new
 		  initializeWithName: aBoardName
 		  andBoard: aBoard
 		  andADice: aCollectionOfDice
-		  andATurnManger:aTurnManager 
-		  andAPositionManager: aPositionShipManager.
+		  andATurnManger: aTurnManager
+		  andAPositionManager: aPositionShipManager
 ]
 
 { #category : 'as yet unclassified' }
-Game class >> validateCollection: aCollection with: amountOfCells [
+Game class >> validateCollection: aCollection [
 
-	| total |
 	aCollection isEmpty ifTrue: [
-		Error signal: 'There must be one dice in the game' ].
-
-	total := 0.
-	aCollection do: [ :aDie | total := total + aDie throw ].
-
+		Error signal: 'There must be one dice in the game' ]
 ]
 
 { #category : 'as yet unclassified' }
