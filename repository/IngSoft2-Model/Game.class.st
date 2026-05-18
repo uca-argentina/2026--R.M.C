@@ -5,9 +5,6 @@ Class {
 		'name',
 		'board',
 		'diceCollection',
-		'shipsInGame',
-		'currentIndexOfShipPlaying',
-		'lapmanager',
 		'shipPositionManager',
 		'aShipTurnManager'
 	],
@@ -16,11 +13,11 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [
+Game class >> createWithName: aGameName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [
 
 	self validateCollection: aCollectionOfDice.
 	^ self new
-		  initializeWithName: aBoardName
+		  initializeWithName: aGameName
 		  andBoard: aBoard
 		  andADice: aCollectionOfDice
 		  andATurnManger: aTurnManager
@@ -41,15 +38,10 @@ Game >> boardSize [
 ]
 
 { #category : 'testing' }
-Game >> canPlay [
+Game >> canPlay [ 
 
 	shipPositionManager hasFinished ifTrue: [ Error signal: 'The game has finished' ]
-]
 
-{ #category : 'testing' }
-Game >> hasFinishedAndWinnerIs: aShip [
-
-	^ shipPositionManager hasWon: aShip
 ]
 
 { #category : 'initialization' }
@@ -87,12 +79,15 @@ Game >> moveBackToZero: aShip [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> moves [
+Game >> playTurn [
 
 	| sumOfTheDices shipToPlay movementEffect |
 	self canPlay.
 
-	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
+	sumOfTheDices := 0.
+
+	diceCollection do: [ :aDie |
+		sumOfTheDices := sumOfTheDices + aDie throw ].
 	shipToPlay := aShipTurnManager nextShipToPlayInGame.
 
 	movementEffect := shipPositionManager
@@ -105,18 +100,6 @@ Game >> moves [
 				                  startingWith: sumOfTheDices ].
 
 	movementEffect applyTo: shipToPlay in: self
-]
-
-{ #category : 'as yet unclassified' }
-Game >> nextShipToPlay [
-
-	| ship |
-	ship := shipsInGame at: currentIndexOfShipPlaying + 1.
-
-	currentIndexOfShipPlaying := currentIndexOfShipPlaying + 1
-	                             \\ shipsInGame size.
-
-	^ ship
 ]
 
 { #category : 'as yet unclassified' }
@@ -140,4 +123,10 @@ Game >> theShip: aShip isAt: aPosition [
 Game >> theShip: aShip isAtLap: aLap [
 
 	^ shipPositionManager is: aShip atLap: aLap
+]
+
+{ #category : 'testing' }
+Game >> winnerIs: aShip [
+
+	^ shipPositionManager hasWon: aShip
 ]

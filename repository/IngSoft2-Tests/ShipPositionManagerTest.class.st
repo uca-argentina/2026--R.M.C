@@ -1,12 +1,12 @@
 Class {
-	#name : 'ShipPositionManager',
+	#name : 'ShipPositionManagerTest',
 	#superclass : 'TestsTools',
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
 
 { #category : 'tests' }
-ShipPositionManager >> test01WhenAPositionManagerHaveAnEmptyShipsCollectionThenItCantBeCreated [
+ShipPositionManagerTest >> test01WhenAPositionManagerHaveAnEmptyShipsCollectionThenItCantBeCreated [
 
 	self
 		should: [
@@ -18,7 +18,7 @@ ShipPositionManager >> test01WhenAPositionManagerHaveAnEmptyShipsCollectionThenI
 ]
 
 { #category : 'tests' }
-ShipPositionManager >> test02WhenAPositionManagerHaveAnNegativeAmountOfLapsThenItCantBeCreated [
+ShipPositionManagerTest >> test02WhenAPositionManagerHaveAnNegativeAmountOfLapsThenItCantBeCreated [
 
  	| aCollectionOfShips |
 	aCollectionOfShips:= OrderedCollection new.
@@ -35,7 +35,7 @@ ShipPositionManager >> test02WhenAPositionManagerHaveAnNegativeAmountOfLapsThenI
 ]
 
 { #category : 'tests' }
-ShipPositionManager >> test03WhenCreatedThenAllShipsStartAtPositionZero [
+ShipPositionManagerTest >> test03WhenCreatedThenAllShipsStartAtPositionZero [
 
 	| aShip anotherShip ships manager |
 
@@ -52,7 +52,7 @@ ShipPositionManager >> test03WhenCreatedThenAllShipsStartAtPositionZero [
 ]
 
 { #category : 'tests' }
-ShipPositionManager >> test04WhenCreatedThenAllShipsStartAtLapZero [
+ShipPositionManagerTest >> test04WhenCreatedThenAllShipsStartAtLapZero [
 
 	| aShip anotherShip ships manager |
 

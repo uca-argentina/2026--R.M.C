@@ -35,5 +35,5 @@ Ship >> name [
 { #category : 'as yet unclassified' }
 Ship >> nameIs: aName [
 
-	^ name == aName
+	^ name = aName
 ]

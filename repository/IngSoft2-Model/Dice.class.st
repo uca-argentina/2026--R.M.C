@@ -16,14 +16,8 @@ Dice class >> cannotBeLowerThan: amountOfFaces [
 				'Number of faces cannot be lower that two (must be integer)' ]
 ]
 
-{ #category : 'accessing' }
-Dice class >> default [
-
-	^ self withTotalNumberFaces: 6
-]
-
 { #category : 'as yet unclassified' }
-Dice class >> withTotalNumberFaces: amountOfFaces [
+Dice class >> withValuesToThrow: amountOfFaces [
 
 	self cannotBeLowerThan: amountOfFaces.
 	^ self new initializeWith: amountOfFaces

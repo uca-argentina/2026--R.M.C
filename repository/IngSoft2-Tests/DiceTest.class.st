@@ -9,7 +9,7 @@ Class {
 DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
 
 	| aDice |
-	aDice := Dice default.
+	aDice := Dice  withValuesToThrow: 10..
 	self assert: aDice throw positive
 ]
 
@@ -17,7 +17,7 @@ DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
 DiceTest >> test02whenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMustBeLowerThanTheMaximumSize [
 
 	| aDice |
-	aDice := Dice withTotalNumberFaces: 10.
+	aDice := Dice withValuesToThrow: 10.
 	self assert: (aDice throw between: 1 and: 10)
 ]
 
@@ -25,7 +25,7 @@ DiceTest >> test02whenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMust
 DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 
 	self
-		should: [ Dice withTotalNumberFaces: 2 ]
+		should: [ Dice withValuesToThrow: 2 ]
 		raise: Error
 		withMessageText: 'Number of faces cannot be lower that two (must be integer)'
 ]
@@ -34,7 +34,7 @@ DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 DiceTest >> test04whenADiceHasNonValidNumberOfFacesThenItCannotBeCreated [
 
 	self
-		should: [ Dice withTotalNumberFaces: 'A' ]
+		should: [ Dice withValuesToThrow: 'A' ]
 		raise: Error
 		withMessageText: 'Number of faces cannot be lower that two (must be integer)'
 ]
