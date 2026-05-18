@@ -539,6 +539,42 @@ GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 ]
 
 { #category : 'tests' }
+GameTest >> test18whenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnRankings [
+    | aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard aTurnManager aRanking |
+    aShip := Ship createWithName: 'juan'.
+    aSecondShip := Ship createWithName: 'fran'.
+    aChargedDice := ChargedDice withTotalNumberFaces: 4.
+    aCollectionOfShips := OrderedCollection new.
+    aCollectionOfShips add: aShip.
+    aCollectionOfShips add: aSecondShip.
+    aCollectionOfDice := OrderedCollection new.
+    aCollectionOfDice add: aChargedDice.
+
+    aTurnManager := TurnManager creatWith: aCollectionOfShips.
+    aBoard := Board createWithATotalNumberOfCellsOf: 8.
+    aGame := Game
+        createWithName: 'Ludo'
+        andShips: aCollectionOfShips
+        andABord: aBoard
+        andADice: aCollectionOfDice
+        andATurnManager: aTurnManager
+        andNumberOfLaps: 1.
+
+    aGame moves.
+    aGame moves.
+    aGame moves.
+
+    aRanking := aGame ranking.
+
+    self assert: (aGame hasFinishedAndWinnerIs: aShip).
+    self assert: (aRanking positionOf: aShip) equals: 1.
+    self assert: (aRanking positionOf: aSecondShip) equals: 2.
+    self assert: (aRanking isLeader: aShip).
+    self assert: aRanking orderedShips first equals: 'juan'.
+    self assert: aRanking orderedShips last equals: 'fran'.
+]
+
+{ #category : 'tests' }
 GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 
 	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aFirstDice aChargedBoard |

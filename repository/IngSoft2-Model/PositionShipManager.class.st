@@ -26,6 +26,13 @@ PositionShipManager class >> validate: aCollection and: aNumber [
 		Error signal: 'There must be a lap in race' ].
 ]
 
+{ #category : 'as yet unclassified' }
+PositionShipManager >> currentRanking [
+    | snapshots |
+    snapshots := shipStatuses collect: [ :status | status snapshot ].
+    ^ RaceRanking createWithStatus: snapshots
+]
+
 { #category : 'testing' }
 PositionShipManager >> hasFinished [
 

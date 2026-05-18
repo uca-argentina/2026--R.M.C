@@ -30,6 +30,11 @@ ShipRaceStatus >> advanceBy: anAmount inBoardOfSize: aBoardSize [
 	boardPosition := newAbsolutePosition \\ aBoardSize
 ]
 
+{ #category : 'accessing' }
+ShipRaceStatus >> boardPosition [
+    ^ boardPosition
+]
+
 { #category : 'initialization' }
 ShipRaceStatus >> hasCompleted: lapsToWin [
 
@@ -62,6 +67,11 @@ ShipRaceStatus >> isFor: aShip [
 	^ ship = aShip
 ]
 
+{ #category : 'accessing' }
+ShipRaceStatus >> lap [
+    ^ lap
+]
+
 { #category : 'as yet unclassified' }
 ShipRaceStatus >> moveToZero [
 
@@ -75,4 +85,24 @@ ShipRaceStatus >> movementEffectAfterMoving: sumOfDices inBoardOfSize: aBoardSiz
 	futurePosition := boardPosition + sumOfDices \\ aBoardSize.
 
 	^ aFutureBlock value: futurePosition
+]
+
+{ #category : 'as yet unclassified' }
+ShipRaceStatus >> setLap: aLap boardPosition: aPosition [
+    lap := aLap.
+    boardPosition := aPosition
+]
+
+{ #category : 'accessing' }
+ShipRaceStatus >> ship [
+    ^ ship
+]
+
+{ #category : 'accessing' }
+ShipRaceStatus >> snapshot [
+    | copy |
+    copy := self class new.
+    copy initializeFor: ship.
+    copy setLap: lap boardPosition: boardPosition.
+    ^ copy
 ]

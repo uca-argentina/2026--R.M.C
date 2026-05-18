@@ -7,11 +7,28 @@ Class {
 		'diceCollection',
 		'shipsInGame',
 		'currentIndexOfShipPlaying',
-		'shipPositionManager'
+		'lapmanager',
+		'shipPositionManager',
+		'aShipTurnManager'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
+
+{ #category : 'as yet unclassified' }
+Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: aBoard andADice: aCollectionOfDice andATurnManager: aTurnManager andNumberOfLaps: aNumber [
+		| aPositionShipManager |
+	aPositionShipManager := PositionShipManager createWith: aCollectionOfShips andNumberOfLaps: aNumber.
+	self validateCollection: aCollectionOfDice with: aBoard numberOfCells  .
+
+	^ self new
+		  initializeWithName: aBoardName
+		  andBoard: aBoard
+		  andShips: aCollectionOfShips
+		  andADice: aCollectionOfDice
+		  andATurnManger:aTurnManager 
+		  andAPositionManager: aPositionShipManager.
+]
 
 { #category : 'as yet unclassified' }
 Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: aBoard andADice: aCollectionOfDice andNumberOfLaps: aNumber [
@@ -69,6 +86,17 @@ Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips 
 	shipPositionManager := ashipPositionManager
 ]
 
+{ #category : 'initialization' }
+Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andATurnManger: aTurnManager andAPositionManager: ashipPositionManager [
+	name := aName.
+	diceCollection := aCollectionOfDice.
+	board := aBoard.
+	shipsInGame := aCollectionOfShips.
+	currentIndexOfShipPlaying := 0.
+	shipPositionManager:=ashipPositionManager.
+	aShipTurnManager:=aTurnManager.
+]
+
 { #category : 'as yet unclassified' }
 Game >> move: aShip by: anAmount [
 
@@ -124,6 +152,11 @@ Game >> nextShipToPlay [
 	                             \\ shipsInGame size.
 
 	^ ship
+]
+
+{ #category : 'as yet unclassified' }
+Game >> ranking [
+    ^ shipPositionManager currentRanking
 ]
 
 { #category : 'accessing' }
