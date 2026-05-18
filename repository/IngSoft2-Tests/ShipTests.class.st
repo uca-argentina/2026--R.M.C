@@ -8,27 +8,29 @@ Class {
 { #category : 'tests' }
 ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aBoard aChargedDice |
-
+	| aGame aShip aCollectionOfShips aCollectionOfDice aBoard aChargedDice aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
-
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
-		createWithName: 'Ludo'
-		andShips: aCollectionOfShips
-		andABord: aBoard
-		andADice: aCollectionOfDice
-		andNumberOfLaps: 5.
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
+		         andADice: aCollectionOfDice.
 
-	self assert: (aGame theShip: aShip isAt: 0).
+	self assert: (aGame theShip: aShip isAt: 0)
 ]
 
 { #category : 'tests' }
