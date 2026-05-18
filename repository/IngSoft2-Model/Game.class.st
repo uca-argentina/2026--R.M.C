@@ -41,9 +41,10 @@ Game >> boardSize [
 ]
 
 { #category : 'testing' }
-Game >> canPlay [
+Game >> canPlay [ 
 
 	shipPositionManager hasFinished ifTrue: [ Error signal: 'The game has finished' ]
+
 ]
 
 { #category : 'testing' }
@@ -92,7 +93,10 @@ Game >> moves [
 	| sumOfTheDices shipToPlay movementEffect |
 	self canPlay.
 
-	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
+	sumOfTheDices := 0.
+
+	diceCollection do: [ :aDie |
+		sumOfTheDices := sumOfTheDices + aDie throw ].
 	shipToPlay := aShipTurnManager nextShipToPlayInGame.
 
 	movementEffect := shipPositionManager
@@ -105,18 +109,6 @@ Game >> moves [
 				                  startingWith: sumOfTheDices ].
 
 	movementEffect applyTo: shipToPlay in: self
-]
-
-{ #category : 'as yet unclassified' }
-Game >> nextShipToPlay [
-
-	| ship |
-	ship := shipsInGame at: currentIndexOfShipPlaying + 1.
-
-	currentIndexOfShipPlaying := currentIndexOfShipPlaying + 1
-	                             \\ shipsInGame size.
-
-	^ ship
 ]
 
 { #category : 'as yet unclassified' }

@@ -11,7 +11,16 @@ Class {
 
 { #category : 'as yet unclassified' }
 TurnManager class >> creatWith: aCollectionofShips [ 
+	self validateShips: aCollectionofShips .
 	^self new intializeWith:aCollectionofShips.
+]
+
+{ #category : 'as yet unclassified' }
+TurnManager class >> validateShips: allShips [
+
+	allShips isEmpty ifTrue: [
+		Error signal: 'The list of ships cannot be empty'
+	].
 ]
 
 { #category : 'as yet unclassified' }
