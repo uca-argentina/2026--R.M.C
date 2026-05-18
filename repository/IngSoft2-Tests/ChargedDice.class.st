@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-ChargedDice class >> withTotalNumberFaces: listOfValues [
+ChargedDice class >> withValuesToThrow: listOfValues [
 
 	^ self new initializeWith: listOfValues 
 ]

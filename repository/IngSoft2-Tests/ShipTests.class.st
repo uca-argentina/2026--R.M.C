@@ -12,7 +12,7 @@ ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aChargedDice := ChargedDice withValuesToThrow: 6.
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
@@ -42,7 +42,7 @@ ShipTests >> test02whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 ]
 
 { #category : 'tests' }
-ShipTests >> test03whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
+ShipTests >> test03whenAShipInHasAnInvalidThenTheCreationFailes [
 
 	self
 		should: [ Ship createWithName: 5 ]

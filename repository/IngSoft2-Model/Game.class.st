@@ -16,11 +16,11 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [
+Game class >> createWithName: aGameName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [
 
 	self validateCollection: aCollectionOfDice.
 	^ self new
-		  initializeWithName: aBoardName
+		  initializeWithName: aGameName
 		  andBoard: aBoard
 		  andADice: aCollectionOfDice
 		  andATurnManger: aTurnManager
@@ -45,12 +45,6 @@ Game >> canPlay [
 
 	shipPositionManager hasFinished ifTrue: [ Error signal: 'The game has finished' ]
 
-]
-
-{ #category : 'testing' }
-Game >> hasFinishedAndWinnerIs: aShip [
-
-	^ shipPositionManager hasWon: aShip
 ]
 
 { #category : 'initialization' }
@@ -88,7 +82,7 @@ Game >> moveBackToZero: aShip [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> moves [
+Game >> playTurn [
 
 	| sumOfTheDices shipToPlay movementEffect |
 	self canPlay.
@@ -132,4 +126,10 @@ Game >> theShip: aShip isAt: aPosition [
 Game >> theShip: aShip isAtLap: aLap [
 
 	^ shipPositionManager is: aShip atLap: aLap
+]
+
+{ #category : 'testing' }
+Game >> winnerIs: aShip [
+
+	^ shipPositionManager hasWon: aShip
 ]
