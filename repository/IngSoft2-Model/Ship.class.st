@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Ship class >> creatWithName: anName [
+Ship class >> createWithName: anName [
 
 	self validate: anName.
 	^ self new initializeWith: anName
@@ -21,12 +21,6 @@ Ship class >> validate: aName [
 	aName isString ifFalse: [ Error signal: 'The name must be a string' ]
 ]
 
-{ #category : 'as yet unclassified' }
-Ship >> advancesTo: aPosition in: aBoard [
-
-	aBoard move: self by: aPosition
-]
-
 { #category : 'initialization' }
 Ship >> initializeWith: anName [
 
@@ -34,9 +28,8 @@ Ship >> initializeWith: anName [
 ]
 
 { #category : 'accessing' }
-Ship >> isAt: aPosition in: aBoard [
-
-	^ aBoard hasTheShip: self atThePosition: aPosition
+Ship >> name [
+	 ^name
 ]
 
 { #category : 'as yet unclassified' }

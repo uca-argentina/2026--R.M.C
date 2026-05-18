@@ -1,83 +1,51 @@
 Class {
 	#name : 'ShipTests',
-	#superclass : 'TestCase',
+	#superclass : 'TestsTools',
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'asserting' }
-ShipTests >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
-
-	self
-		should: argThatShuoldFailed
-		raise: anError
-		withExceptionDo: [ :aPosibleError |
-			self assert: aPosibleError messageText equals: errorMesagge ]
-]
-
 { #category : 'tests' }
 ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 
-	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithName: 'juan'.
+	| aGame aShip aCollectionOfShips aCollectionOfDice aBoard aChargedDice aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
+		         andADice: aCollectionOfDice.
 
-	self assert: (aShip isAt: 0 in: aBoard)
+	self assert: (aGame theShip: aShip isAt: 0)
 ]
 
 { #category : 'tests' }
-ShipTests >> test02whenAShipAdvancesFiveStepsThenThePositionIsFive [
+ShipTests >> test02whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
-	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
-
-	aShip advancesTo: 5 in: aBoard.
-	self assert: (aShip isAt: 5 in: aBoard)
-]
-
-{ #category : 'tests' }
-ShipTests >> test03whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
-
-	| aShip aCollectionOfShips aBoard |
-	aShip := Ship creatWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
-
+	| aShip  |
+	aShip := Ship createWithName: 'juan'.
 	self assert: (aShip nameIs: 'juan')
 ]
 
 { #category : 'tests' }
-ShipTests >> test04whenAShipAdvancesThenTheBoardChangesTheShipsPositionAsWell [
-
-	| aShip aBoard aCollectionOfShips |
-	aShip := Ship creatWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andShips: aCollectionOfShips.
-
-	aShip advancesTo: 5 in: aBoard.
-	self assert: (aShip isAt: 5 in: aBoard)
-]
-
-{ #category : 'tests' }
-ShipTests >> test05whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
+ShipTests >> test03whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
 
 	self
-		should: [ Ship creatWithName: 5 ]
+		should: [ Ship createWithName: 5 ]
 		raise: Error
 		withMessageText: 'The name must be a string'
 ]

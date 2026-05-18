@@ -1,102 +1,119 @@
 Class {
 	#name : 'GameTest',
-	#superclass : 'TestCase',
+	#superclass : 'TestsTools',
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'asserting' }
-GameTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
-
-	self
-		should: argThatShuoldFailed
-		raise: anError
-		withExceptionDo: [ :aPosibleError |
-			self assert: aPosibleError messageText equals: errorMesagge ]
-]
-
 { #category : 'tests' }
 GameTest >> test01whenAGameStartsThenItReturnsItsName [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 25
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 10
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
+
 	self assert: aGame start equals: 'Ludo'
 ]
 
 { #category : 'tests' }
 GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 10
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Generala'
-		         andShips: aCollectionOfShips
-		         andABordOf: 10
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
+
 	self assert: aGame start equals: 'Generala'
 ]
 
 { #category : 'tests' }
 GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 10
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 10
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame moves.
+
 	self assert: (aGame theShip: aShip isAt: 3)
 ]
 
 { #category : 'tests' }
 GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 10
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 10
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	self assert: aGame boardSize equals: 10
@@ -105,20 +122,26 @@ GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 { #category : 'tests' }
 GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 10
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 10
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame moves.
@@ -129,191 +152,155 @@ GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 { #category : 'tests' }
 GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
 
-	| aGame aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
-
+	| aGame aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
 	aSecondChargedDice := ChargedDice withTotalNumberFaces: 3.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aSecondChargedDice.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 10
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 10
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame moves.
-
 	self assert: (aGame theShip: aShip isAt: 8)
 ]
 
 { #category : 'tests' }
 GameTest >> test07whenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 
-	| aShip aCollectionOfShips aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
-
+	| aShip aCollectionOfShips aCollectionOfDice aBoard aGame aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aCollectionOfDice := OrderedCollection new.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 10
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 
 	self
 		should: [
-				Game
-					createWithName: 'Ludo'
-					andShips: aCollectionOfShips
-					andABordOf: 10
-					andADice: aCollectionOfDice ]
+				aGame := Game
+					         createWithName: 'Ludo'
+					         andAShipPositionManager: aPositionShipManager
+					         andATurnManager: aTurnManager
+					         andABord: aBoard
+					         andADice: aCollectionOfDice ]
 		raise: Error
 		withMessageText: 'There must be one dice in the game'
 ]
 
 { #category : 'tests' }
-GameTest >> test08whenTheSumOfTheDicesIsHigherThatTheAmountOfCellsThenTheCreationFails [
+GameTest >> test08whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 
-	| aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-	aSecondChargedDice := ChargedDice withTotalNumberFaces: 9.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aSecondChargedDice.
-	aCollectionOfDice add: aChargedDice.
-
-	self
-		should: [
-				Game
-					createWithName: 'Ludo'
-					andShips: aCollectionOfShips
-					andABordOf: 10
-					andADice: aCollectionOfDice ]
-		raise: Error
-		withMessageText:
-		'There of the dices must be lower than the amount of cells'
-]
-
-{ #category : 'tests' }
-GameTest >> test09whenAGameMovesTwoShipsThenThesShipsMovesToTheCells [
-
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithName: 'juan'.
-	aSecondShip := Ship creatWithName: 'fran'.
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 4.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 25
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 15
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame moves.
 	aGame moves.
+	aGame moves.
+	aGame moves.
 
-	self assert: (aGame theShip: aShip isAt: 3).
-	self assert: (aGame theShip: aSecondShip isAt: 3)
+	self assert: (aGame theShip: aShip isAt: 8).
+	self assert: (aGame theShip: aSecondShip isAt: 8)
 ]
 
 { #category : 'tests' }
-GameTest >> test10whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
+GameTest >> test09whenAShipMovesToTheFinalCellThenTheGameIsFished [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithName: 'juan'.
-	aSecondShip := Ship creatWithName: 'fran'.
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 4.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aSecondShip.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 15
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame moves.
 	aGame moves.
-	aGame moves.
-	aGame moves.
-
-	self assert: (aGame theShip: aShip isAt: 6).
-	self assert: (aGame theShip: aSecondShip isAt: 6)
-]
-
-{ #category : 'tests' }
-GameTest >> test11whenAShipMovesToTheFinalCellThenTheGameIsFished [
-
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice |
-	aShip := Ship creatWithName: 'juan'.
-
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-
-
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aGame := Game
-		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 12
-		         andADice: aCollectionOfDice.
-
-	aGame moves.
-	aGame moves.
-
 
 	self assert: (aGame hasFinishedAndWinnerIs: aShip)
 ]
 
 { #category : 'tests' }
-GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
+GameTest >> test10whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
 
-	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip |
-	aShip := Ship creatWithName: 'juan'.
-	aSecondShip := Ship creatWithName: 'fran'.
-
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 4.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
-
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
-		         andABordOf: 12
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame moves.
@@ -324,4 +311,655 @@ GameTest >> test12whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 		should: [ aGame moves ]
 		raise: Error
 		withMessageText: 'The game has finished'
+]
+
+{ #category : 'tests' }
+GameTest >> test11WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+	aGame moves.
+	aGame moves.
+	aGame moves.
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAtLap: 2).
+	self assert: (aGame theShip: aSecondShip isAtLap: 1)
+]
+
+{ #category : 'tests' }
+GameTest >> test12WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
+		         andADice: aCollectionOfDice.
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAtLap: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test13WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 8.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAtLap: 1).
+	self assert: (aGame theShip: aShip isAt: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test14WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 6).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 2)
+]
+
+{ #category : 'tests' }
+GameTest >> test15WhenAShipFallsInAWormHoleInTwoThenGameMovesItBackToZero [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test16WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEffectIsNotApplied [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 6).
+	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 2).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 2)
+]
+
+{ #category : 'tests' }
+GameTest >> test17WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 13.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 9).
+	self assert: (aGame theShip: aShip isAtLap: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aFirstDice aSecondDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aFirstDice := ChargedDice withTotalNumberFaces: 10.
+	aSecondDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aFirstDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 3.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	aCollectionOfDice removeAll.
+	aCollectionOfDice add: aSecondDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 9).
+	self assert: (aGame theShip: aShip isAtLap: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test18whenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnRankings [
+
+	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard aTurnManager aRanking aPositionShipManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'fran'.
+	aChargedDice := ChargedDice withTotalNumberFaces: 4.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 8.
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+	aGame moves.
+	aGame moves.
+
+	aRanking := aGame ranking.
+
+	self assert: (aGame hasFinishedAndWinnerIs: aShip).
+	self assert: (aRanking positionOf: aShip) equals: 1.
+	self assert: (aRanking positionOf: aSecondShip) equals: 2.
+	self assert: (aRanking isLeader: aShip).
+	self assert: aRanking orderedShips first equals: 'juan'.
+	self assert: aRanking orderedShips last equals: 'fran'
+]
+
+{ #category : 'tests' }
+GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
+
+	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aFirstDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pedro'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aFirstDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aFirstDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith:
+		(MoonWalk createWithPosition: 6 withBackwardsMovementOf: 2).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 6)
+]
+
+{ #category : 'tests' }
+GameTest >> test20whenAShipFallsInAMoonWalkCellTheTheEffectIsCorrectlyAplied [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aFirstDice aChargedBoard aSecondShip aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pedro'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aFirstDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aFirstDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith:
+		(MoonWalk createWithPosition: 6 withBackwardsMovementOf: 1).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 3.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+	aGame moves.
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 6).
+	self assert: (aGame theShip: aSecondShip isAt: 2)
+]
+
+{ #category : 'tests' }
+GameTest >> test21WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelowZero [
+
+	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aFirstDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pedro'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aFirstDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aFirstDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith:
+		(MoonWalk createWithPosition: 6 withBackwardsMovementOf: 3).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 3.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 6).
+	self assert: (aGame theShip: aSecondShip isAt: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test22WhenAShipFallsInMoonWalkThenOtherShipLosesOneLap [
+
+	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pedro'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith:
+		(MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 3.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves. "juan -> 6, vuelta 0"
+	aGame moves. "pedro -> 6, vuelta 0"
+	aGame moves. "juan -> 2, vuelta 1"
+	aGame moves. "pedro -> 2, vuelta 1"
+	aGame moves. "juan -> 8, vuelta 1, cae en MoonWalk"
+
+	self assert: (aGame theShip: aSecondShip isAt: 8).
+	self assert: (aGame theShip: aSecondShip isAtLap: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test23WhenAShipFallsInHyperJumpThenItAdvancesTheNextParsecValueConvertedToCells [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 100.
+	aChargedBoard replaceACellWith:
+		(HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 3.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 6).
+	self assert: (aGame theShip: aShip isAtLap: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test24WhenTwoShipsFallInHyperJumpThenItUsesNextParsecValue [
+
+	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pedro'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 100.
+	aChargedBoard replaceACellWith:
+		(HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+	self assert: (aGame theShip: aShip isAt: 6).
+
+	aGame moves.
+	self assert: (aGame theShip: aSecondShip isAt: 5)
+]
+
+{ #category : 'tests' }
+GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginning [
+
+	| aGame aShip aSecondShip aThirdShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pedro'.
+	aThirdShip := Ship createWithName: 'maria'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aCollectionOfShips add: aThirdShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 100.
+	aChargedBoard replaceACellWith:
+		(HyperJump createWithPosition: 3 andParsecs: #( 20 10 )).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+	self assert: (aGame theShip: aShip isAt: 5).
+
+	aGame moves.
+	self assert: (aGame theShip: aSecondShip isAt: 4).
+
+	aGame moves.
+	self assert: (aGame theShip: aThirdShip isAt: 5)
+]
+
+{ #category : 'tests' }
+GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 10
+		                 andAnAmountOfParcecsOf: 100.
+	aChargedBoard replaceACellWith:
+		(HyperJump createWithPosition: 3 andParsecs: #( 25 )).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 5)
+]
+
+{ #category : 'tests' }
+GameTest >> test27WhenAShipFallsInASpeedUpThenGameMovesItForwardFourCells [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (SpeedUp createWithPosition: 6).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 10)
+]
+
+{ #category : 'tests' }
+GameTest >> test28WhenAShipFallsInAnAtomicBombThenGameMovesItToTheFirstPosition [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 6).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame moves.
+
+	self assert: (aGame theShip: aShip isAt: 0)
 ]

@@ -11,7 +11,7 @@ Class {
 { #category : 'as yet unclassified' }
 Dice class >> cannotBeLowerThan: amountOfFaces [
 
-	amountOfFaces < 3 ifTrue: [
+	(amountOfFaces isInteger and: [ amountOfFaces > 2 ]) ifFalse: [
 			Error signal:
 				'Number of faces cannot be lower that two (must be integer)' ]
 ]

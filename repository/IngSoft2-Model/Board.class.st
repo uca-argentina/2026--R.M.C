@@ -3,31 +3,18 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'numberOfCells',
-		'shipsWhereabout'
+		'cells',
+		'amountOfParcecs'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
-
-	self validateNumber: aNumberOfCells.
-	self validateCollection: aCollectionOfShips.
-
-	^ self new
-		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
-		  andShips: aCollectionOfShips
-]
-
-{ #category : 'as yet unclassified' }
-Board class >> validateCollection: aCollection [
-
-	aCollection isEmpty ifTrue: [
-		Error signal: 'There must be at least one ship in the board' ].
-
-	aCollection asSet size ~= aCollection size ifTrue: [
-		Error signal: 'There cant be two equals ships in the board' ]
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs [ 
+	self validateNumber: aNumberOfCells .
+	self validateParcecs: anAmountOfParcecs .
+	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs .
 ]
 
 { #category : 'testing' }
@@ -40,34 +27,35 @@ Board class >> validateNumber: aNumber [
 ]
 
 { #category : 'testing' }
-Board >> canPlay [
+Board class >> validateParcecs: aNumber [
 
-	^ shipsWhereabout anySatisfy: [ :position |
-		  position >= numberOfCells ]
-]
-
-{ #category : 'testing' }
-Board >> hasTheShip: aShip atThePosition: aPosition [
-
-	^ (shipsWhereabout at: aShip) = aPosition
-]
-
-{ #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andShips: aCollectionOfShips [
-
-	numberOfCells := aNumberOfCells.
-
-	shipsWhereabout := Dictionary new.
-	aCollectionOfShips do: [ :aShip | shipsWhereabout at: aShip put: 0 ]
+	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
+			Error signal:
+				'The board must have an positive integer number of parcecs' ].
+	^ aNumber
 ]
 
 { #category : 'as yet unclassified' }
-Board >> move: aShip by: amountToAdd [
+Board >> amountOfCellsForParsecs: anAmountOfParsecs [
 
-	| currentPosition |
-	currentPosition := shipsWhereabout at: aShip.
+	^ anAmountOfParsecs // (amountOfParcecs / self numberOfCells)
+]
 
-	shipsWhereabout at: aShip put: currentPosition + amountToAdd
+{ #category : 'accessing' }
+Board >> effectForLandingAt: aPosition startingWith: anAmount [
+
+	| cell |
+	cell := cells at: aPosition + 1.
+
+	^ cell effectForMovement: anAmount in: self.
+]
+
+{ #category : 'initialization' }
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf:anAmountOfParcecs [ 
+	 numberOfCells  := aNumberOfCells.
+		cells := (0 to: aNumberOfCells) collect: [ :index |
+		         Cell createWithPosition: index ].
+	 amountOfParcecs := anAmountOfParcecs.
 ]
 
 { #category : 'as yet unclassified' }
@@ -77,7 +65,6 @@ Board >> numberOfCells [
 ]
 
 { #category : 'as yet unclassified' }
-Board >> winnerShip: aShip [
-
-	^ self hasTheShip: aShip atThePosition: numberOfCells
+Board >> parcecs [
+^ amountOfParcecs .
 ]
