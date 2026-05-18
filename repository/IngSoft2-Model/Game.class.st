@@ -16,32 +16,13 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: aBoard andADice: aCollectionOfDice andATurnManager: aTurnManager andNumberOfLaps: aNumber [
-		| aPositionShipManager |
-	aPositionShipManager := PositionShipManager createWith: aCollectionOfShips andNumberOfLaps: aNumber.
-	self validateCollection: aCollectionOfDice with: aBoard numberOfCells  .
+Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [ 
 
 	^ self new
 		  initializeWithName: aBoardName
 		  andBoard: aBoard
-		  andShips: aCollectionOfShips
 		  andADice: aCollectionOfDice
 		  andATurnManger:aTurnManager 
-		  andAPositionManager: aPositionShipManager.
-]
-
-{ #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABord: aBoard andADice: aCollectionOfDice andNumberOfLaps: aNumber [
-
-	| aPositionShipManager |
-	aPositionShipManager := PositionShipManager createWith: aCollectionOfShips andNumberOfLaps: aNumber.
-	self validateCollection: aCollectionOfDice with: aBoard numberOfCells  .
-
-	^ self new
-		  initializeWithName: aBoardName
-		  andBoard: aBoard
-		  andShips: aCollectionOfShips
-		  andADice: aCollectionOfDice
 		  andAPositionManager: aPositionShipManager.
 ]
 
@@ -76,25 +57,13 @@ Game >> hasFinishedAndWinnerIs: aShip [
 ]
 
 { #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andAPositionManager: ashipPositionManager [
+Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice andATurnManger: aTurnManager andAPositionManager: aPositionShipManager [
 
 	name := aName.
-	diceCollection := aCollectionOfDice.
 	board := aBoard.
-	shipsInGame := aCollectionOfShips.
-	currentIndexOfShipPlaying := 0.
-	shipPositionManager := ashipPositionManager
-]
-
-{ #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice andATurnManger: aTurnManager andAPositionManager: ashipPositionManager [
-	name := aName.
 	diceCollection := aCollectionOfDice.
-	board := aBoard.
-	shipsInGame := aCollectionOfShips.
-	currentIndexOfShipPlaying := 0.
-	shipPositionManager:=ashipPositionManager.
-	aShipTurnManager:=aTurnManager.
+	aShipTurnManager := aTurnManager.
+	shipPositionManager := aPositionShipManager
 ]
 
 { #category : 'as yet unclassified' }
@@ -128,7 +97,7 @@ Game >> moves [
 	self canPlay.
 
 	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
-	shipToPlay := self nextShipToPlay.
+	shipToPlay := aShipTurnManager nextShipToPlayInGame.
 
 	movementEffect := shipPositionManager
 		                  movementEffectFor: shipToPlay
