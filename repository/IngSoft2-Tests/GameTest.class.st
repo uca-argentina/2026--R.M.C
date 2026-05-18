@@ -763,30 +763,29 @@ GameTest >> test22WhenAShipFallsInMoonWalkThenOtherShipLosesOneLap [
 { #category : 'tests' }
 GameTest >> test23WhenAShipFallsInHyperJumpThenItAdvancesTheNextParsecValueConvertedToCells [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 100.
-
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
-
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 3.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-		         andNumberOfLaps: 3.
+		         andADice: aCollectionOfDice.
 
 	aGame moves.
 
@@ -797,32 +796,31 @@ GameTest >> test23WhenAShipFallsInHyperJumpThenItAdvancesTheNextParsecValueConve
 { #category : 'tests' }
 GameTest >> test24WhenTwoShipsFallInHyperJumpThenItUsesNextParsecValue [
 
-	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
 	aSecondShip := Ship createWithName: 'pedro'.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
-
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 100.
-
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
-
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-		         andNumberOfLaps: 5.
+		         andADice: aCollectionOfDice.
 
 	aGame moves.
 	self assert: (aGame theShip: aShip isAt: 6).
@@ -834,34 +832,33 @@ GameTest >> test24WhenTwoShipsFallInHyperJumpThenItUsesNextParsecValue [
 { #category : 'tests' }
 GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginning [
 
-	| aGame aShip aSecondShip aThirdShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	| aGame aShip aSecondShip aThirdShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
 	aSecondShip := Ship createWithName: 'pedro'.
 	aThirdShip := Ship createWithName: 'maria'.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
 	aCollectionOfShips add: aThirdShip.
-
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 100.
-
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 20 10 )).
-
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-		         andNumberOfLaps: 5.
+		         andADice: aCollectionOfDice.
 
 	aGame moves.
 	self assert: (aGame theShip: aShip isAt: 5).
@@ -876,30 +873,29 @@ GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginn
 { #category : 'tests' }
 GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
-
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
-
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 100.
-
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 25 )).
-
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-		         andNumberOfLaps: 5.
+		         andADice: aCollectionOfDice.
 
 	aGame moves.
 
@@ -909,11 +905,10 @@ GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
 { #category : 'tests' }
 GameTest >> test27WhenAShipFallsInASpeedUpThenGameMovesItForwardFourCells [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
@@ -922,13 +917,16 @@ GameTest >> test27WhenAShipFallsInASpeedUpThenGameMovesItForwardFourCells [
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (SpeedUp createWithPosition: 6).
-
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-		         andNumberOfLaps: 1.
+		         andADice: aCollectionOfDice.
 
 	aGame moves.
 
@@ -938,11 +936,10 @@ GameTest >> test27WhenAShipFallsInASpeedUpThenGameMovesItForwardFourCells [
 { #category : 'tests' }
 GameTest >> test28WhenAShipFallsInAnAtomicBombThenGameMovesItToTheFirstPosition [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard |
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
@@ -951,13 +948,16 @@ GameTest >> test28WhenAShipFallsInAnAtomicBombThenGameMovesItToTheFirstPosition 
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 6).
-
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andShips: aCollectionOfShips
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
-		         andADice: aCollectionOfDice
-		         andNumberOfLaps: 1.
+		         andADice: aCollectionOfDice.
 
 	aGame moves.
 
