@@ -24,7 +24,7 @@ RaceRanking >> initializeWith: aSnapshotCollection [
 
 { #category : 'testing' }
 RaceRanking >> isLeader: aShip [
-    ^ (self positionOf: aShip) = 1
+    ^ (self positionOfRank: aShip) = 1
 ]
 
 { #category : 'as yet unclassified' }
@@ -33,7 +33,7 @@ RaceRanking >> orderedShips [
 ]
 
 { #category : 'as yet unclassified' }
-RaceRanking >> positionOf: aShip [
+RaceRanking >> positionOfRank: aShip [
     ^ rankedStatuses
         detectIndex: [ :status | status isFor: aShip ]
 ]

@@ -957,8 +957,8 @@ GameTest >> test29whenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnRank
 	aRanking := aGame ranking.
 
 	self assert: (aGame hasFinishedAndWinnerIs: aShip).
-	self assert: (aRanking positionOf: aShip) equals: 1.
-	self assert: (aRanking positionOf: aSecondShip) equals: 2.
+	self assert: (aRanking positionOfRank: aShip) equals: 1.
+	self assert: (aRanking positionOfRank: aSecondShip) equals: 2.
 	self assert: (aRanking isLeader: aShip).
 	self assert: aRanking orderedShips first equals: 'juan'.
 	self assert: aRanking orderedShips last equals: 'fran'
