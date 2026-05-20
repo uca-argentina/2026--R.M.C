@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-CellTestWhromHole >> test01whenTheWhormHoleIsCreatedThenItKnowsItsPosition [
+CellTestWhromHole >> test01WhenTheWhormHoleIsCreatedThenItKnowsItsPosition [
 
 	| aCell |
 	aCell := WhromHole createWithPosition: 1.
@@ -14,7 +14,7 @@ CellTestWhromHole >> test01whenTheWhormHoleIsCreatedThenItKnowsItsPosition [
 ]
 
 { #category : 'tests' }
-CellTestWhromHole >> test02whenTheWhormHoleHasNegativeBackwardsMovementThenCreationFailed [
+CellTestWhromHole >> test02WhenTheWhormHoleHasNegativeBackwardsMovementThenCreationFailed [
 
 	self should: [ MoonWalk createWithPosition: 1 withBackwardsMovementOf: -2 ] 
 	raise: Error 

@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-ShipTests >> test01whenAShipIsAtZeroStartingPosition [
+ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aBoard aChargedDice aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -34,7 +34,7 @@ ShipTests >> test01whenAShipIsAtZeroStartingPosition [
 ]
 
 { #category : 'tests' }
-ShipTests >> test02whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
+ShipTests >> test02WhenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
 	| aShip  |
 	aShip := Ship createWithName: 'juan'.
@@ -42,7 +42,7 @@ ShipTests >> test02whenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 ]
 
 { #category : 'tests' }
-ShipTests >> test03whenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
+ShipTests >> test03WhenAShipInANegativePositionTryToBeCreatedThenTheCreationFailes [
 
 	self
 		should: [ Ship createWithName: 5 ]

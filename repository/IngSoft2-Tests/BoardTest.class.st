@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
+BoardTest >> test01WhenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 
 	| aBoard aShip aCollectionOfShips |
 	aShip := Ship createWithName: 'juan'.
@@ -20,7 +20,7 @@ BoardTest >> test01whenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 ]
 
 { #category : 'tests' }
-BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
+BoardTest >> test02WhenABoardIsCreatedWithTenCellsThenItHasTenCells [
 
 	| aBoard aShip aCollectionOfShips |
 	aShip := Ship createWithName: 'juan'.
@@ -34,7 +34,7 @@ BoardTest >> test02whenABoardIsCreatedWithTenCellsThenItHasTenCells [
 ]
 
 { #category : 'tests' }
-BoardTest >> test03whenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
+BoardTest >> test03WhenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 
 	| aShip |
 	aShip := Ship createWithName: 'juan'.
@@ -47,7 +47,7 @@ BoardTest >> test03whenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 ]
 
 { #category : 'tests' }
-BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreated [
+BoardTest >> test04WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreated [
 
 	| aShip |
 	aShip := Ship createWithName: 'juan'.
@@ -61,7 +61,7 @@ BoardTest >> test04whenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreate
 ]
 
 { #category : 'tests' }
-BoardTest >> test05whenABoardIsCreatedThenItHaveANumberOfParsecs [
+BoardTest >> test05WhenABoardIsCreatedThenItHaveANumberOfParsecs [
 
 	| aBoard aShip aCollectionOfShips |
 	aShip := Ship createWithName: 'juan'.
@@ -75,7 +75,7 @@ BoardTest >> test05whenABoardIsCreatedThenItHaveANumberOfParsecs [
 ]
 
 { #category : 'tests' }
-BoardTest >> test06whenABoardHasNegativeAmountOfParcecsThenTheBoardCannotBeCreated [
+BoardTest >> test06WhenABoardHasNegativeAmountOfParcecsThenTheBoardCannotBeCreated [
 
 	| aShip |
 	aShip := Ship createWithName: 'juan'.

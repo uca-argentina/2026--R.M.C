@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
+DiceTest >> test01WhenADiceIsThrownThenTheResultMustBePositive [
 
 	| aDice |
 	aDice := Dice default.
@@ -14,7 +14,7 @@ DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
 ]
 
 { #category : 'tests' }
-DiceTest >> test02whenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMustBeLowerThanTheMaximumSize [
+DiceTest >> test02WhenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMustBeLowerThanTheMaximumSize [
 
 	| aDice |
 	aDice := Dice withTotalNumberFaces: 10.
@@ -22,7 +22,7 @@ DiceTest >> test02whenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMust
 ]
 
 { #category : 'tests' }
-DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
+DiceTest >> test03WhenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 
 	self
 		should: [ Dice withTotalNumberFaces: 2 ]
@@ -31,7 +31,7 @@ DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 ]
 
 { #category : 'tests' }
-DiceTest >> test04whenADiceHasNonValidNumberOfFacesThenItCannotBeCreated [
+DiceTest >> test04WhenADiceHasNonValidNumberOfFacesThenItCannotBeCreated [
 
 	self
 		should: [ Dice withTotalNumberFaces: 'A' ]

@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-GameTest >> test01whenAGameStartsThenItReturnsItsName [
+GameTest >> test01WhenAGameStartsThenItReturnsItsName [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -34,7 +34,7 @@ GameTest >> test01whenAGameStartsThenItReturnsItsName [
 ]
 
 { #category : 'tests' }
-GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
+GameTest >> test02WhenAGameStartsWithASpecificNameThenItKnowsItsName [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -62,7 +62,7 @@ GameTest >> test02whenAGameStartsWithASpecificNameThenItKnowsItsName [
 ]
 
 { #category : 'tests' }
-GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
+GameTest >> test03WhenTheGameAdvanceATurnThenTheShipsPositionChanges [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -92,7 +92,7 @@ GameTest >> test03whenTheGameAdvanceATurnThenTheShipsPositionChanges [
 ]
 
 { #category : 'tests' }
-GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
+GameTest >> test04WhenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -120,7 +120,7 @@ GameTest >> test04whenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 ]
 
 { #category : 'tests' }
-GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
+GameTest >> test05WhenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -150,7 +150,7 @@ GameTest >> test05whenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 ]
 
 { #category : 'tests' }
-GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
+GameTest >> test06WhenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
 
 	| aGame aShip aCollectionOfShips aChargedDice aSecondChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -181,7 +181,7 @@ GameTest >> test06whenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 ]
 
 { #category : 'tests' }
-GameTest >> test07whenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
+GameTest >> test07WhenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 
 	| aShip aCollectionOfShips aCollectionOfDice aBoard aGame aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -210,7 +210,7 @@ GameTest >> test07whenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 ]
 
 { #category : 'tests' }
-GameTest >> test08whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
+GameTest >> test08WhenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -246,7 +246,7 @@ GameTest >> test08whenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 ]
 
 { #category : 'tests' }
-GameTest >> test09whenAShipMovesToTheFinalCellThenTheGameIsFished [
+GameTest >> test09WhenAShipMovesToTheFinalCellThenTheGameIsFished [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
@@ -277,7 +277,7 @@ GameTest >> test09whenAShipMovesToTheFinalCellThenTheGameIsFished [
 ]
 
 { #category : 'tests' }
-GameTest >> test10whenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
+GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
 
 	| aGame aShip aCollectionOfShips aChargedDice aCollectionOfDice aSecondShip aBoard aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.

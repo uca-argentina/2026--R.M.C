@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-CellTestAtomicBomb >> test01whenTheAtomicBombIsCreatedThenItKnowsItsPosition [
+CellTestAtomicBomb >> test01WhenTheAtomicBombIsCreatedThenItKnowsItsPosition [
 
 	| aCell |
 	aCell := AtomicBomb createWithPosition: 1.

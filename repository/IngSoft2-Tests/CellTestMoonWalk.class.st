@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-CellTestMoonWalk >> test01whenTheMoonWalkIsCreatedThenItKnowsItsPosition [
+CellTestMoonWalk >> test01WhenTheMoonWalkIsCreatedThenItKnowsItsPosition [
 
 	| aCell |
 	aCell := MoonWalk createWithPosition: 1 withBackwardsMovementOf: 2.

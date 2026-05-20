@@ -6,7 +6,7 @@ Class {
 }
 
 { #category : 'tests' }
-CellTestSpeedUp >> test01whenTheSpeedUpIsCreatedThenItKnowsItsPosition [
+CellTestSpeedUp >> test01WhenTheSpeedUpIsCreatedThenItKnowsItsPosition [
 
 	| aCell |
 	aCell := SpeedUp createWithPosition: 1.
