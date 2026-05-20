@@ -6,42 +6,32 @@ Class {
 		'board',
 		'diceCollection',
 		'shipsInGame',
-		'currentIndexOfShipPlaying'
+		'currentIndexOfShipPlaying',
+		'lapmanager',
+		'shipPositionManager',
+		'aShipTurnManager'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andShips: aCollectionOfShips andABordOf: aNumberOfCells andADice: aCollectionOfDice [
+Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice [
 
-	| aBoard |
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: aNumberOfCells
-		          andShips: aCollectionOfShips.
-
-	self validateCollection: aCollectionOfDice with: aNumberOfCells.
-
+	self validateCollection: aCollectionOfDice.
 	^ self new
 		  initializeWithName: aBoardName
 		  andBoard: aBoard
-		  andShips: aCollectionOfShips
 		  andADice: aCollectionOfDice
+		  andATurnManger: aTurnManager
+		  andAPositionManager: aPositionShipManager
 ]
 
 { #category : 'as yet unclassified' }
-Game class >> validateCollection: aCollection with: amountOfCells [
+Game class >> validateCollection: aCollection [
 
-	| total |
 	aCollection isEmpty ifTrue: [
-		Error signal: 'There must be one dice in the game' ].
-
-	total := 0.
-	aCollection do: [ :aDie | total := total + aDie throw ].
-
-	total > amountOfCells ifTrue: [
-			Error signal:
-				'There of the dices must be lower than the amount of cells' ]
+		Error signal: 'There must be one dice in the game' ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -53,34 +43,47 @@ Game >> boardSize [
 { #category : 'testing' }
 Game >> canPlay [
 
-	board canPlay ifTrue: [ Error signal: 'The game has finished' ]
+	shipPositionManager hasFinished ifTrue: [ Error signal: 'The game has finished' ]
 ]
 
 { #category : 'testing' }
 Game >> hasFinishedAndWinnerIs: aShip [
 
-	^ board winnerShip: aShip
+	^ shipPositionManager hasWon: aShip
 ]
 
 { #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andShips: aCollectionOfShips andADice: aCollectionOfDice [
+Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice andATurnManger: aTurnManager andAPositionManager: aPositionShipManager [
 
 	name := aName.
-	diceCollection := aCollectionOfDice.
 	board := aBoard.
-	shipsInGame := aCollectionOfShips.
-	currentIndexOfShipPlaying := 0
+	diceCollection := aCollectionOfDice.
+	aShipTurnManager := aTurnManager.
+	shipPositionManager := aPositionShipManager
 ]
 
 { #category : 'as yet unclassified' }
-Game >> moves [
+Game >> move: aShip by: anAmount [
 
-	| total |
-	self canPlay.
-	total := diceCollection sum: [ :aDie | aDie throw ].
+	shipPositionManager
+		move: aShip
+		by: anAmount
+		inBoardOfSize: board numberOfCells
+]
 
+{ #category : 'as yet unclassified' }
+Game >> moveAllShipsExcept: aShip by: anAmount [
 
-	self nextShipToPlay advancesTo: total in: board
+	shipPositionManager
+		moveAllShipsExcept: aShip
+		by: anAmount  
+		inBoardOfSize: board numberOfCells
+]
+
+{ #category : 'as yet unclassified' }
+Game >> moveBackToZero: aShip [
+
+	shipPositionManager moveToZero: aShip
 ]
 
 { #category : 'as yet unclassified' }
@@ -95,6 +98,32 @@ Game >> nextShipToPlay [
 	^ ship
 ]
 
+{ #category : 'as yet unclassified' }
+Game >> playturn [
+
+	| sumOfTheDices shipToPlay movementEffect |
+	self canPlay.
+
+	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
+	shipToPlay := aShipTurnManager nextShipToPlayInGame.
+
+	movementEffect := shipPositionManager
+		                  movementEffectFor: shipToPlay
+		                  moving: sumOfTheDices
+		                  inBoardOfSize: board numberOfCells
+		                  modifiedBy: [ :futurePosition |
+			                  board
+				                  effectForLandingAt: futurePosition
+				                  startingWith: sumOfTheDices ].
+
+	movementEffect applyTo: shipToPlay in: self
+]
+
+{ #category : 'as yet unclassified' }
+Game >> ranking [
+    ^ shipPositionManager currentRanking
+]
+
 { #category : 'accessing' }
 Game >> start [
 
@@ -104,5 +133,11 @@ Game >> start [
 { #category : 'accessing' }
 Game >> theShip: aShip isAt: aPosition [
 
-	^ board hasTheShip: aShip atThePosition: aPosition
+	^ shipPositionManager is: aShip atPosition: aPosition
+]
+
+{ #category : 'as yet unclassified' }
+Game >> theShip: aShip isAtLap: aLap [
+
+	^ shipPositionManager is: aShip atLap: aLap
 ]

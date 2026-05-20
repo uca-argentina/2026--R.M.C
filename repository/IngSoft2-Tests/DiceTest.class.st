@@ -1,22 +1,12 @@
 Class {
 	#name : 'DiceTest',
-	#superclass : 'TestCase',
+	#superclass : 'TestsTools',
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'asserting' }
-DiceTest >> should: argThatShuoldFailed raise: anError withMessageText: errorMesagge [
-
-	self
-		should: argThatShuoldFailed
-		raise: anError
-		withExceptionDo: [ :aPosibleError |
-			self assert: aPosibleError messageText equals: errorMesagge ]
-]
-
 { #category : 'tests' }
-DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
+DiceTest >> test01WhenADiceIsThrownThenTheResultMustBePositive [
 
 	| aDice |
 	aDice := Dice default.
@@ -24,7 +14,7 @@ DiceTest >> test01whenADiceIsThrownThenTheResultMustBePositive [
 ]
 
 { #category : 'tests' }
-DiceTest >> test02whenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMustBeLowerThanTheMaximumSize [
+DiceTest >> test02WhenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMustBeLowerThanTheMaximumSize [
 
 	| aDice |
 	aDice := Dice withTotalNumberFaces: 10.
@@ -32,7 +22,7 @@ DiceTest >> test02whenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMust
 ]
 
 { #category : 'tests' }
-DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
+DiceTest >> test03WhenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 
 	self
 		should: [ Dice withTotalNumberFaces: 2 ]
@@ -41,10 +31,10 @@ DiceTest >> test03whenADiceHasANumberOfFacesLowerThanTwoThenItCannotBeCreated [
 ]
 
 { #category : 'tests' }
-DiceTest >> test04whenADiceHasNonValidNumberOfFacesThenItCannotBeCreated [
+DiceTest >> test04WhenADiceHasNonValidNumberOfFacesThenItCannotBeCreated [
 
 	self
-		should: [ Dice withTotalNumberFaces: 2 ]
+		should: [ Dice withTotalNumberFaces: 'A' ]
 		raise: Error
 		withMessageText: 'Number of faces cannot be lower that two (must be integer)'
 ]
