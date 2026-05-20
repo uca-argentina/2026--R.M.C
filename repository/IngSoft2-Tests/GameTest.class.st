@@ -86,7 +86,7 @@ GameTest >> test03WhenTheGameAdvanceATurnThenTheShipsPositionChanges [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 3)
 ]
@@ -144,7 +144,7 @@ GameTest >> test05WhenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 5)
 ]
@@ -176,7 +176,7 @@ GameTest >> test06WhenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 	self assert: (aGame theShip: aShip isAt: 8)
 ]
 
@@ -236,10 +236,10 @@ GameTest >> test08WhenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
-	aGame moves.
-	aGame moves.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 8).
 	self assert: (aGame theShip: aSecondShip isAt: 8)
@@ -270,8 +270,8 @@ GameTest >> test09WhenAShipMovesToTheFinalCellThenTheGameIsFished [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
+	aGame playturn.
+	aGame playturn.
 
 	self assert: (aGame hasFinishedAndWinnerIs: aShip)
 ]
@@ -303,12 +303,12 @@ GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
-	aGame moves.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
 
 	self
-		should: [ aGame moves ]
+		should: [ aGame playturn ]
 		raise: Error
 		withMessageText: 'The game has finished'
 ]
@@ -340,11 +340,11 @@ GameTest >> test11WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
-	aGame moves.
-	aGame moves.
-	aGame moves.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAtLap: 2).
 	self assert: (aGame theShip: aSecondShip isAtLap: 1)
@@ -374,7 +374,7 @@ GameTest >> test12WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
 		         andATurnManager: aTurnManager
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAtLap: 0)
 ]
@@ -404,7 +404,7 @@ GameTest >> test13WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAtLap: 1).
 	self assert: (aGame theShip: aShip isAt: 0)
@@ -436,7 +436,7 @@ GameTest >> test14WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 2)
 ]
@@ -467,7 +467,7 @@ GameTest >> test15WhenAShipFallsInAWormHoleInTwoThenGameMovesItBackToZero [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 0)
 ]
@@ -499,7 +499,7 @@ GameTest >> test16WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEf
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 2)
 ]
@@ -530,7 +530,7 @@ GameTest >> test17WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 9).
 	self assert: (aGame theShip: aShip isAtLap: 0)
@@ -563,12 +563,12 @@ GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	aCollectionOfDice removeAll.
 	aCollectionOfDice add: aSecondDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 9).
 	self assert: (aGame theShip: aShip isAtLap: 0)
@@ -603,7 +603,7 @@ GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 6)
 ]
@@ -637,9 +637,9 @@ GameTest >> test20whenAShipFallsInAMoonWalkCellTheTheEffectIsCorrectlyAplied [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
-	aGame moves.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 6).
 	self assert: (aGame theShip: aSecondShip isAt: 2)
@@ -674,7 +674,7 @@ GameTest >> test21WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelo
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 6).
 	self assert: (aGame theShip: aSecondShip isAt: 0)
@@ -709,11 +709,11 @@ GameTest >> test22WhenAShipFallsInMoonWalkThenOtherShipLosesOneLap [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves. "juan -> 6, vuelta 0"
-	aGame moves. "pedro -> 6, vuelta 0"
-	aGame moves. "juan -> 2, vuelta 1"
-	aGame moves. "pedro -> 2, vuelta 1"
-	aGame moves. "juan -> 8, vuelta 1, cae en MoonWalk"
+	aGame playturn. "juan -> 6, vuelta 0"
+	aGame playturn. "pedro -> 6, vuelta 0"
+	aGame playturn. "juan -> 2, vuelta 1"
+	aGame playturn. "pedro -> 2, vuelta 1"
+	aGame playturn. "juan -> 8, vuelta 1, cae en MoonWalk"
 
 	self assert: (aGame theShip: aSecondShip isAt: 8).
 	self assert: (aGame theShip: aSecondShip isAtLap: 0)
@@ -746,7 +746,7 @@ GameTest >> test23WhenAShipFallsInHyperJumpThenItAdvancesTheNextParsecValueConve
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 6).
 	self assert: (aGame theShip: aShip isAtLap: 0)
@@ -781,10 +781,10 @@ GameTest >> test24WhenTwoShipsFallInHyperJumpThenItUsesNextParsecValue [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 	self assert: (aGame theShip: aShip isAt: 6).
 
-	aGame moves.
+	aGame playturn.
 	self assert: (aGame theShip: aSecondShip isAt: 5)
 ]
 
@@ -819,13 +819,13 @@ GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginn
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 	self assert: (aGame theShip: aShip isAt: 5).
 
-	aGame moves.
+	aGame playturn.
 	self assert: (aGame theShip: aSecondShip isAt: 4).
 
-	aGame moves.
+	aGame playturn.
 	self assert: (aGame theShip: aThirdShip isAt: 5)
 ]
 
@@ -856,7 +856,7 @@ GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 5)
 ]
@@ -887,7 +887,7 @@ GameTest >> test27WhenAShipFallsInASpeedUpThenGameMovesItForwardFourCells [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 10)
 ]
@@ -918,7 +918,7 @@ GameTest >> test28WhenAShipFallsInAnAtomicBombThenGameMovesItToTheFirstPosition 
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
+	aGame playturn.
 
 	self assert: (aGame theShip: aShip isAt: 0)
 ]
@@ -950,9 +950,9 @@ GameTest >> test29whenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnRank
 		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
-	aGame moves.
-	aGame moves.
-	aGame moves.
+	aGame playturn.
+	aGame playturn.
+	aGame playturn.
 
 	aRanking := aGame ranking.
 
