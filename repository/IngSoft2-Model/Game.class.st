@@ -9,7 +9,8 @@ Class {
 		'currentIndexOfShipPlaying',
 		'lapmanager',
 		'shipPositionManager',
-		'aShipTurnManager'
+		'aShipTurnManager',
+		'aCardsManager'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -28,10 +29,29 @@ Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipM
 ]
 
 { #category : 'as yet unclassified' }
+Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice andACardManager:aCardManager [
+
+	self validateCollection: aCollectionOfDice.
+	^ self new
+		  initializeWithName: aBoardName
+		  andBoard: aBoard
+		  andADice: aCollectionOfDice
+		  andATurnManger: aTurnManager
+		  andAPositionManager: aPositionShipManager
+	     andACardManager:aCardManager
+
+]
+
+{ #category : 'as yet unclassified' }
 Game class >> validateCollection: aCollection [
 
 	aCollection isEmpty ifTrue: [
 		Error signal: 'There must be one dice in the game' ]
+]
+
+{ #category : 'as yet unclassified' }
+Game >> ShowCardsLeftfrom:AplayerName [
+	^0.
 ]
 
 { #category : 'as yet unclassified' }
@@ -60,6 +80,17 @@ Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice a
 	diceCollection := aCollectionOfDice.
 	aShipTurnManager := aTurnManager.
 	shipPositionManager := aPositionShipManager
+]
+
+{ #category : 'initialization' }
+Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice andATurnManger: aTurnManager andAPositionManager: aPositionShipManager andACardManager:aCardManager [
+
+	name := aName.
+	board := aBoard.
+	diceCollection := aCollectionOfDice.
+	aShipTurnManager := aTurnManager.
+	shipPositionManager := aPositionShipManager.
+	aCardsManager:=aCardManager.
 ]
 
 { #category : 'as yet unclassified' }
@@ -122,6 +153,12 @@ Game >> playturn [
 { #category : 'as yet unclassified' }
 Game >> ranking [
     ^ shipPositionManager currentRanking
+]
+
+{ #category : 'as yet unclassified' }
+Game >> shipPlayer: aShip playsCard: aCard targetPlayer: aShipTarget [
+
+	aCardsManager applyCard:aCard fromShip:aShip to:aShipTarget.
 ]
 
 { #category : 'accessing' }
