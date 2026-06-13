@@ -118,18 +118,6 @@ Game >> moveBackToZero: aShip [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> nextShipToPlay [
-
-	| ship |
-	ship := shipsInGame at: currentIndexOfShipPlaying + 1.
-
-	currentIndexOfShipPlaying := currentIndexOfShipPlaying + 1
-	                             \\ shipsInGame size.
-
-	^ ship
-]
-
-{ #category : 'as yet unclassified' }
 Game >> playturn [
 
 	| sumOfTheDices shipToPlay movementEffect |

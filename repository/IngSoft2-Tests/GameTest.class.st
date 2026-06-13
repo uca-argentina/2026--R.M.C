@@ -424,7 +424,7 @@ GameTest >> test14WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
-	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 6).
+	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
 	aPositionShipManager := PositionShipManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
@@ -455,7 +455,7 @@ GameTest >> test15WhenAShipFallsInAWormHoleInTwoThenGameMovesItBackToZero [
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
-	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
+	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
 	aPositionShipManager := PositionShipManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
@@ -486,8 +486,8 @@ GameTest >> test16WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEf
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
-	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 6).
-	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 2).
+	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
+	aChargedBoard replaceACellWith: (WormHole createWithPosition: 2).
 	aPositionShipManager := PositionShipManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
@@ -518,7 +518,7 @@ GameTest >> test17WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
-	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
+	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
 	aPositionShipManager := PositionShipManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
@@ -551,7 +551,7 @@ GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 	aChargedBoard := BoardCharged
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
-	aChargedBoard replaceACellWith: (WhromHole createWithPosition: 3).
+	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
 	aPositionShipManager := PositionShipManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 3.
@@ -1026,4 +1026,40 @@ GameTest >> test31whenAShipPlaysSobrecargaAndTargetsaPlayer [
 	aGame shipPlayer:aSecondShip playsCard:aSobreCarga targetPlayer:aShip.
 	aGame playturn.
 	self assert: (aGame theShip: aShip isAt: 2)
+]
+
+{ #category : 'tests' }
+GameTest >> test32WhenOneShipFallsInAnAtomicBombThenGameMovesTwoShipsItToTheFirstPosition [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip|
+	aShip := Ship createWithName: 'juan'.
+	aSecondShip := Ship createWithName: 'pepe'.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame playturn. 
+	aGame playturn.
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 0).
+	self assert: (aGame theShip: aSecondShip isAt: 6)
 ]

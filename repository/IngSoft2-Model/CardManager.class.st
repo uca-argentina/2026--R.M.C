@@ -14,8 +14,8 @@ CardManager class >> createWith: alistofCards [
 ]
 
 { #category : 'as yet unclassified' }
-CardManager >> applyCard: aCard fromShip: aShip to: aShip3 [ 
-	aCard applyPenaltyTo:aShip3 .
+CardManager >> applyCard: aCard fromShip: aShip to: aShip3 [  
+	aCard applyPenaltyTo:aShip3 aCardManager:self.
 ]
 
 { #category : 'as yet unclassified' }

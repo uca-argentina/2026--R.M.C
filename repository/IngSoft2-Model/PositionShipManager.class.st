@@ -84,7 +84,7 @@ PositionShipManager >> moveAllShipsExcept: aShip by: anAmount inBoardOfSize: aBo
 { #category : 'as yet unclassified' }
 PositionShipManager >> moveToZero: aShip [
 
-	(self statusOf: aShip) moveToZero
+	shipStatuses do: [ :aShipStatus |aShipStatus moveToZero  ]
 ]
 
 { #category : 'as yet unclassified' }
