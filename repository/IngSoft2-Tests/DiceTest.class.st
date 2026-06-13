@@ -1,6 +1,9 @@
 Class {
 	#name : 'DiceTest',
 	#superclass : 'TestsTools',
+	#instVars : [
+		'aDice'
+	],
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
@@ -8,16 +11,16 @@ Class {
 { #category : 'tests' }
 DiceTest >> test01WhenADiceIsThrownThenTheResultMustBePositive [
 
-	| aDice |
 	aDice := Dice default.
-	self assert: aDice throw positive
+
+	self assert: (aDice throw positive)
 ]
 
 { #category : 'tests' }
 DiceTest >> test02WhenADiceIsCreatedWithAnSpecificAmountOfFacesThenTheResultMustBeLowerThanTheMaximumSize [
 
-	| aDice |
 	aDice := Dice withTotalNumberFaces: 10.
+
 	self assert: (aDice throw between: 1 and: 10)
 ]
 

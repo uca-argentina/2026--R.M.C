@@ -19,7 +19,7 @@ GameTest >> test01WhenAGameStartsThenItReturnsItsName [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 25
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -47,7 +47,7 @@ GameTest >> test02WhenAGameStartsWithASpecificNameThenItKnowsItsName [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 10
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -75,7 +75,7 @@ GameTest >> test03WhenTheGameAdvanceATurnThenTheShipsPositionChanges [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 10
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -105,7 +105,7 @@ GameTest >> test04WhenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 10
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -133,7 +133,7 @@ GameTest >> test05WhenAGameThrowsTheDiceToMoveAShipThenTheShipMovesToTheCell [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 10
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -165,7 +165,7 @@ GameTest >> test06WhenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 10
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -192,7 +192,7 @@ GameTest >> test07WhenAGameHasAnEmptyDicesCollectionThenTheCreationFails [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 10
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -225,7 +225,7 @@ GameTest >> test08WhenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 25
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -259,7 +259,7 @@ GameTest >> test09WhenAShipMovesToTheFinalCellThenTheGameIsFished [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -292,7 +292,7 @@ GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -329,7 +329,7 @@ GameTest >> test11WhenInAGameWeAskWhereTheShipsAreThenTheGAmeReturnItsLaps [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -364,7 +364,7 @@ GameTest >> test12WhenShipDoesNotCrossTheEndThenItStaysInSameLap [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -393,7 +393,7 @@ GameTest >> test13WhenShipMovesExactlyBoardSizeThenItCompletesOneLap [
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8
 		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -425,7 +425,7 @@ GameTest >> test14WhenAShipFallsInAWormHoleThenGameMovesItBackFourCells [
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -456,7 +456,7 @@ GameTest >> test15WhenAShipFallsInAWormHoleInTwoThenGameMovesItBackToZero [
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -488,7 +488,7 @@ GameTest >> test16WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEf
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 2).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -519,7 +519,7 @@ GameTest >> test17WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -552,7 +552,7 @@ GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 		                 createWithATotalNumberOfCellsOf: 10
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 3.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -592,7 +592,7 @@ GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith:
 		(MoonWalk createWithPosition: 6 withBackwardsMovementOf: 2).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -626,7 +626,7 @@ GameTest >> test20whenAShipFallsInAMoonWalkCellTheTheEffectIsCorrectlyAplied [
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith:
 		(MoonWalk createWithPosition: 6 withBackwardsMovementOf: 1).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 3.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -663,7 +663,7 @@ GameTest >> test21WhenMoonWalkMovesAnotherShipBackwardsThenPositionDoesNotGoBelo
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith:
 		(MoonWalk createWithPosition: 6 withBackwardsMovementOf: 3).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 3.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -698,7 +698,7 @@ GameTest >> test22WhenAShipFallsInMoonWalkThenOtherShipLosesOneLap [
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith:
 		(MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 3.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -735,7 +735,7 @@ GameTest >> test23WhenAShipFallsInHyperJumpThenItAdvancesTheNextParsecValueConve
 		                 andAnAmountOfParcecsOf: 100.
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 3.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -770,7 +770,7 @@ GameTest >> test24WhenTwoShipsFallInHyperJumpThenItUsesNextParsecValue [
 		                 andAnAmountOfParcecsOf: 100.
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -808,7 +808,7 @@ GameTest >> test25WhenHyperJumpUsesAllParsecValuesThenItStartsAgainFromTheBeginn
 		                 andAnAmountOfParcecsOf: 100.
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 20 10 )).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -845,7 +845,7 @@ GameTest >> test26WhenHyperJumpParsecsDoNotDivideExactlyThenItRoundsDown [
 		                 andAnAmountOfParcecsOf: 100.
 	aChargedBoard replaceACellWith:
 		(HyperJump createWithPosition: 3 andParsecs: #( 25 )).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -876,7 +876,7 @@ GameTest >> test27WhenAShipFallsInASpeedUpThenGameMovesItForwardFourCells [
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (SpeedUp createWithPosition: 6).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -907,7 +907,7 @@ GameTest >> test28WhenAShipFallsInAnAtomicBombThenGameMovesItToTheFirstPosition 
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 6).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -939,7 +939,7 @@ GameTest >> test29whenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnRank
 	aBoard := Board
 		          createWithATotalNumberOfCellsOf: 8
 		          andAnAmountOfParcecsOf: 8.
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -981,7 +981,7 @@ GameTest >> test30WhenOneShipFallsInAnAtomicBombThenGameMovesTwoShipsItToTheFirs
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1020,7 +1020,7 @@ GameTest >> test31WhenAShipWantsToPlayACardandPLaysSobreCarga [
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1060,7 +1060,7 @@ GameTest >> test32WhenAShipWantsToPlayACardandPLaysSobreCargaRemain [
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1104,7 +1104,7 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1148,7 +1148,7 @@ GameTest >> test34WhenAShipWantsToPlayACardandPLaysSobreCargaandItGetsRemove [
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
