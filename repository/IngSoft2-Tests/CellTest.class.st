@@ -13,7 +13,7 @@ CellTest >> test01whenTheCellIsCreatedThenItKnowsItsPosition [
 
 	aCell := Cell createWithPosition: 1.
 
-	self assert: aCell numberOfCell equals: 1
+	self assert: (aCell numberOfCell) equals: 1
 ]
 
 { #category : 'tests' }
@@ -21,7 +21,7 @@ CellTest >> test02whenTheCellIsCreatedAtAnExactPositionThenItCannotBeInAnotherPo
 
 	aCell := Cell createWithPosition: 1.
 
-	self deny: aCell numberOfCell equals: 2
+	self deny: (aCell numberOfCell) equals: 2
 ]
 
 { #category : 'tests' }

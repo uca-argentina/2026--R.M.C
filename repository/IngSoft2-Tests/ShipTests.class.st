@@ -5,9 +5,9 @@ Class {
 		'aGame',
 		'aShip',
 		'aCollectionOfShips',
+		'aChargedDice',
 		'aCollectionOfDice',
 		'aBoard',
-		'aChargedDice',
 		'aShipPositionManager',
 		'aTurnManager'
 	],
@@ -25,12 +25,8 @@ ShipTests >> arrangeShipTestWithOneShipOneDieOfSixFacesOneBoardWithEightCellsAnd
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager
-		                        createWith: aCollectionOfShips
-		                        andNumberOfLaps: 5.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
+	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 
 	aGame := Game
@@ -73,5 +69,5 @@ ShipTests >> test04WhenAShipHasOneCard [
 	aSobreCard := SobreCarga new.
 	aShip := Ship createWithName: 'juan' andWithCard: [ aSobreCard ].
 
-	self assert: aShip hasCardLeft equals: 1
+	self assert: (aShip hasCardLeft) equals: 1
 ]
