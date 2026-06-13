@@ -2,7 +2,8 @@ Class {
 	#name : 'CardManager',
 	#superclass : 'Object',
 	#instVars : [
-		'pendingCards'
+		'pendingCards',
+		'lastPlayedCard'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -20,7 +21,8 @@ CardManager >> addPenaltyToAllShips: aCard [
 
 { #category : 'initialization' }
 CardManager >> applyCard: aCard toTarget: aTargetShip [
-    aCard applyIn: self toTarget: aTargetShip
+    aCard applyIn: self toTarget: aTargetShip.
+    self updateLastCard: aCard.
 ]
 
 { #category : 'initialization' }
@@ -38,6 +40,11 @@ CardManager >> initialize [
 
 ]
 
+{ #category : 'as yet unclassified' }
+CardManager >> lastCard [
+    ^ lastPlayedCard.
+]
+
 { #category : 'initialization' }
 CardManager >> penaltyFor: aShip [
     | applicable |
@@ -45,4 +52,9 @@ CardManager >> penaltyFor: aShip [
         each first = #all or: [ each first = aShip ] ].
     applicable isEmpty ifTrue: [ ^0 ].
     ^ applicable inject: 0 into: [ :sum :each | sum + each second throwModifier ].
+]
+
+{ #category : 'as yet unclassified' }
+CardManager >> updateLastCard: aCard [
+    (aCard isKindOf: Redo) ifFalse: [ lastPlayedCard := aCard ].
 ]

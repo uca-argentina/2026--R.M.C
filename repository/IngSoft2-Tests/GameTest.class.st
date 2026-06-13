@@ -1305,3 +1305,56 @@ GameTest >> test37WhenAShipCancelsACardThePenaltyIsRemoved [
 
     self assert: (aGame theShip: aShip isAt: 6).
 ]
+
+{ #category : 'tests' }
+GameTest >> test38WhenAShipPlaysRedoItRepeatsTheLastPlayedCard [
+    | aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard 
+      aPositionShipManager aTurnManager aSecondShip aSobreCarga aRedo
+      aCollectionOfCardsForJuan aCollectionOfCardsForPepe |
+
+    aSobreCarga := SobreCarga new.
+    aRedo := Redo new.
+
+    aCollectionOfCardsForPepe := OrderedCollection new.
+    aCollectionOfCardsForPepe add: aSobreCarga.
+    aCollectionOfCardsForPepe add: aRedo.
+    aSecondShip := Ship createWithName: 'pepe' andWithCard: aCollectionOfCardsForPepe.
+
+    aCollectionOfCardsForJuan := OrderedCollection new.
+    aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCardsForJuan.
+
+    aCollectionOfShips := OrderedCollection new.
+    aCollectionOfShips add: aShip.
+    aCollectionOfShips add: aSecondShip.
+
+    aChargedDice := ChargedDice withTotalNumberFaces: 6.
+    aCollectionOfDice := OrderedCollection new.
+    aCollectionOfDice add: aChargedDice.
+
+    aChargedBoard := BoardCharged
+                         createWithATotalNumberOfCellsOf: 12
+                         andAnAmountOfParcecsOf: 50.
+    aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+    aPositionShipManager := PositionShipManager
+                                createWith: aCollectionOfShips
+                                andNumberOfLaps: 1.
+    aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
+    aGame := Game
+                 createWithName: 'Ludo'
+                 andAShipPositionManager: aPositionShipManager
+                 andATurnManager: aTurnManager
+                 andABord: aChargedBoard
+                 andADice: aCollectionOfDice.
+
+    "pepe plays SobreCarga on juan → juan gets -2"
+    aGame PayerShip: aSecondShip PlaysCard: aSobreCarga toTarget: aShip.
+    "pepe plays Redo also targeting juan → juan gets another -2"
+    aGame PayerShip: aSecondShip PlaysCard: aRedo toTarget: aShip.
+
+    "juan plays → dice=6, two penalties of -2 = moves 2"
+    aGame playturn.
+
+    self assert: (aGame theShip: aShip isAt: 2).
+]
