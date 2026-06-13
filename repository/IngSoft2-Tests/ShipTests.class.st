@@ -1,14 +1,23 @@
 Class {
 	#name : 'ShipTests',
 	#superclass : 'TestsTools',
+	#instVars : [
+		'aGame',
+		'aShip',
+		'aCollectionOfShips',
+		'aCollectionOfDice',
+		'aBoard',
+		'aChargedDice',
+		'aPositionShipManager',
+		'aTurnManager'
+	],
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
-ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
+{ #category : 'as yet unclassified' }
+ShipTests >> arrangeShipTestWithOneShipOneDieOfSixFacesOneBoardWithEightCellsAndFiveLaps [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aBoard aChargedDice aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -23,12 +32,19 @@ ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aPositionShipManager
 		         andATurnManager: aTurnManager
 		         andABord: aBoard
-		         andADice: aCollectionOfDice.
+		         andADice: aCollectionOfDice
+]
+
+{ #category : 'tests' }
+ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
+
+	self arrangeShipTestWithOneShipOneDieOfSixFacesOneBoardWithEightCellsAndFiveLaps.
 
 	self assert: (aGame theShip: aShip isAt: 0)
 ]
