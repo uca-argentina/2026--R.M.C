@@ -141,11 +141,12 @@ Game >> moveBackToZero: aShip [
 
 { #category : 'as yet unclassified' }
 Game >> penaltyAppliedToShip: aShip [ 
-| aPenalties |
+| aPenalties aPenaltiesvalue|
 (aPenaltyShips anySatisfy: [ :each | each first = aShip ]) ifFalse: [ ^0 ].
 aPenalties := (aPenaltyShips select: [ :each | each first = aShip ])
                     collect: [ :each | each second ].
-^aPenalties first.
+aPenaltiesvalue:=aPenalties first.
+^aPenaltiesvalue.
 ]
 
 { #category : 'as yet unclassified' }

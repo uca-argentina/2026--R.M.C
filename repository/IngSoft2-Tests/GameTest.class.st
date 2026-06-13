@@ -1091,8 +1091,8 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 	aCollectionOfCards := OrderedCollection new.
 	aSobreCarga := SobreCarga new.
 	aCollectionOfCards add:aSobreCarga .
-	aShip := Ship createWithName: 'juan' andWithCard:aCollectionOfCards.
-	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
+	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'pepe' andWithCard: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -1115,15 +1115,15 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 					
-   aGame PayerShip:aSecondShip PlaysCard:aSobreCarga toTarget:aShip.
+ 	aGame PayerShip:aShip PlaysCard:aSobreCarga toTarget:aSecondShip.
+	aGame PayerShip:aSecondShip PlaysCard:aSobreCarga toTarget:aShip.
 	aGame playturn.
-	aGame PayerShip:aShip PlaysCard:aSobreCarga toTarget:aSecondShip.
 	aGame playturn.
 	
 	
 
 
-	self assert: (aGame theShip:aSecondShip isAt: 4).
+	self assert: (aGame theShip:aShip  isAt: 4).
 
 ]
 

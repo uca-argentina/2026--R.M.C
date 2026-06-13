@@ -18,7 +18,7 @@ Ship class >> createWithName: anName [
 
 { #category : 'as yet unclassified' }
 Ship class >> createWithName: aName andWithCard: aCard [
-^self new intializeWith: aName  andWithCard:aCard.
+^self new intializeWith: aName  andWithCard:aCard copy.
 ]
 
 { #category : 'as yet unclassified' }
