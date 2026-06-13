@@ -10,7 +10,10 @@ Class {
 		'lapmanager',
 		'shipPositionManager',
 		'aShipTurnManager',
-		'aCardsManager'
+		'aCardsManager',
+		'targeplayer',
+		'aCard',
+		'aPenaltyShips'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -50,8 +53,26 @@ Game class >> validateCollection: aCollection [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> ShowCardsLeftfrom:AplayerName [
-	^0.
+Game >> PayerShip: aShip PlaysCard: aSobreCarga toTarget: aShip3 [ 
+	targeplayer:=aShip3.
+	aShip PlaysCardFromGame:self LookForCardinShip:aSobreCarga.
+]
+
+{ #category : 'as yet unclassified' }
+Game >> Showcardsfromplayer: aShip [ 
+	^aShip hasCardLeft.
+]
+
+{ #category : 'as yet unclassified' }
+Game >> appliesCard: aSobreCarga [ 
+	| apenalty |
+	apenalty:=aSobreCarga penalty.
+	aPenaltyShips add:{targeplayer. apenalty}.
+]
+
+{ #category : 'as yet unclassified' }
+Game >> appliesPenaltyTo: aShip [ 
+	self shouldBeImplemented.
 ]
 
 { #category : 'as yet unclassified' }
@@ -79,7 +100,8 @@ Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice a
 	board := aBoard.
 	diceCollection := aCollectionOfDice.
 	aShipTurnManager := aTurnManager.
-	shipPositionManager := aPositionShipManager
+	shipPositionManager := aPositionShipManager.
+	aPenaltyShips:=OrderedCollection new.
 ]
 
 { #category : 'initialization' }
@@ -118,17 +140,28 @@ Game >> moveBackToZero: aShip [
 ]
 
 { #category : 'as yet unclassified' }
+Game >> penaltyAppliedToShip: aShip [ 
+| aPenalties |
+(aPenaltyShips anySatisfy: [ :each | each first = aShip ]) ifFalse: [ ^0 ].
+aPenalties := (aPenaltyShips select: [ :each | each first = aShip ])
+                    collect: [ :each | each second ].
+^aPenalties first.
+]
+
+{ #category : 'as yet unclassified' }
 Game >> playturn [
 
-	| sumOfTheDices shipToPlay movementEffect |
+	| sumOfTheDices shipToPlay movementEffect throwwithpenalty |
 	self canPlay.
-
-	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
-	shipToPlay := aShipTurnManager nextShipToPlayInGame.
+   shipToPlay := aShipTurnManager nextShipToPlayInGame.
+	throwwithpenalty:= (self penaltyAppliedToShip:shipToPlay) .
+	sumOfTheDices := (diceCollection sum: [ :aDie | aDie throw ])+throwwithpenalty.
+	
+	
 
 	movementEffect := shipPositionManager
 		                  movementEffectFor: shipToPlay
-		                  moving: sumOfTheDices
+		                  moving: sumOfTheDices 
 		                  inBoardOfSize: board numberOfCells
 		                  modifiedBy: [ :futurePosition |
 			                  board
@@ -141,12 +174,6 @@ Game >> playturn [
 { #category : 'as yet unclassified' }
 Game >> ranking [
     ^ shipPositionManager currentRanking
-]
-
-{ #category : 'as yet unclassified' }
-Game >> shipPlayer: aShip playsCard: aCard targetPlayer: aShipTarget [
-
-	aCardsManager applyCard:aCard fromShip:aShip to:aShipTarget.
 ]
 
 { #category : 'accessing' }

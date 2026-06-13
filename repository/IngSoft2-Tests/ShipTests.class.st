@@ -49,3 +49,11 @@ ShipTests >> test03WhenAShipInANegativePositionTryToBeCreatedThenTheCreationFail
 		raise: Error
 		withMessageText: 'The name must be a string'
 ]
+
+{ #category : 'tests' }
+ShipTests >> test04WhenAShipHasOneCard [
+	| aShip  aSobreCard|
+	aSobreCard:= SobreCarga new.
+	aShip:= Ship createWithName: 'juan' andWithCard:[aSobreCard] .
+	self assert: (aShip hasCardLeft = 1).
+]
