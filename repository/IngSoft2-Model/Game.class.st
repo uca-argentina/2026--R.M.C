@@ -53,9 +53,9 @@ Game class >> validateCollection: aCollection [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> PayerShip: aShip PlaysCard: aSobreCarga toTarget: aShip3 [ 
-	targeplayer:=aShip3.
-	aShip PlaysCardFromGame:self LookForCardinShip:aSobreCarga.
+Game >> PayerShip: aShip PlaysCard: aCard toTarget: aTargetShip [
+    targeplayer := aTargetShip.
+    aShip PlaysCardFromGame: self LookForCardinShip: aCard
 ]
 
 { #category : 'as yet unclassified' }
@@ -64,15 +64,8 @@ Game >> Showcardsfromplayer: aShip [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> appliesCard: aSobreCarga [ 
-	| apenalty |
-	apenalty:=aSobreCarga penalty.
-	aPenaltyShips add:{targeplayer. apenalty}.
-]
-
-{ #category : 'as yet unclassified' }
-Game >> appliesPenaltyTo: aShip [ 
-	self shouldBeImplemented.
+Game >> appliesCard: aCard [
+    aCardsManager applyCard: aCard toTarget: targeplayer.
 ]
 
 { #category : 'as yet unclassified' }
@@ -101,18 +94,8 @@ Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice a
 	diceCollection := aCollectionOfDice.
 	aShipTurnManager := aTurnManager.
 	shipPositionManager := aPositionShipManager.
-	aPenaltyShips:=OrderedCollection new.
-]
-
-{ #category : 'initialization' }
-Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice andATurnManger: aTurnManager andAPositionManager: aPositionShipManager andACardManager:aCardManager [
-
-	name := aName.
-	board := aBoard.
-	diceCollection := aCollectionOfDice.
-	aShipTurnManager := aTurnManager.
-	shipPositionManager := aPositionShipManager.
-	aCardsManager:=aCardManager.
+	aCardsManager := CardManager new.
+	
 ]
 
 { #category : 'as yet unclassified' }
@@ -141,12 +124,7 @@ Game >> moveBackToZero: aShip [
 
 { #category : 'as yet unclassified' }
 Game >> penaltyAppliedToShip: aShip [ 
-| aPenalties aPenaltiesvalue|
-(aPenaltyShips anySatisfy: [ :each | each first = aShip ]) ifFalse: [ ^0 ].
-aPenalties := (aPenaltyShips select: [ :each | each first = aShip ])
-                    collect: [ :each | each second ].
-aPenaltiesvalue:=aPenalties first.
-^aPenaltiesvalue.
+  ^ aCardsManager penaltyFor: aShip
 ]
 
 { #category : 'as yet unclassified' }

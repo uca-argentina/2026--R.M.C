@@ -1,16 +1,16 @@
 Class {
-	#name : 'SobreCarga',
+	#name : 'Speed',
 	#superclass : 'Object',
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }
 
 { #category : 'as yet unclassified' }
-SobreCarga >> affectsAllShips [
+Speed >> affectsAllShips [
     ^ false.
 ]
 
 { #category : 'as yet unclassified' }
-SobreCarga >> throwModifier [
-	^-2.
+Speed >> throwModifier [
+	^1.
 ]

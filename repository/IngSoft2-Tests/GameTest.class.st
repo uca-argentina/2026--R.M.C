@@ -1166,3 +1166,88 @@ GameTest >> test34WhenAShipWantsToPlayACardandPLaysSobreCargaandItGetsRemove [
 	self assert: ((aGame Showcardsfromplayer:aSecondShip)=0).
 
 ]
+
+{ #category : 'tests' }
+GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aAcceleration aCollectionOfCards |
+	aShip := Ship createWithName: 'juan' andWithCard: OrderedCollection new.
+	aCollectionOfCards := OrderedCollection new.
+	aAcceleration := Acceleration new.
+	aCollectionOfCards add:aAcceleration .
+	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+					
+   aGame PayerShip:aSecondShip PlaysCard:aAcceleration toTarget:#all.
+	aGame playturn.
+	aGame playturn.
+
+	
+	
+
+
+	self assert: (aGame theShip: aShip isAt: 7).
+	
+	self assert: (aGame theShip: aSecondShip isAt: 7).
+
+]
+
+{ #category : 'tests' }
+GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aSpeed aCollectionOfCards |
+	aShip := Ship createWithName: 'juan'.
+	aCollectionOfCards := OrderedCollection new.
+	aSpeed:= Speed new.
+	aCollectionOfCards add:aSpeed .
+	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+					
+   aGame PayerShip:aSecondShip PlaysCard:aSpeed toTarget:aShip.
+	aGame playturn.
+	
+
+
+	self assert: (aGame theShip: aShip isAt: 7).
+
+]
