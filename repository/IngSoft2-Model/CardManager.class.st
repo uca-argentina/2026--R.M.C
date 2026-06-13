@@ -9,11 +9,27 @@ Class {
 }
 
 { #category : 'initialization' }
-CardManager >> applyCard: aCard toTarget: aTargetShip [
-    aCard affectsAllShips
-        ifTrue:  [ pendingCards add: { #all. aCard } ]
-        ifFalse: [ pendingCards add: { aTargetShip. aCard } ]
+CardManager >> addPenalty: aCard toTarget: aShip [
+    pendingCards add: { aShip. aCard }.
+]
 
+{ #category : 'initialization' }
+CardManager >> addPenaltyToAllShips: aCard [
+    pendingCards add: { #all. aCard }.
+]
+
+{ #category : 'initialization' }
+CardManager >> applyCard: aCard toTarget: aTargetShip [
+    aCard applyIn: self toTarget: aTargetShip
+]
+
+{ #category : 'initialization' }
+CardManager >> cancelCard: aCard toTarget: aShip [
+    | entryToRemove |
+    entryToRemove := pendingCards
+        detect: [ :each | each second = aCard and: [ each first = aShip ] ]
+        ifNone: [ ^self ].
+    pendingCards remove: entryToRemove.
 ]
 
 { #category : 'initialization' }

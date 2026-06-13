@@ -5,9 +5,9 @@ Class {
 	#package : 'IngSoft2-Model'
 }
 
-{ #category : 'as yet unclassified' }
-SobreCarga >> affectsAllShips [
-    ^ false.
+{ #category : 'initialization' }
+SobreCarga >> applyIn: aCardManager toTarget: aShip [
+    aCardManager addPenalty: self toTarget: aShip.
 ]
 
 { #category : 'as yet unclassified' }

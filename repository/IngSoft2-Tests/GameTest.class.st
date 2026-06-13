@@ -1251,3 +1251,57 @@ GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
 	self assert: (aGame theShip: aShip isAt: 7).
 
 ]
+
+{ #category : 'tests' }
+GameTest >> test37WhenAShipCancelsACardThePenaltyIsRemoved [
+    | aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard 
+      aPositionShipManager aTurnManager aSecondShip aSobreCarga aCancellation 
+      aCollectionOfCardsForJuan aCollectionOfCardsForPepe |
+
+    aSobreCarga := SobreCarga new.
+    aCancellation := Cancellation targeting: aSobreCarga.
+
+    aCollectionOfCardsForJuan := OrderedCollection new.
+    aCollectionOfCardsForJuan add: aCancellation.
+    aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCardsForJuan.
+
+    aCollectionOfCardsForPepe := OrderedCollection new.
+    aCollectionOfCardsForPepe add: aSobreCarga.
+    aSecondShip := Ship createWithName: 'pepe' andWithCard: aCollectionOfCardsForPepe.
+
+    aCollectionOfShips := OrderedCollection new.
+    aCollectionOfShips add: aShip.
+    aCollectionOfShips add: aSecondShip.
+
+    aChargedDice := ChargedDice withTotalNumberFaces: 6.
+    aCollectionOfDice := OrderedCollection new.
+    aCollectionOfDice add: aChargedDice.
+
+    aChargedBoard := BoardCharged
+                         createWithATotalNumberOfCellsOf: 12
+                         andAnAmountOfParcecsOf: 50.
+    aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+    aPositionShipManager := PositionShipManager
+                                createWith: aCollectionOfShips
+                                andNumberOfLaps: 1.
+    aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
+    aGame := Game
+                 createWithName: 'Ludo'
+                 andAShipPositionManager: aPositionShipManager
+                 andATurnManager: aTurnManager
+                 andABord: aChargedBoard
+                 andADice: aCollectionOfDice.
+
+    "pepe applies SobreCarga penalty to juan"
+    aGame PayerShip: aSecondShip PlaysCard: aSobreCarga toTarget: aShip.
+
+    "juan cancels the SobreCarga applied to himself"
+    aGame PayerShip: aShip PlaysCard: aCancellation toTarget: aShip.
+
+    "juan plays turn → dice=6, no penalty → moves 6"
+    aGame playturn.
+
+    self assert: (aGame theShip: aShip isAt: 6).
+]

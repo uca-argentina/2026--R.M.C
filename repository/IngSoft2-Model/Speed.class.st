@@ -6,8 +6,8 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Speed >> affectsAllShips [
-    ^ false.
+Speed >> applyIn: aCardManager toTarget: aShip [
+    aCardManager addPenalty: self toTarget: aShip.
 ]
 
 { #category : 'as yet unclassified' }

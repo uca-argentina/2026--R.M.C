@@ -5,12 +5,14 @@ Class {
 	#package : 'IngSoft2-Model'
 }
 
-{ #category : 'as yet unclassified' }
-Acceleration >> affectsAllShips [
-    ^ true.
+{ #category : 'initialization' }
+Acceleration >> applyIn: aCardManager toTarget: aShip [
+    aCardManager addPenaltyToAllShips: self.
+
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 Acceleration >> throwModifier [
-	^1.
+    ^ 1.
+
 ]
