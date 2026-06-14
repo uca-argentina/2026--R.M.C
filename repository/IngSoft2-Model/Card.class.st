@@ -11,6 +11,12 @@ Card >> applyIn: aCardManager toTarget: aShip [
 	^ self subclassResponsibility
 ]
 
+{ #category : 'testing' }
+Card >> isRedo [
+
+	^ false
+]
+
 { #category : 'initialization' }
 Card >> throwModifier [
 

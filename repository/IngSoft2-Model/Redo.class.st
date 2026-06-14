@@ -14,6 +14,12 @@ Redo >> applyIn: aCardManager toTarget: aShip [
 	cardToRepeat applyIn: aCardManager toTarget: aShip
 ]
 
+{ #category : 'testing' }
+Redo >> isRedo [
+
+	^ true
+]
+
 { #category : 'initialization' }
 Redo >> throwModifier [
 

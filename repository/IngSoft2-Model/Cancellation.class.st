@@ -11,14 +11,8 @@ Class {
 { #category : 'initialization' }
 Cancellation >> applyIn: aCardManager toTarget: aShip [
 
-	(cardToCancel = 'no target') ifTrue: [Error signal: 'The cancellation must have a target card to cancel' ].
+	cardToCancel ifNil: [Error signal: 'The cancellation must have a target card to cancel' ].
 	aCardManager cancelCard: cardToCancel toTarget: aShip.
-]
-
-{ #category : 'initialization' }
-Cancellation >> initializeTargeting: aCard [
-
-	cardToCancel := 'no target'
 ]
 
 { #category : 'as yet unclassified' }

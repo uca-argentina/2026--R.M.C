@@ -91,7 +91,7 @@ CardManager >> repeatedMovementEffect [
 { #category : 'as yet unclassified' }
 CardManager >> updateLastCard: aCard [
 
-	(aCard isKindOf: Redo) ifFalse: [ lastPlayedCard := aCard ]
+	aCard isRedo ifFalse: [ lastPlayedCard := aCard ]
 ]
 
 { #category : 'as yet unclassified' }
