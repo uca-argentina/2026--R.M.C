@@ -11,7 +11,7 @@ Class {
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 ShipPositionManagerTest >> arrangeShipPositionManagerTestWithTwoShipsAndFiveLaps [
 
 	aShip := Ship createWithName: 'juan'.

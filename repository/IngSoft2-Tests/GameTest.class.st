@@ -19,7 +19,7 @@ Class {
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneBoardOfEightCellsEightParsecsAndOneLap [
 
 	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 8.
@@ -27,7 +27,7 @@ GameTest >> arrangeGameTestWithOneBoardOfEightCellsEightParsecsAndOneLap [
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
 
 	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
@@ -35,7 +35,7 @@ GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndOneLap [
 
 	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
@@ -43,7 +43,7 @@ GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndOneLap [
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap [
 
 	aBoard := Board createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
@@ -51,7 +51,7 @@ GameTest >> arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap [
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneBoardOfTwentyFiveCellsFiftyParsecsAndOneLap [
 
 	aBoard := Board createWithATotalNumberOfCellsOf: 25 andAnAmountOfParcecsOf: 50.
@@ -59,7 +59,7 @@ GameTest >> arrangeGameTestWithOneBoardOfTwentyFiveCellsFiftyParsecsAndOneLap [
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap [
 
 	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
@@ -68,7 +68,7 @@ GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps [
 
 	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
@@ -76,7 +76,7 @@ GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndFiveLaps [
 
 	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
@@ -84,7 +84,7 @@ GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndFive
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndOneLap [
 
 	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
@@ -92,7 +92,7 @@ GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndOneL
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndThreeLaps [
 
 	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
@@ -100,7 +100,7 @@ GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndThre
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap [
 
 	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 12 andAnAmountOfParcecsOf: 50.
@@ -108,7 +108,7 @@ GameTest >> arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfEightFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 8.
@@ -116,7 +116,7 @@ GameTest >> arrangeGameTestWithOneDieOfEightFaces [
 	aCollectionOfDice add: aChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfFiveFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
@@ -124,7 +124,7 @@ GameTest >> arrangeGameTestWithOneDieOfFiveFaces [
 	aCollectionOfDice add: aChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfFourFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 4.
@@ -132,7 +132,7 @@ GameTest >> arrangeGameTestWithOneDieOfFourFaces [
 	aCollectionOfDice add: aChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfSixFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
@@ -140,7 +140,7 @@ GameTest >> arrangeGameTestWithOneDieOfSixFaces [
 	aCollectionOfDice add: aChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfTenFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 10.
@@ -148,7 +148,7 @@ GameTest >> arrangeGameTestWithOneDieOfTenFaces [
 	aCollectionOfDice add: aChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfThirteenFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 13.
@@ -156,7 +156,7 @@ GameTest >> arrangeGameTestWithOneDieOfThirteenFaces [
 	aCollectionOfDice add: aChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfThreeFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
@@ -164,7 +164,7 @@ GameTest >> arrangeGameTestWithOneDieOfThreeFaces [
 	aCollectionOfDice add: aChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneShip [
 
 	aShip := Ship createWithName: 'juan'.
@@ -172,7 +172,7 @@ GameTest >> arrangeGameTestWithOneShip [
 	aCollectionOfShips add: aShip.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithThreeShips [
 
 	aShip := Ship createWithName: 'juan'.
@@ -184,7 +184,7 @@ GameTest >> arrangeGameTestWithThreeShips [
 	aCollectionOfShips add: aThirdShip.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithTwoDiceOfFiveFacesAndThreeFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 5.
@@ -194,7 +194,7 @@ GameTest >> arrangeGameTestWithTwoDiceOfFiveFacesAndThreeFaces [
 	aCollectionOfDice add: aSecondChargedDice.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithTwoShips [
 
 	aShip := Ship createWithName: 'juan'.
@@ -1021,7 +1021,7 @@ GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1066,7 +1066,7 @@ GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
 		                 createWithATotalNumberOfCellsOf: 12
 		                 andAnAmountOfParcecsOf: 50.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1116,7 +1116,7 @@ GameTest >> test37WhenAShipCancelsACardThePenaltyIsRemoved [
                          andAnAmountOfParcecsOf: 50.
     aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
-    aPositionShipManager := PositionShipManager
+    aPositionShipManager := ShipPositionManager
                                 createWith: aCollectionOfShips
                                 andNumberOfLaps: 1.
     aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1170,7 +1170,7 @@ GameTest >> test38WhenAShipPlaysRedoItRepeatsTheLastPlayedCard [
                          andAnAmountOfParcecsOf: 50.
     aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
-    aPositionShipManager := PositionShipManager
+    aPositionShipManager := ShipPositionManager
                                 createWith: aCollectionOfShips
                                 andNumberOfLaps: 1.
     aTurnManager := TurnManager creatWith: aCollectionOfShips.
@@ -1221,7 +1221,7 @@ GameTest >> test39WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
 		createWithATotalNumberOfCellsOf: 12
 		andAnAmountOfParcecsOf: 50.
 
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		createWith: aCollectionOfShips
 		andNumberOfLaps: 1.
 
@@ -1267,7 +1267,7 @@ GameTest >> test40WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovement
 		createWithATotalNumberOfCellsOf: 12
 		andAnAmountOfParcecsOf: 50.
 
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		createWith: aCollectionOfShips
 		andNumberOfLaps: 1.
 
@@ -1323,7 +1323,7 @@ GameTest >> test41WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
 
-	aPositionShipManager := PositionShipManager
+	aPositionShipManager := ShipPositionManager
 		                        createWith: aCollectionOfShips
 		                        andNumberOfLaps: 1.
 

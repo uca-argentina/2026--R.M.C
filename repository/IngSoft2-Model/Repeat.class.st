@@ -1,6 +1,6 @@
 Class {
 	#name : 'Repeat',
-	#superclass : 'Object',
+	#superclass : 'Card',
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
 }

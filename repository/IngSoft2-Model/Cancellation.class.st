@@ -1,6 +1,6 @@
 Class {
 	#name : 'Cancellation',
-	#superclass : 'Object',
+	#superclass : 'Card',
 	#instVars : [
 		'cardToCancel'
 	],
@@ -10,23 +10,24 @@ Class {
 
 { #category : 'as yet unclassified' }
 Cancellation class >> targeting: aCard [
-    ^ self new initializeTargeting: aCard.
+
+	^ self new initializeTargeting: aCard
 ]
 
 { #category : 'initialization' }
 Cancellation >> applyIn: aCardManager toTarget: aShip [
-    aCardManager cancelCard: cardToCancel toTarget: aShip.
 
+	aCardManager cancelCard: cardToCancel toTarget: aShip
 ]
 
 { #category : 'initialization' }
 Cancellation >> initializeTargeting: aCard [
-    cardToCancel := aCard.
 
+	cardToCancel := aCard
 ]
 
 { #category : 'initialization' }
 Cancellation >> throwModifier [
-    ^ 0.
 
+	^ 0
 ]
