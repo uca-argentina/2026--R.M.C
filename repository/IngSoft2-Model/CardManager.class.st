@@ -37,8 +37,7 @@ CardManager >> applyCard: aCard toTarget: aTargetShip [
 CardManager >> cancelCard: aCard toTarget: aShip [
 
 	| entryToRemove |
-	entryToRemove := pendingCards
-		                 detect: [ :each | each second = aCard and: [ each first = aShip ] ]
+	entryToRemove := pendingCards detect: [ :each | each second = aCard and: [ each first = aShip or: [ each first = #all ] ] ]
 		                 ifNone: [ ^ self ].
 	pendingCards remove: entryToRemove
 ]

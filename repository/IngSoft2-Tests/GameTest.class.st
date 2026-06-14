@@ -238,22 +238,6 @@ GameTest >> arrangeGameTestWithTwoShipsAndOneOfEveryCard [
 	aCollectionOfShips add: aSecondShip
 ]
 
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithTwoShipsAndOneOverloadCardAndOneCancellationCard [
-
-	anOverload := Overload new.
-	aCollectionOfCards := OrderedCollection new.
-	aCollectionOfCards add: anOverload.
-	aCancellation := Overload new.
-	aSecondCollectionOfCards := OrderedCollection new.
-	aSecondCollectionOfCards add: anOverload.
-	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
-	aSecondShip := Ship createWithName: 'fran' andWithCard: aSecondCollectionOfCards.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aSecondShip
-]
-
 { #category : 'tests' }
 GameTest >> test01WhenAGameStartsThenItReturnsItsName [
 
@@ -1035,12 +1019,16 @@ GameTest >> test34WhenAShipWantsToPlayACardAndPlaysOverloadThenItGetsRemoved [
 { #category : 'tests' }
 GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aAcceleration aCollectionOfCards |
-	aShip := Ship createWithName: 'juan' andWithCard: OrderedCollection new.
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip aAcceleration aCollectionOfCards |
+	aShip := Ship
+		         createWithName: 'juan'
+		         andWithCard: OrderedCollection new.
 	aCollectionOfCards := OrderedCollection new.
 	aAcceleration := Acceleration new.
-	aCollectionOfCards add:aAcceleration .
-	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
+	aCollectionOfCards add: aAcceleration.
+	aSecondShip := Ship
+		               createWithName: 'pepe'
+		               andWithCard: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -1062,19 +1050,13 @@ GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
-					
-   aGame PayerShip:aSecondShip PlaysCard:aAcceleration toTarget:#all.
+
+	aGame PayerShip: aSecondShip PlaysCard: aAcceleration toTarget: #all.
 	aGame playturn.
 	aGame playturn.
-
-	
-	
-
 
 	self assert: (aGame theShip: aShip isAt: 7).
-	
-	self assert: (aGame theShip: aSecondShip isAt: 7).
-
+	self assert: (aGame theShip: aSecondShip isAt: 7)
 ]
 
 { #category : 'tests' }
@@ -1118,7 +1100,7 @@ GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
 ]
 
 { #category : 'tests' }
-GameTest >> test37WhenAShipCancelsAnOverloadCardThePenaltyIsRemoved [
+GameTest >> test37WhenAShipCancelsAnOverloadCardThenThePenaltyIsRemoved [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
 	self arrangeGameTestWithOneDieOfSixFaces.
@@ -1132,10 +1114,62 @@ GameTest >> test37WhenAShipCancelsAnOverloadCardThePenaltyIsRemoved [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	"fran applies SobreCarga penalty to juan"
+	"fran applies Overload penalty to juan"
 	aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip.
-	"juan cancels the SobreCarga applied to himself"
+	"juan cancels the Overload applied to himself"
 	aCancellation targeting: anOverload.
+	aGame PayerShip: aShip PlaysCard: aCancellation toTarget: aShip.
+	"juan plays turn → dice=6, no penalty → moves 6"
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 6)
+]
+
+{ #category : 'tests' }
+GameTest >> test38WhenAShipCancelsASpeedCardThenThePenaltyIsRemoved [
+
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	"fran applies Speed modifier to juan"
+	aGame PayerShip: aSecondShip PlaysCard: aSpeed toTarget: aShip.
+	"juan cancels the Speed modifier applied to himself"
+	aCancellation targeting: aSpeed.
+	aGame PayerShip: aShip PlaysCard: aCancellation toTarget: aShip.
+	"juan plays turn → dice=6, no penalty → moves 6"
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 6)
+]
+
+{ #category : 'tests' }
+GameTest >> test39WhenAShipCancelsAnAccelerationCardThenThePenaltyIsRemoved [
+
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	"fran applies Acceleration penalty to juan"
+	aGame PayerShip: aSecondShip PlaysCard: anAcceleration toTarget: #all.
+	"juan cancels the Acceleration applied to everyone"
+	aCancellation targeting: anAcceleration.
 	aGame PayerShip: aShip PlaysCard: aCancellation toTarget: aShip.
 	"juan plays turn → dice=6, no penalty → moves 6"
 	aGame playturn.
