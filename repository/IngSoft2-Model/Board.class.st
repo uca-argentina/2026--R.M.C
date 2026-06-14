@@ -18,6 +18,18 @@ Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParc
 	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs
 ]
 
+{ #category : 'as yet unclassified' }
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator [
+
+	self validateNumber: aNumberOfCells.
+	self validateParcecs: anAmountOfParcecs.
+
+	^ self new
+		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
+		  andAnAmountOfParcecsOf: anAmountOfParcecs
+		  using: aCellGenerator
+]
+
 { #category : 'testing' }
 Board class >> validateNumber: aNumber [
 
@@ -54,6 +66,17 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcec
 
 	numberOfCells := aNumberOfCells.
 	cells := (0 to: aNumberOfCells) collect: [ :index | Cell createWithPosition: index ].
+	amountOfParcecs := anAmountOfParcecs
+]
+
+{ #category : 'initialization' }
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator [
+
+	numberOfCells := aNumberOfCells.
+
+	cells := (0 to: aNumberOfCells) collect: [ :index |
+		         aCellGenerator cellForPosition: index ].
+
 	amountOfParcecs := anAmountOfParcecs
 ]
 
