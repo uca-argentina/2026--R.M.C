@@ -11,7 +11,6 @@ Class {
 		'aSecondChargedDice',
 		'aCollectionOfDice',
 		'aBoard',
-		'aChargedBoard',
 		'aShipPositionManager',
 		'aTurnManager',
 		'aCollectionOfCards',
@@ -28,42 +27,60 @@ Class {
 }
 
 { #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneBoardOfEightCellsEightParsecsAndOneLap [
+GameTest >> arrangeGameTestWithBoardOf: aNumberOfCells parsecs: anAmountOfParsecs laps: anAmountOfLaps [
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 8.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: aNumberOfCells
+		          andAnAmountOfParcecsOf: anAmountOfParsecs
+		          using: (ChargedCellGenerator forBoardOfSize: aNumberOfCells).
+
+	aShipPositionManager := ShipPositionManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: anAmountOfLaps.
+
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
 { #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
+GameTest >> arrangeGameTestWithBoardOf: aNumberOfCells parsecs: anAmountOfParsecs laps: anAmountOfLaps charging: aCell at: aPosition [
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
+	| generator |
+
+	generator := ChargedCellGenerator forBoardOfSize: aNumberOfCells.
+
+	generator put: aCell at: aPosition.
+
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: aNumberOfCells
+		          andAnAmountOfParcecsOf: anAmountOfParsecs
+		          using: generator.
+
+	aShipPositionManager := ShipPositionManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: anAmountOfLaps.
+
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
 { #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndOneLap [
+GameTest >> arrangeGameTestWithBoardOf: aNumberOfCells parsecs: anAmountOfParsecs laps: anAmountOfLaps chargingCells: aCollectionOfCells [
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
+	| generator |
 
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap [
+	generator := ChargedCellGenerator forBoardOfSize: aNumberOfCells.
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
+	aCollectionOfCells do: [ :cell |
+		generator put: cell at: cell numberOfCell ].
 
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneBoardOfTwentyFiveCellsFiftyParsecsAndOneLap [
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: aNumberOfCells
+		          andAnAmountOfParcecsOf: anAmountOfParsecs
+		          using: generator.
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 25 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
+	aShipPositionManager := ShipPositionManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: anAmountOfLaps.
+
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
 
@@ -75,105 +92,10 @@ GameTest >> arrangeGameTestWithOneCard [
 ]
 
 { #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap [
+GameTest >> arrangeGameTestWithOneDieOf: aNumberOfFaces [
 
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+	aChargedDice := ChargedDice withTotalNumberFaces: aNumberOfFaces.
 
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps [
-
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 3.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndFiveLaps [
-
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 3.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndOneLap [
-
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndThreeLaps [
-
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 10 andAnAmountOfParcecsOf: 100.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 3.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap [
-
-	aChargedBoard := BoardCharged createWithATotalNumberOfCellsOf: 12 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneDieOfEightFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 8.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneDieOfFiveFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 5.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneDieOfFourFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 4.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneDieOfSixFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-	aCollectionOfDice := OrderedCollection with: aChargedDice.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneDieOfTenFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 10.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneDieOfThirteenFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 13.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithOneDieOfThreeFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 ]
@@ -381,8 +303,12 @@ GameTest >> test07WhenAGameHasAnEmptyDieCollectionThenTheCreationFails [
 GameTest >> test08WhenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfFourFaces.
-	self arrangeGameTestWithOneBoardOfTwentyFiveCellsFiftyParsecsAndOneLap.
+	self arrangeGameTestWithOneDieOf: 4.
+
+	self
+		arrangeGameTestWithBoardOf: 25
+		parsecs: 50
+		laps: 1.
 
 	aGame := Game
 		         createWithName: 'Ludo'
@@ -425,8 +351,12 @@ GameTest >> test09WhenAShipMovesToTheFinalCellThenTheGameIsFished [
 GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfFourFaces.
-	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndOneLap.
+	self arrangeGameTestWithOneDieOf: 4.
+
+	self
+		arrangeGameTestWithBoardOf: 8
+		parsecs: 50
+		laps: 1.
 
 	aGame := Game
 		         createWithName: 'Ludo'
@@ -449,8 +379,12 @@ GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 GameTest >> test11WhenAGameIsAskedTheWhereaboutOfTheShipsThenTheGameReturnItsLaps [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfSixFaces.
-	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
+	self arrangeGameTestWithOneDieOf: 6.
+
+	self
+		arrangeGameTestWithBoardOf: 8
+		parsecs: 50
+		laps: 5.
 
 	aGame := Game
 		         createWithName: 'Ludo'
@@ -627,15 +561,19 @@ GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfSixFaces.
-	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap.
-	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 2).
+	self arrangeGameTestWithOneDieOf: 6.
+
+	self
+		arrangeGameTestWithBoardOf: 10
+		parsecs: 50
+		laps: 1
+		charging: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 2) at:6.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
-		         andABord: aChargedBoard
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame playturn.
@@ -647,15 +585,19 @@ GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 GameTest >> test20WhenAShipFallsInAMoonWalkTheTheEffectIsProperlyAplied [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfThreeFaces.
-	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
-	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 1).
+	self arrangeGameTestWithOneDieOf: 3.
+
+	self
+		arrangeGameTestWithBoardOf: 10
+		parsecs: 50
+		laps: 3
+		charging: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 1)at:6.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
-		         andABord: aChargedBoard
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame playturn.
@@ -670,15 +612,19 @@ GameTest >> test20WhenAShipFallsInAMoonWalkTheTheEffectIsProperlyAplied [
 GameTest >> test21WhenAShipFallsInAMoonWalkAndMovesAnotherShipBackwardsThenItsPositionDoesNotGoBelowZero [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfSixFaces.
-	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
-	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 3).
+	self arrangeGameTestWithOneDieOf: 6.
+
+	self
+		arrangeGameTestWithBoardOf: 10
+		parsecs: 50
+		laps: 3
+		charging: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 3)at:6.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
-		         andABord: aChargedBoard
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame playturn.
@@ -691,15 +637,19 @@ GameTest >> test21WhenAShipFallsInAMoonWalkAndMovesAnotherShipBackwardsThenItsPo
 GameTest >> test22WhenAShipFallsInAMoonWalkThenOtherShipLosesOneLap [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfSixFaces.
-	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
-	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
+	self arrangeGameTestWithOneDieOf: 6.
+
+	self
+		arrangeGameTestWithBoardOf: 10
+		parsecs: 50
+		laps: 3
+		charging: (MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4)at:8.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
-		         andABord: aChargedBoard
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame playturn. "juan -> 6, vuelta 0"
@@ -738,19 +688,24 @@ GameTest >> test23WhenAShipFallsInAHyperJumpThenItAdvancesTheNextParsecValueConv
 GameTest >> test24WhenTwoShipsFallInAHyperJumpThenItUsesTheNextParsecValue [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfThreeFaces.
-	self arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndFiveLaps.
-	aChargedBoard replaceACellWith: (HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
+	self arrangeGameTestWithOneDieOf: 3.
+
+	self
+		arrangeGameTestWithBoardOf: 10
+		parsecs: 100
+		laps: 5
+		charging: (HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )) at:3.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
-		         andABord: aChargedBoard
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame playturn.
 	self assert: (aGame theShip: aShip isAt: 6).
+
 	aGame playturn.
 	self assert: (aGame theShip: aSecondShip isAt: 5)
 ]
@@ -846,15 +801,19 @@ GameTest >> test28WhenAShipFallsInAnAtomicBombThenTheGameMovesItToTheFirstPositi
 GameTest >> test29WhenOneShipFallsInAnAtomicBombThenTheGameMovesTwoShipsToTheFirstPosition [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfSixFaces.
-	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
-	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+	self arrangeGameTestWithOneDieOf: 6.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging: (AtomicBomb createWithPosition: 12) at:12.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
-		         andABord: aChargedBoard
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame playturn.
@@ -869,9 +828,14 @@ GameTest >> test29WhenOneShipFallsInAnAtomicBombThenTheGameMovesTwoShipsToTheFir
 GameTest >> test30WhenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnsARankingWithStats [
 
 	| aRanking |
+
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfFourFaces.
-	self arrangeGameTestWithOneBoardOfEightCellsEightParsecsAndOneLap.
+	self arrangeGameTestWithOneDieOf: 4.
+
+	self
+		arrangeGameTestWithBoardOf: 8
+		parsecs: 8
+		laps: 1.
 
 	aGame := Game
 		         createWithName: 'Ludo'
@@ -883,6 +847,7 @@ GameTest >> test30WhenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnsARa
 	aGame playturn.
 	aGame playturn.
 	aGame playturn.
+
 	aRanking := aGame ranking.
 
 	self assert: (aGame hasFinishedAndWinnerIs: aShip).
@@ -1024,15 +989,19 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 GameTest >> test34WhenAShipWantsToPlayACardAndPlaysOverloadThenItGetsRemoved [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeGameTestWithOneDieOfSixFaces.
-	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
-	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+	self arrangeGameTestWithOneDieOf: 6.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging: (AtomicBomb createWithPosition: 12) at:12.
 
 	aGame := Game
 		         createWithName: 'Ludo'
 		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
-		         andABord: aChargedBoard
+		         andABord: aBoard
 		         andADice: aCollectionOfDice.
 
 	aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip.
@@ -1324,6 +1293,42 @@ GameTest >> test43WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
 ]
 
 { #category : 'tests' }
+GameTest >> test44WhenAShipFallsInACardDealerCellThenItReceivesACard [
+
+	| aCardGenerator |
+
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOf: 3.
+
+	aSpeed := Speed new.
+	aCardGenerator := ChargedDeck with: aSpeed.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging:
+			(CardDealerCell
+				createWithPosition: 3
+				andCardGenerator: aCardGenerator)
+		at: 3.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aShipPositionManager
+		andATurnManager: aTurnManager
+		andABord: aBoard
+		andADice: aCollectionOfDice.
+
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 0.
+
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 3).
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 1
+]
+
+{ #category : 'tests' }
 GameTest >> test44WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovementEffect [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard
@@ -1371,6 +1376,43 @@ GameTest >> test44WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovement
 	aGame PayerShip: aShip PlaysCard: aRepeat toTarget: aShip.
 
 	self assert: (aGame theShip: aShip isAt: 6)
+]
+
+{ #category : 'tests' }
+GameTest >> test45WhenAShipUsesTheCardGivenByCardDealerCellThenTheCardIsRemovedFromHand [
+
+	| aCardGenerator |
+
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOf: 3.
+
+	aSpeed := Speed new.
+	aCardGenerator := ChargedDeck with: aSpeed.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging:
+			(CardDealerCell
+				createWithPosition: 3
+				andCardGenerator: aCardGenerator)
+		at: 3.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aShipPositionManager
+		andATurnManager: aTurnManager
+		andABord: aBoard
+		andADice: aCollectionOfDice.
+
+	aGame playturn.
+
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 1.
+
+	aGame PayerShip: aShip PlaysCard: aSpeed toTarget: aShip.
+
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 0
 ]
 
 { #category : 'tests' }
@@ -1453,6 +1495,45 @@ GameTest >> test46WhenAShipPlaysARedoCardButNoCardsWerePlayedBeforeThenItFails [
 		should: [ aGame PayerShip: aSecondShip PlaysCard: aRedo toTarget: aShip ]
 		raise: Error
 		withMessageText: 'The redo must be played after another card'
+]
+
+{ #category : 'tests' }
+GameTest >> test46WhenAShipUsesTheSpeedCardGivenByCardDealerCellThenItsNextMovementIsIncreased [
+
+	| aCardGenerator |
+
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOf: 3.
+
+	aSpeed := Speed new.
+	aCardGenerator := ChargedDeck with: aSpeed.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging:
+			(CardDealerCell
+				createWithPosition: 3
+				andCardGenerator: aCardGenerator)
+		at: 3.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aShipPositionManager
+		andATurnManager: aTurnManager
+		andABord: aBoard
+		andADice: aCollectionOfDice.
+
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 3).
+
+	aGame PayerShip: aShip PlaysCard: aSpeed toTarget: aShip.
+
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 7)
 ]
 
 { #category : 'tests' }

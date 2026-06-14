@@ -3,7 +3,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'name',
-		'card'
+		'cards'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -27,6 +27,18 @@ Ship class >> validateCollectionOfCards: aCollectionOfCards [
 Ship class >> validateName: aName [
 
 	(aName isString) ifFalse: [ Error signal: 'The name must be a string' ]
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> addCard: aCard [
+
+	cards add: aCard.
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> cards [
+
+	^ cards copy
 ]
 
 { #category : 'testing' }
@@ -61,4 +73,13 @@ Ship >> playsCardFromGame: aGame LookForCardInShip: aCard [
 	aShipHasCard := card includes: aCard.
 	aShipHasCard ifTrue: [ card remove: aCard. aGame appliesCard: aCard ]
 		ifFalse: [ Error signal: 'Ship does not have that card' ]
+]
+
+{ #category : 'as yet unclassified' }
+Ship >> removeCard: aCard [
+
+	(cards includes: aCard)
+		ifFalse: [ Error signal: 'The ship does not have that card' ].
+
+	cards remove: aCard.
 ]
