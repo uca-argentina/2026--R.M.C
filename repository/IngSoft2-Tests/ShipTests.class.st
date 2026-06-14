@@ -18,7 +18,7 @@ Class {
 }
 
 { #category : 'tests - initial state' }
-ShipTests >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
+ShipTests >> arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
 
 	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
@@ -26,7 +26,7 @@ ShipTests >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
 ]
 
 { #category : 'tests - initial state' }
-ShipTests >> arrangeGameTestWithOneCard [
+ShipTests >> arrangeShipTestWithOneCard [
 
 	anOverload := Overload new.
 	aCollectionOfCards := OrderedCollection new.
@@ -34,7 +34,7 @@ ShipTests >> arrangeGameTestWithOneCard [
 ]
 
 { #category : 'tests - initial state' }
-ShipTests >> arrangeGameTestWithOneDieOfSixFaces [
+ShipTests >> arrangeShipTestWithOneDieOfSixFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
 	aCollectionOfDice := OrderedCollection new.
@@ -42,11 +42,8 @@ ShipTests >> arrangeGameTestWithOneDieOfSixFaces [
 ]
 
 { #category : 'tests - initial state' }
-ShipTests >> arrangeGameTestWithOneShip [
+ShipTests >> arrangeShipTestWithOneShip [
 
-	anOverload := Overload new.
-	aCollectionOfCards := OrderedCollection new.
-	aCollectionOfCards add: anOverload.
 	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -55,10 +52,10 @@ ShipTests >> arrangeGameTestWithOneShip [
 { #category : 'tests' }
 ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
 
-	self arrangeGameTestWithOneCard.
-	self arrangeGameTestWithOneShip.
-	self arrangeGameTestWithOneDieOfSixFaces.
-	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
+	self arrangeShipTestWithOneCard.
+	self arrangeShipTestWithOneShip.
+	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
 
 	aGame := Game
 		         createWithName: 'Ludo'
