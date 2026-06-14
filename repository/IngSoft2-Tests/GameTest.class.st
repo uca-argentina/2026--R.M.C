@@ -1351,3 +1351,115 @@ GameTest >> test43WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 	aGame PayerShip: aShip PlaysCard: aSecondRepeat toTarget: aShip.
 	self assert: (aGame theShip: aShip isAt: 2)
 ]
+
+{ #category : 'tests' }
+GameTest >> test44WhenAShipFallsInACardDealerCellThenItReceivesACard [
+
+	| aCardGenerator |
+
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOf: 3.
+
+	aSpeed := Speed new.
+	aCardGenerator := ChargedDeck with: aSpeed.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging:
+			(CardDealerCell
+				createWithPosition: 3
+				andCardGenerator: aCardGenerator)
+		at: 3.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aShipPositionManager
+		andATurnManager: aTurnManager
+		andABord: aBoard
+		andADice: aCollectionOfDice.
+
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 0.
+
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 3).
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 1
+]
+
+{ #category : 'tests' }
+GameTest >> test45WhenAShipUsesTheCardGivenByCardDealerCellThenTheCardIsRemovedFromHand [
+
+	| aCardGenerator |
+
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOf: 3.
+
+	aSpeed := Speed new.
+	aCardGenerator := ChargedDeck with: aSpeed.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging:
+			(CardDealerCell
+				createWithPosition: 3
+				andCardGenerator: aCardGenerator)
+		at: 3.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aShipPositionManager
+		andATurnManager: aTurnManager
+		andABord: aBoard
+		andADice: aCollectionOfDice.
+
+	aGame playturn.
+
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 1.
+
+	aGame PayerShip: aShip PlaysCard: aSpeed toTarget: aShip.
+
+	self assert: (aGame Showcardsfromplayer: aShip) equals: 0
+]
+
+{ #category : 'tests' }
+GameTest >> test46WhenAShipUsesTheSpeedCardGivenByCardDealerCellThenItsNextMovementIsIncreased [
+
+	| aCardGenerator |
+
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOf: 3.
+
+	aSpeed := Speed new.
+	aCardGenerator := ChargedDeck with: aSpeed.
+
+	self
+		arrangeGameTestWithBoardOf: 12
+		parsecs: 50
+		laps: 1
+		charging:
+			(CardDealerCell
+				createWithPosition: 3
+				andCardGenerator: aCardGenerator)
+		at: 3.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aShipPositionManager
+		andATurnManager: aTurnManager
+		andABord: aBoard
+		andADice: aCollectionOfDice.
+
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 3).
+
+	aGame PayerShip: aShip PlaysCard: aSpeed toTarget: aShip.
+
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 7)
+]
