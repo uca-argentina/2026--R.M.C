@@ -3,7 +3,10 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'pendingCards',
-		'lastPlayedCard'
+		'lastPlayedCard',
+		'lastMovementEffect',
+		'movementEffectGeneratedByCard',
+		'repeatedMovementEffect'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -21,8 +24,10 @@ CardManager >> addPenaltyToAllShips: aCard [
 
 { #category : 'initialization' }
 CardManager >> applyCard: aCard toTarget: aTargetShip [
+	 movementEffectGeneratedByCard := nil.
     aCard applyIn: self toTarget: aTargetShip.
     self updateLastCard: aCard.
+	 ^ movementEffectGeneratedByCard
 ]
 
 { #category : 'initialization' }
@@ -32,6 +37,12 @@ CardManager >> cancelCard: aCard toTarget: aShip [
         detect: [ :each | each second = aCard and: [ each first = aShip ] ]
         ifNone: [ ^self ].
     pendingCards remove: entryToRemove.
+]
+
+{ #category : 'accessing' }
+CardManager >> clearRepeatedMovementEffect [
+
+	repeatedMovementEffect := nil
 ]
 
 { #category : 'initialization' }
@@ -45,6 +56,12 @@ CardManager >> lastCard [
     ^ lastPlayedCard.
 ]
 
+{ #category : 'as yet unclassified' }
+CardManager >> movementEffectGeneratedByCard [
+
+	^ movementEffectGeneratedByCard
+]
+
 { #category : 'initialization' }
 CardManager >> penaltyFor: aShip [
     | applicable |
@@ -55,6 +72,24 @@ CardManager >> penaltyFor: aShip [
 ]
 
 { #category : 'as yet unclassified' }
+CardManager >> repeatLastMovementEffect [
+
+	repeatedMovementEffect := lastMovementEffect
+]
+
+{ #category : 'accessing' }
+CardManager >> repeatedMovementEffect [
+
+	^ repeatedMovementEffect
+]
+
+{ #category : 'as yet unclassified' }
 CardManager >> updateLastCard: aCard [
     (aCard isKindOf: Redo) ifFalse: [ lastPlayedCard := aCard ].
+]
+
+{ #category : 'as yet unclassified' }
+CardManager >> updateLastMovementEffect: aMovementEffect [
+
+	lastMovementEffect := aMovementEffect
 ]

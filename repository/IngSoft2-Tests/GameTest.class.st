@@ -1358,3 +1358,163 @@ GameTest >> test38WhenAShipPlaysRedoItRepeatsTheLastPlayedCard [
 
     self assert: (aGame theShip: aShip isAt: 2).
 ]
+
+{ #category : 'tests' }
+GameTest >> test39WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard
+	  aPositionShipManager aTurnManager aRepeat
+	  aCollectionOfCardsForJuan |
+
+	aRepeat := Repeat new.
+
+	aCollectionOfCardsForJuan := OrderedCollection new.
+	aCollectionOfCardsForJuan add: aRepeat.
+
+	aShip := Ship
+		createWithName: 'juan'
+		andWithCard: aCollectionOfCardsForJuan.
+
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		createWithATotalNumberOfCellsOf: 12
+		andAnAmountOfParcecsOf: 50.
+
+	aPositionShipManager := PositionShipManager
+		createWith: aCollectionOfShips
+		andNumberOfLaps: 1.
+
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aPositionShipManager
+		andATurnManager: aTurnManager
+		andABord: aChargedBoard
+		andADice: aCollectionOfDice.
+
+	aGame PayerShip: aShip PlaysCard: aRepeat toTarget: aShip.
+
+	self assert: (aGame theShip: aShip isAt: 0)
+]
+
+{ #category : 'tests' }
+GameTest >> test40WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovementEffect [
+
+	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard
+	  aPositionShipManager aTurnManager aRepeat
+	  aCollectionOfCardsForJuan |
+
+	aRepeat := Repeat new.
+
+	aCollectionOfCardsForJuan := OrderedCollection new.
+	aCollectionOfCardsForJuan add: aRepeat.
+
+	aShip := Ship
+		createWithName: 'juan'
+		andWithCard: aCollectionOfCardsForJuan.
+
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		createWithATotalNumberOfCellsOf: 12
+		andAnAmountOfParcecsOf: 50.
+
+	aPositionShipManager := PositionShipManager
+		createWith: aCollectionOfShips
+		andNumberOfLaps: 1.
+
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
+	aGame := Game
+		createWithName: 'Ludo'
+		andAShipPositionManager: aPositionShipManager
+		andATurnManager: aTurnManager
+		andABord: aChargedBoard
+		andADice: aCollectionOfDice.
+
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 3).
+
+	aGame PayerShip: aShip PlaysCard: aRepeat toTarget: aShip.
+
+	self assert: (aGame theShip: aShip isAt: 6)
+]
+
+{ #category : 'tests' }
+GameTest >> test41WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
+
+	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aRepeat aSecondRepeat aCollectionOfCardsForJuan |
+	aRepeat := Repeat new.
+	aSecondRepeat := Repeat new.
+
+	aCollectionOfCardsForJuan := OrderedCollection new.
+	aCollectionOfCardsForJuan add: aRepeat.
+	aCollectionOfCardsForJuan add: aSecondRepeat.
+
+	aShip := Ship
+		         createWithName: 'juan'
+		         andWithCard: aCollectionOfCardsForJuan.
+
+	aSecondShip := Ship
+		               createWithName: 'pepe'
+		               andWithCard: OrderedCollection new.
+
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip.
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 3.
+
+	aCollectionOfDice := OrderedCollection new.
+	aCollectionOfDice add: aChargedDice.
+
+	aChargedBoard := BoardCharged
+		                 createWithATotalNumberOfCellsOf: 12
+		                 andAnAmountOfParcecsOf: 50.
+
+	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
+
+	aPositionShipManager := PositionShipManager
+		                        createWith: aCollectionOfShips
+		                        andNumberOfLaps: 1.
+
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aPositionShipManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	"juan tira 3. Último efecto: avanzar 3"
+	aGame playturn.
+	self assert: (aGame theShip: aShip isAt: 3).
+
+	"juan usa Repeat sobre pepe. Pepe avanza 3"
+	aGame PayerShip: aShip PlaysCard: aRepeat toTarget: aSecondShip.
+	self assert: (aGame theShip: aSecondShip isAt: 3).
+
+	"pepe tira 3. Cae en 6, hay WormHole, vuelve 4. Último efecto ahora es WormHole"
+	aGame playturn.
+	self assert: (aGame theShip: aSecondShip isAt: 2).
+
+	"juan usa otro Repeat. Ahora ya no repite avanzar 3, repite WormHole"
+	aGame PayerShip: aShip PlaysCard: aSecondRepeat toTarget: aShip.
+	self assert: (aGame theShip: aShip isAt: 2)
+]

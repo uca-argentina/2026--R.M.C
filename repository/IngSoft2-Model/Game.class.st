@@ -54,8 +54,10 @@ Game class >> validateCollection: aCollection [
 
 { #category : 'as yet unclassified' }
 Game >> PayerShip: aShip PlaysCard: aCard toTarget: aTargetShip [
-    targeplayer := aTargetShip.
-    aShip PlaysCardFromGame: self LookForCardinShip: aCard
+
+	targeplayer := aTargetShip.
+	aShip PlaysCardFromGame: self LookForCardinShip: aCard.
+	self applyRepeatedMovementEffectIfNeededTo: aTargetShip
 ]
 
 { #category : 'as yet unclassified' }
@@ -66,6 +68,19 @@ Game >> Showcardsfromplayer: aShip [
 { #category : 'as yet unclassified' }
 Game >> appliesCard: aCard [
     aCardsManager applyCard: aCard toTarget: targeplayer.
+]
+
+{ #category : 'as yet unclassified' }
+Game >> applyRepeatedMovementEffectIfNeededTo: aTargetShip [
+
+	| repeatedEffect |
+
+	repeatedEffect := aCardsManager repeatedMovementEffect.
+
+	repeatedEffect ifNil: [ ^ self ].
+
+	repeatedEffect applyTo: aTargetShip in: self.
+	aCardsManager clearRepeatedMovementEffect
 ]
 
 { #category : 'as yet unclassified' }
@@ -132,21 +147,23 @@ Game >> playturn [
 
 	| sumOfTheDices shipToPlay movementEffect throwwithpenalty |
 	self canPlay.
-   shipToPlay := aShipTurnManager nextShipToPlayInGame.
-	throwwithpenalty:= (self penaltyAppliedToShip:shipToPlay) .
-	sumOfTheDices := (diceCollection sum: [ :aDie | aDie throw ])+throwwithpenalty.
-	
-	
+	shipToPlay := aShipTurnManager nextShipToPlayInGame.
+	throwwithpenalty := self penaltyAppliedToShip: shipToPlay.
+	sumOfTheDices := (diceCollection sum: [ :aDie | aDie throw ])
+	                 + throwwithpenalty.
+
+
 
 	movementEffect := shipPositionManager
 		                  movementEffectFor: shipToPlay
-		                  moving: sumOfTheDices 
+		                  moving: sumOfTheDices
 		                  inBoardOfSize: board numberOfCells
 		                  modifiedBy: [ :futurePosition |
 			                  board
 				                  effectForLandingAt: futurePosition
 				                  startingWith: sumOfTheDices ].
 
+	aCardsManager updateLastMovementEffect: movementEffect.
 	movementEffect applyTo: shipToPlay in: self
 ]
 
