@@ -8,16 +8,16 @@ Class {
 { #category : 'tests' }
 CellTestWormHole >> test01WhenTheWhormHoleIsCreatedThenItKnowsItsPosition [
 
-	| aCell |
 	aCell := WormHole createWithPosition: 1.
-	self assert: (aCell numberOfCell )equals: 1
+
+	self assert: (aCell numberOfCell) equals: 1
 ]
 
 { #category : 'tests' }
 CellTestWormHole >> test02WhenTheWhormHoleHasNegativeBackwardsMovementThenCreationFailed [
 
-	self should: [ MoonWalk createWithPosition: 1 withBackwardsMovementOf: -2 ] 
-	raise: Error 
-	withMessageText: 'The backwards movement must be positive integer' .
-	
+	self
+		should: [ MoonWalk createWithPosition: 1 withBackwardsMovementOf: -2 ]
+		raise: Error
+		withMessageText: 'The backwards movement must be positive integer'
 ]

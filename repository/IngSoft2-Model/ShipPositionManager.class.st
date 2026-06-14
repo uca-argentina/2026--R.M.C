@@ -1,5 +1,5 @@
 Class {
-	#name : 'PositionShipManager',
+	#name : 'ShipPositionManager',
 	#superclass : 'Object',
 	#instVars : [
 		'lapsToWin',
@@ -10,14 +10,14 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PositionShipManager class >> createWith: aCollectionOfShips andNumberOfLaps: aNumberOfLaps [
+ShipPositionManager class >> createWith: aCollectionOfShips andNumberOfLaps: aNumberOfLaps [
 
 	self validate: aCollectionOfShips and: aNumberOfLaps .
 	^ self new initializeWith: aCollectionOfShips and:aNumberOfLaps .
 ]
 
 { #category : 'as yet unclassified' }
-PositionShipManager class >> validate: aCollection and: aNumber [
+ShipPositionManager class >> validate: aCollection and: aNumber [
 
 	aCollection isEmpty ifTrue: [
 		Error signal: 'There must be one ship in de manager of positions' ].
@@ -27,27 +27,27 @@ PositionShipManager class >> validate: aCollection and: aNumber [
 ]
 
 { #category : 'as yet unclassified' }
-PositionShipManager >> currentRanking [
+ShipPositionManager >> currentRanking [
     | snapshots |
     snapshots := shipStatuses collect: [ :status | status snapshot ].
     ^ RaceRanking createWithStatus: snapshots
 ]
 
 { #category : 'testing' }
-PositionShipManager >> hasFinished [
+ShipPositionManager >> hasFinished [
 
 	^ shipStatuses anySatisfy: [ :aShipStatus |
 		  aShipStatus hasCompleted: lapsToWin ]
 ]
 
 { #category : 'initialization' }
-PositionShipManager >> hasWon: aShip [
+ShipPositionManager >> hasWon: aShip [
 
 	^ (self statusOf: aShip) hasCompleted: lapsToWin
 ]
 
 { #category : 'initialization' }
-PositionShipManager >> initializeWith: aCollectionOfShips and: aNumberOfLaps [
+ShipPositionManager >> initializeWith: aCollectionOfShips and: aNumberOfLaps [
 
 	lapsToWin := aNumberOfLaps.
 	shipStatuses := aCollectionOfShips collect: [ :aShip |
@@ -55,26 +55,26 @@ PositionShipManager >> initializeWith: aCollectionOfShips and: aNumberOfLaps [
 ]
 
 { #category : 'testing' }
-PositionShipManager >> is: aShip atLap: aLap [
+ShipPositionManager >> is: aShip atLap: aLap [
 
 	^ (self statusOf: aShip)
 		isAtLap: aLap
 ]
 
 { #category : 'initialization' }
-PositionShipManager >> is: aShip atPosition: aPosition [
+ShipPositionManager >> is: aShip atPosition: aPosition [
 
 	^ (self statusOf: aShip) isAtPosition: aPosition
 ]
 
 { #category : 'initialization' }
-PositionShipManager >> move: aShip by: anAmount inBoardOfSize: aBoardSize [
+ShipPositionManager >> move: aShip by: anAmount inBoardOfSize: aBoardSize [
 
 	(self statusOf: aShip) advanceBy: anAmount inBoardOfSize: aBoardSize
 ]
 
 { #category : 'as yet unclassified' }
-PositionShipManager >> moveAllShipsExcept: aShip by: anAmount inBoardOfSize: aBoardSize [
+ShipPositionManager >> moveAllShipsExcept: aShip by: anAmount inBoardOfSize: aBoardSize [
 
 	shipStatuses do: [ :aShipStatus |
 			(aShipStatus isFor: aShip) ifFalse: [
@@ -82,13 +82,13 @@ PositionShipManager >> moveAllShipsExcept: aShip by: anAmount inBoardOfSize: aBo
 ]
 
 { #category : 'as yet unclassified' }
-PositionShipManager >> moveToZero: aShip [
+ShipPositionManager >> moveToZero: aShip [
 
 	shipStatuses do: [ :aShipStatus |aShipStatus moveToZero  ]
 ]
 
 { #category : 'as yet unclassified' }
-PositionShipManager >> movementEffectFor: aShip moving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
+ShipPositionManager >> movementEffectFor: aShip moving: sumOfDices inBoardOfSize: aBoardSize modifiedBy: aFutureBlock [
 
 	^ (self statusOf: aShip)
 		  movementEffectAfterMoving: sumOfDices
@@ -97,7 +97,7 @@ PositionShipManager >> movementEffectFor: aShip moving: sumOfDices inBoardOfSize
 ]
 
 { #category : 'initialization' }
-PositionShipManager >> statusOf: aShip [
+ShipPositionManager >> statusOf: aShip [
 
 	^ shipStatuses detect: [ :aShipStatus | aShipStatus isFor: aShip ]
 ]

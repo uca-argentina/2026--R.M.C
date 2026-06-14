@@ -1,14 +1,23 @@
 Class {
 	#name : 'ShipTests',
 	#superclass : 'TestsTools',
+	#instVars : [
+		'aGame',
+		'aShip',
+		'aCollectionOfShips',
+		'aChargedDice',
+		'aCollectionOfDice',
+		'aBoard',
+		'aShipPositionManager',
+		'aTurnManager'
+	],
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
 
-{ #category : 'tests' }
-ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
+{ #category : 'as yet unclassified' }
+ShipTests >> arrangeShipTestWithOneShipOneDieOfSixFacesOneBoardWithEightCellsAndFiveLaps [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aBoard aChargedDice aPositionShipManager aTurnManager |
 	aShip := Ship createWithName: 'juan'.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -16,19 +25,22 @@ ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
 
-	aBoard := Board
-		          createWithATotalNumberOfCellsOf: 8
-		          andAnAmountOfParcecsOf: 50.
-	aPositionShipManager := PositionShipManager
-		                        createWith: aCollectionOfShips
-		                        andNumberOfLaps: 5.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
+	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andAShipPositionManager: aPositionShipManager
+		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
 		         andABord: aBoard
-		         andADice: aCollectionOfDice.
+		         andADice: aCollectionOfDice
+]
+
+{ #category : 'tests' }
+ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
+
+	self arrangeShipTestWithOneShipOneDieOfSixFacesOneBoardWithEightCellsAndFiveLaps.
 
 	self assert: (aGame theShip: aShip isAt: 0)
 ]
@@ -36,8 +48,8 @@ ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
 { #category : 'tests' }
 ShipTests >> test02WhenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
-	| aShip  |
 	aShip := Ship createWithName: 'juan'.
+
 	self assert: (aShip nameIs: 'juan')
 ]
 
@@ -52,8 +64,10 @@ ShipTests >> test03WhenAShipInANegativePositionTryToBeCreatedThenTheCreationFail
 
 { #category : 'tests' }
 ShipTests >> test04WhenAShipHasOneCard [
-	| aShip  aSobreCard|
-	aSobreCard:= SobreCarga new.
-	aShip:= Ship createWithName: 'juan' andWithCard:[aSobreCard] .
-	self assert: (aShip hasCardLeft = 1).
+
+	| aSobreCard |
+	aSobreCard := SobreCarga new.
+	aShip := Ship createWithName: 'juan' andWithCard: [ aSobreCard ].
+
+	self assert: (aShip hasCardLeft) equals: 1
 ]
