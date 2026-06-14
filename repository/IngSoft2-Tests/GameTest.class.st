@@ -1451,3 +1451,25 @@ GameTest >> test47WhenACancellationCardHasNoTargetThenItFails [
 		raise: Error
 		withMessageText: 'The cancellation must have a target card to cancel'
 ]
+
+{ #category : 'tests' }
+GameTest >> test48WhenAShipTriesToPlayTheSameCardTwiceThenItFails [
+
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip.
+	self
+		should: [ aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip ]
+		raise: Error
+		withMessageText: 'Ship does not have that card'
+]

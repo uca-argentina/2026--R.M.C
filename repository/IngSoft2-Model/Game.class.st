@@ -56,7 +56,7 @@ Game class >> validateCollection: aCollection [
 Game >> PayerShip: aShip PlaysCard: aCards toTarget: aTargetShip [
 
 	targeplayer := aTargetShip.
-	aShip PlaysCardFromGame: self LookForCardinShip: aCards.
+	aShip playsCardFromGame: self LookForCardInShip: aCards.
 	self applyRepeatedMovementEffectIfNeededTo: aTargetShip
 ]
 
