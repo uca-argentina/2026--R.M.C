@@ -53,10 +53,10 @@ Game class >> validateCollection: aCollection [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> PayerShip: aShip PlaysCard: aCard toTarget: aTargetShip [
+Game >> PayerShip: aShip PlaysCard: aCards toTarget: aTargetShip [
 
 	targeplayer := aTargetShip.
-	aShip PlaysCardFromGame: self LookForCardinShip: aCard.
+	aShip PlaysCardFromGame: self LookForCardinShip: aCards.
 	self applyRepeatedMovementEffectIfNeededTo: aTargetShip
 ]
 

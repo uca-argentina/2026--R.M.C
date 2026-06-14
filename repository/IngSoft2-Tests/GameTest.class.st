@@ -1408,3 +1408,46 @@ GameTest >> test45WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 	aGame PayerShip: aShip PlaysCard: aSecondRepeat toTarget: aShip.
 	self assert: (aGame theShip: aShip isAt: 2)
 ]
+
+{ #category : 'tests' }
+GameTest >> test46WhenAShipPlaysARedoCardButNoCardsWerePlayedBeforeThenItFails [
+
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	self
+		should: [ aGame PayerShip: aSecondShip PlaysCard: aRedo toTarget: aShip ]
+		raise: Error
+		withMessageText: 'The redo must be played after another card'
+]
+
+{ #category : 'tests' }
+GameTest >> test47WhenACancellationCardHasNoTargetThenItFails [
+
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip.
+	self
+		should: [ aGame PayerShip: aShip PlaysCard: aCancellation toTarget: aShip ]
+		raise: Error
+		withMessageText: 'The cancellation must have a target card to cancel'
+]
