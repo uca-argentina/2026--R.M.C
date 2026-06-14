@@ -62,7 +62,7 @@ Game >> PayerShip: aShip PlaysCard: aCards toTarget: aTargetShip [
 
 { #category : 'as yet unclassified' }
 Game >> Showcardsfromplayer: aShip [ 
-	^aShip hasCardLeft.
+	^aShip hasCardsLeft.
 ]
 
 { #category : 'as yet unclassified' }

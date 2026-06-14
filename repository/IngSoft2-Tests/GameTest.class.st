@@ -208,8 +208,8 @@ GameTest >> arrangeGameTestWithTwoShipsAndOneCard [
 	anOverload := Overload new.
 	aCollectionOfCards := OrderedCollection new.
 	aCollectionOfCards add: anOverload.
-	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
-	aSecondShip := Ship createWithName: 'fran' andWithCard: aCollectionOfCards.
+	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'fran' andWithACollectionOfCards: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip
@@ -231,8 +231,8 @@ GameTest >> arrangeGameTestWithTwoShipsAndOneOfEveryCard [
 	aCollectionOfCards add: aCancellation.
 	aCollectionOfCards add: aRedo.
 	aCollectionOfCards add: aRepeat.
-	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
-	aSecondShip := Ship createWithName: 'fran' andWithCard: aCollectionOfCards.
+	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'fran' andWithACollectionOfCards: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip
@@ -876,7 +876,7 @@ GameTest >> test31WhenAShipWantsToPlayACardandPLaysSobreCarga [
 	aCollectionOfCards := OrderedCollection new.
 	aSobreCarga := Overload new.
 	aCollectionOfCards add:aSobreCarga .
-	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'pepe' andWithACollectionOfCards:aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -916,7 +916,7 @@ GameTest >> test32WhenAShipWantsToPlayACardandPLaysSobreCargaRemain [
 	aCollectionOfCards := OrderedCollection new.
 	aSobreCarga := Overload new.
 	aCollectionOfCards add:aSobreCarga .
-	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'pepe' andWithACollectionOfCards:aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -959,8 +959,8 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 	aCollectionOfCards := OrderedCollection new.
 	aSobreCarga := Overload new.
 	aCollectionOfCards add:aSobreCarga .
-	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
-	aSecondShip := Ship createWithName: 'pepe' andWithCard: aCollectionOfCards.
+	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'pepe' andWithACollectionOfCards: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -1022,13 +1022,13 @@ GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip aAcceleration aCollectionOfCards |
 	aShip := Ship
 		         createWithName: 'juan'
-		         andWithCard: OrderedCollection new.
+		         andWithACollectionOfCards: OrderedCollection new.
 	aCollectionOfCards := OrderedCollection new.
 	aAcceleration := Acceleration new.
 	aCollectionOfCards add: aAcceleration.
 	aSecondShip := Ship
 		               createWithName: 'pepe'
-		               andWithCard: aCollectionOfCards.
+		               andWithACollectionOfCards: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -1067,7 +1067,7 @@ GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
 	aCollectionOfCards := OrderedCollection new.
 	aSpeed:= Speed new.
 	aCollectionOfCards add:aSpeed .
-	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'pepe' andWithACollectionOfCards:aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -1266,7 +1266,7 @@ GameTest >> test43WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
 
 	aShip := Ship
 		createWithName: 'juan'
-		andWithCard: aCollectionOfCardsForJuan.
+		andWithACollectionOfCards: aCollectionOfCardsForJuan.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -1312,7 +1312,7 @@ GameTest >> test44WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovement
 
 	aShip := Ship
 		createWithName: 'juan'
-		andWithCard: aCollectionOfCardsForJuan.
+		andWithACollectionOfCards: aCollectionOfCardsForJuan.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
@@ -1361,11 +1361,11 @@ GameTest >> test45WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 
 	aShip := Ship
 		         createWithName: 'juan'
-		         andWithCard: aCollectionOfCardsForJuan.
+		         andWithACollectionOfCards: aCollectionOfCardsForJuan.
 
 	aSecondShip := Ship
 		               createWithName: 'pepe'
-		               andWithCard: OrderedCollection new.
+		               andWithACollectionOfCards: OrderedCollection new.
 
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.

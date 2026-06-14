@@ -10,41 +10,36 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Ship class >> createWithName: anName [
+Ship class >> createWithName: aName andWithACollectionOfCards: aCollectionOfCards [
 
-	self validate: anName.
-	^ self new initializeWith: anName
+	self validateName: aName.
+	self validateCollectionOfCards: aCollectionOfCards.
+	^ self new intializeWithName: aName andWithACollectionOfCards: aCollectionOfCards copy
 ]
 
 { #category : 'as yet unclassified' }
-Ship class >> createWithName: aName andWithCard: aCard [
+Ship class >> validateCollectionOfCards: aCollectionOfCards [
 
-	^ self new intializeWith: aName andWithCard: aCard copy
+	aCollectionOfCards ifEmpty: [ Error signal: 'The collection of cards cannot be empty' ]
 ]
 
 { #category : 'as yet unclassified' }
-Ship class >> validate: aName [
+Ship class >> validateName: aName [
 
-	aName isString ifFalse: [ Error signal: 'The name must be a string' ]
+	(aName isString) ifFalse: [ Error signal: 'The name must be a string' ]
 ]
 
 { #category : 'testing' }
-Ship >> hasCardLeft [
+Ship >> hasCardsLeft [
 
 	^ card size
 ]
 
-{ #category : 'initialization' }
-Ship >> initializeWith: anName [
-
-	name := anName
-]
-
 { #category : 'as yet unclassified' }
-Ship >> intializeWith: aName andWithCard: aCard [
+Ship >> intializeWithName: aName andWithACollectionOfCards: aCollectionOfCards [
 
 	name := aName.
-	card := aCard
+	card := aCollectionOfCards
 ]
 
 { #category : 'accessing' }
