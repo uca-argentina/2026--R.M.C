@@ -1502,19 +1502,16 @@ GameTest >> test41WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
 
-	"juan tira 3. Último efecto: avanzar 3"
 	aGame playturn.
 	self assert: (aGame theShip: aShip isAt: 3).
 
-	"juan usa Repeat sobre pepe. Pepe avanza 3"
+
 	aGame PayerShip: aShip PlaysCard: aRepeat toTarget: aSecondShip.
 	self assert: (aGame theShip: aSecondShip isAt: 3).
 
-	"pepe tira 3. Cae en 6, hay WormHole, vuelve 4. Último efecto ahora es WormHole"
 	aGame playturn.
 	self assert: (aGame theShip: aSecondShip isAt: 2).
 
-	"juan usa otro Repeat. Ahora ya no repite avanzar 3, repite WormHole"
 	aGame PayerShip: aShip PlaysCard: aSecondRepeat toTarget: aShip.
 	self assert: (aGame theShip: aShip isAt: 2)
 ]
