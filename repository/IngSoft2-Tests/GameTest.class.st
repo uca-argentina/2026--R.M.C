@@ -15,7 +15,13 @@ Class {
 		'aShipPositionManager',
 		'aTurnManager',
 		'aCollectionOfCards',
-		'anOverload'
+		'aSecondCollectionOfCards',
+		'anOverload',
+		'aSpeed',
+		'anAcceleration',
+		'aCancellation',
+		'aRedo',
+		'aRepeat'
 	],
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
@@ -199,14 +205,53 @@ GameTest >> arrangeGameTestWithTwoDiceOfFiveFacesAndThreeFaces [
 { #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithTwoShipsAndOneCard [
 
-	aCollectionOfCards := OrderedCollection new.
 	anOverload := Overload new.
+	aCollectionOfCards := OrderedCollection new.
 	aCollectionOfCards add: anOverload.
 	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
 	aSecondShip := Ship createWithName: 'fran' andWithCard: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aSecondShip.
+	aCollectionOfShips add: aSecondShip
+]
+
+{ #category : 'tests - initial state' }
+GameTest >> arrangeGameTestWithTwoShipsAndOneOfEveryCard [
+
+	anOverload := Overload new.
+	aSpeed := Speed new.
+	anAcceleration := Acceleration new.
+	aCancellation := Cancellation new.
+	aRedo := Redo new.
+	aRepeat := Repeat new.
+	aCollectionOfCards := OrderedCollection new.
+	aCollectionOfCards add: anOverload.
+	aCollectionOfCards add: aSpeed.
+	aCollectionOfCards add: anAcceleration.
+	aCollectionOfCards add: aCancellation.
+	aCollectionOfCards add: aRedo.
+	aCollectionOfCards add: aRepeat.
+	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'fran' andWithCard: aCollectionOfCards.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip
+]
+
+{ #category : 'tests - initial state' }
+GameTest >> arrangeGameTestWithTwoShipsAndOneOverloadCardAndOneCancellationCard [
+
+	anOverload := Overload new.
+	aCollectionOfCards := OrderedCollection new.
+	aCollectionOfCards add: anOverload.
+	aCancellation := Overload new.
+	aSecondCollectionOfCards := OrderedCollection new.
+	aSecondCollectionOfCards add: anOverload.
+	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'fran' andWithCard: aSecondCollectionOfCards.
+	aCollectionOfShips := OrderedCollection new.
+	aCollectionOfShips add: aShip.
+	aCollectionOfShips add: aSecondShip
 ]
 
 { #category : 'tests' }
@@ -988,7 +1033,7 @@ GameTest >> test34WhenAShipWantsToPlayACardAndPlaysOverloadThenItGetsRemoved [
 ]
 
 { #category : 'tests' }
-GameTest >> test37WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
+GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aAcceleration aCollectionOfCards |
 	aShip := Ship createWithName: 'juan' andWithCard: OrderedCollection new.
@@ -1033,7 +1078,7 @@ GameTest >> test37WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 ]
 
 { #category : 'tests' }
-GameTest >> test38WhenAShipWantsToPlayACardandPLaysSpeeds [
+GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aSpeed aCollectionOfCards |
 	aShip := Ship createWithName: 'juan'.
@@ -1073,57 +1118,29 @@ GameTest >> test38WhenAShipWantsToPlayACardandPLaysSpeeds [
 ]
 
 { #category : 'tests' }
-GameTest >> test39WhenAShipCancelsACardThePenaltyIsRemoved [
-    | aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard 
-      aPositionShipManager aTurnManager aSecondShip aSobreCarga aCancellation 
-      aCollectionOfCardsForJuan aCollectionOfCardsForPepe |
+GameTest >> test37WhenAShipCancelsAnOverloadCardThePenaltyIsRemoved [
 
-    aSobreCarga := Overload new.
-    aCancellation := Cancellation targeting: aSobreCarga.
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
-    aCollectionOfCardsForJuan := OrderedCollection new.
-    aCollectionOfCardsForJuan add: aCancellation.
-    aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCardsForJuan.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
 
-    aCollectionOfCardsForPepe := OrderedCollection new.
-    aCollectionOfCardsForPepe add: aSobreCarga.
-    aSecondShip := Ship createWithName: 'pepe' andWithCard: aCollectionOfCardsForPepe.
+	"fran applies SobreCarga penalty to juan"
+	aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip.
+	"juan cancels the SobreCarga applied to himself"
+	aCancellation targeting: anOverload.
+	aGame PayerShip: aShip PlaysCard: aCancellation toTarget: aShip.
+	"juan plays turn → dice=6, no penalty → moves 6"
+	aGame playturn.
 
-    aCollectionOfShips := OrderedCollection new.
-    aCollectionOfShips add: aShip.
-    aCollectionOfShips add: aSecondShip.
-
-    aChargedDice := ChargedDice withTotalNumberFaces: 6.
-    aCollectionOfDice := OrderedCollection new.
-    aCollectionOfDice add: aChargedDice.
-
-    aChargedBoard := BoardCharged
-                         createWithATotalNumberOfCellsOf: 12
-                         andAnAmountOfParcecsOf: 50.
-    aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-
-    aPositionShipManager := ShipPositionManager
-                                createWith: aCollectionOfShips
-                                andNumberOfLaps: 1.
-    aTurnManager := TurnManager creatWith: aCollectionOfShips.
-
-    aGame := Game
-                 createWithName: 'Ludo'
-                 andAShipPositionManager: aPositionShipManager
-                 andATurnManager: aTurnManager
-                 andABord: aChargedBoard
-                 andADice: aCollectionOfDice.
-
-    "pepe applies SobreCarga penalty to juan"
-    aGame PayerShip: aSecondShip PlaysCard: aSobreCarga toTarget: aShip.
-
-    "juan cancels the SobreCarga applied to himself"
-    aGame PayerShip: aShip PlaysCard: aCancellation toTarget: aShip.
-
-    "juan plays turn → dice=6, no penalty → moves 6"
-    aGame playturn.
-
-    self assert: (aGame theShip: aShip isAt: 6).
+	self assert: (aGame theShip: aShip isAt: 6)
 ]
 
 { #category : 'tests' }

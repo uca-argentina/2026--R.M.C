@@ -8,12 +8,6 @@ Class {
 	#package : 'IngSoft2-Model'
 }
 
-{ #category : 'as yet unclassified' }
-Cancellation class >> targeting: aCard [
-
-	^ self new initializeTargeting: aCard
-]
-
 { #category : 'initialization' }
 Cancellation >> applyIn: aCardManager toTarget: aShip [
 
@@ -22,6 +16,12 @@ Cancellation >> applyIn: aCardManager toTarget: aShip [
 
 { #category : 'initialization' }
 Cancellation >> initializeTargeting: aCard [
+
+	cardToCancel := 'esta vacio'
+]
+
+{ #category : 'as yet unclassified' }
+Cancellation >> targeting: aCard [
 
 	cardToCancel := aCard
 ]
