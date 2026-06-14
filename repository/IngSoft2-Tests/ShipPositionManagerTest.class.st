@@ -6,12 +6,19 @@ Class {
 		'aSecondShip',
 		'aCollectionOfShips',
 		'aShipPositionManager',
-		'anOverload',
-		'aCollectionOfCards'
+		'aCollectionOfCards',
+		'anOverload'
 	],
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
+
+{ #category : 'tests - initial state' }
+ShipPositionManagerTest >> arrangeShipPositionManagerTestWithOneCard [
+
+	anOverload := Overload new.
+	aCollectionOfCards := OrderedCollection with: anOverload.
+]
 
 { #category : 'tests - initial state' }
 ShipPositionManagerTest >> arrangeShipPositionManagerTestWithTwoShips [
@@ -19,14 +26,6 @@ ShipPositionManagerTest >> arrangeShipPositionManagerTestWithTwoShips [
 	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 	aSecondShip := Ship createWithName: 'fran' andWithACollectionOfCards: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection with: aShip with: aSecondShip.
-]
-
-{ #category : 'tests - initial state' }
-ShipPositionManagerTest >> arrangeShipTestWithOneCard [
-
-	anOverload := Overload new.
-	aCollectionOfCards := OrderedCollection new.
-	aCollectionOfCards add: anOverload.
 ]
 
 { #category : 'tests' }
@@ -41,7 +40,7 @@ ShipPositionManagerTest >> test01WhenAPositionManagerHaveAnEmptyShipsCollectionT
 { #category : 'tests' }
 ShipPositionManagerTest >> test02WhenAPositionManagerHaveAnNegativeAmountOfLapsThenItCantBeCreated [
 
-	self arrangeShipTestWithOneCard.
+	self arrangeShipPositionManagerTestWithOneCard.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: (Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards).
 
@@ -54,7 +53,7 @@ ShipPositionManagerTest >> test02WhenAPositionManagerHaveAnNegativeAmountOfLapsT
 { #category : 'tests' }
 ShipPositionManagerTest >> test03WhenAPositionManagerIsCreatedThenAllShipsStartAtPositionZero [
 
-	self arrangeShipTestWithOneCard.
+	self arrangeShipPositionManagerTestWithOneCard.
 	self arrangeShipPositionManagerTestWithTwoShips.
 	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
 
@@ -65,7 +64,7 @@ ShipPositionManagerTest >> test03WhenAPositionManagerIsCreatedThenAllShipsStartA
 { #category : 'tests' }
 ShipPositionManagerTest >> test04WhenAPositionManagerIsCreatedThenAllShipsStartAtLapZero [
 
-	self arrangeShipTestWithOneCard.
+	self arrangeShipPositionManagerTestWithOneCard.
 	self arrangeShipPositionManagerTestWithTwoShips.
 	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
 

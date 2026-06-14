@@ -29,24 +29,21 @@ ShipTests >> arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
 ShipTests >> arrangeShipTestWithOneCard [
 
 	anOverload := Overload new.
-	aCollectionOfCards := OrderedCollection new.
-	aCollectionOfCards add: anOverload.
+	aCollectionOfCards := OrderedCollection with: anOverload.
 ]
 
 { #category : 'tests - initial state' }
 ShipTests >> arrangeShipTestWithOneDieOfSixFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
+	aCollectionOfDice := OrderedCollection with: aChargedDice.
 ]
 
 { #category : 'tests - initial state' }
 ShipTests >> arrangeShipTestWithOneShip [
 
 	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
+	aCollectionOfShips := OrderedCollection with: aShip.
 ]
 
 { #category : 'tests' }

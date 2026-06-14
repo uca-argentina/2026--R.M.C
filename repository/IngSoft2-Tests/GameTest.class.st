@@ -36,6 +36,14 @@ GameTest >> arrangeGameTestWithOneBoardOfEightCellsEightParsecsAndOneLap [
 ]
 
 { #category : 'tests - initial state' }
+GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
+
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
+	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
+	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+]
+
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndOneLap [
 
 	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
@@ -57,6 +65,13 @@ GameTest >> arrangeGameTestWithOneBoardOfTwentyFiveCellsFiftyParsecsAndOneLap [
 	aBoard := Board createWithATotalNumberOfCellsOf: 25 andAnAmountOfParcecsOf: 50.
 	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 1.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+]
+
+{ #category : 'tests - initial state' }
+GameTest >> arrangeGameTestWithOneCard [
+
+	anOverload := Overload new.
+	aCollectionOfCards := OrderedCollection with: anOverload.
 ]
 
 { #category : 'tests - initial state' }
@@ -133,6 +148,13 @@ GameTest >> arrangeGameTestWithOneDieOfFourFaces [
 ]
 
 { #category : 'tests - initial state' }
+GameTest >> arrangeGameTestWithOneDieOfSixFaces [
+
+	aChargedDice := ChargedDice withTotalNumberFaces: 6.
+	aCollectionOfDice := OrderedCollection with: aChargedDice.
+]
+
+{ #category : 'tests - initial state' }
 GameTest >> arrangeGameTestWithOneDieOfTenFaces [
 
 	aChargedDice := ChargedDice withTotalNumberFaces: 10.
@@ -154,6 +176,13 @@ GameTest >> arrangeGameTestWithOneDieOfThreeFaces [
 	aChargedDice := ChargedDice withTotalNumberFaces: 3.
 	aCollectionOfDice := OrderedCollection new.
 	aCollectionOfDice add: aChargedDice.
+]
+
+{ #category : 'tests - initial state' }
+GameTest >> arrangeGameTestWithOneShip [
+
+	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
+	aCollectionOfShips := OrderedCollection with: aShip.
 ]
 
 { #category : 'tests - initial state' }
@@ -214,34 +243,11 @@ GameTest >> arrangeGameTestWithTwoShipsAndOneOfEveryCard [
 	aCollectionOfShips add: aSecondShip
 ]
 
-{ #category : 'tests - initial state' }
-GameTest >> arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
-
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
-	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeShipTestWithOneDieOfSixFaces [
-
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-]
-
-{ #category : 'tests - initial state' }
-GameTest >> arrangeShipTestWithOneShip [
-
-	aShip := Ship createWithName: 'juan'.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-]
-
 { #category : 'tests' }
 GameTest >> test01WhenAGameStartsThenItReturnsItsName [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfFiveFaces.
 	self arrangeGameTestWithOneBoardOfTwentyFiveCellsFiftyParsecsAndOneLap.
 
@@ -258,7 +264,8 @@ GameTest >> test01WhenAGameStartsThenItReturnsItsName [
 { #category : 'tests' }
 GameTest >> test02WhenAGameStartsWithASpecificNameThenItKnowsItsName [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfFiveFaces.
 	self arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap.
 
@@ -275,7 +282,8 @@ GameTest >> test02WhenAGameStartsWithASpecificNameThenItKnowsItsName [
 { #category : 'tests' }
 GameTest >> test03WhenAGameAdvancesATurnThenTheShipsPositionChanges [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfThreeFaces.
 	self arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap.
 
@@ -294,7 +302,8 @@ GameTest >> test03WhenAGameAdvancesATurnThenTheShipsPositionChanges [
 { #category : 'tests' }
 GameTest >> test04WhenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfFiveFaces.
 	self arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap.
 
@@ -311,7 +320,8 @@ GameTest >> test04WhenAGameCreatesAnNSizeBoardThenTheBoardInTheGameHasNCells [
 { #category : 'tests' }
 GameTest >> test05WhenAGameThrowsADieToMoveAShipThenTheShipMovesToTheCell [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfFiveFaces.
 	self arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap.
 
@@ -330,7 +340,8 @@ GameTest >> test05WhenAGameThrowsADieToMoveAShipThenTheShipMovesToTheCell [
 { #category : 'tests' }
 GameTest >> test06WhenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheDices [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithTwoDiceOfFiveFacesAndThreeFaces.
 	self arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap.
 
@@ -349,7 +360,8 @@ GameTest >> test06WhenAGameThrowsNDicesToMoveAShipThenTheShipMovesToTheSumOfTheD
 { #category : 'tests' }
 GameTest >> test07WhenAGameHasAnEmptyDieCollectionThenTheCreationFails [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	aCollectionOfDice := OrderedCollection new.
 	self arrangeGameTestWithOneBoardOfTenCellsFiftyParsecsAndOneLap.
 
@@ -391,7 +403,8 @@ GameTest >> test08WhenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 { #category : 'tests' }
 GameTest >> test09WhenAShipMovesToTheFinalCellThenTheGameIsFished [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfFourFaces.
 	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndOneLap.
 
@@ -436,8 +449,8 @@ GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 GameTest >> test11WhenAGameIsAskedTheWhereaboutOfTheShipsThenTheGameReturnItsLaps [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
-	self arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
 
 	aGame := Game
 		         createWithName: 'Ludo'
@@ -459,9 +472,10 @@ GameTest >> test11WhenAGameIsAskedTheWhereaboutOfTheShipsThenTheGameReturnItsLap
 { #category : 'tests' }
 GameTest >> test12WhenAShipDoesNotCrossTheEndThenItStaysInTheSameLap [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfThreeFaces.
-	self arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
+	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
 
 	aGame := Game
 		         createWithName: 'Ludo'
@@ -477,9 +491,10 @@ GameTest >> test12WhenAShipDoesNotCrossTheEndThenItStaysInTheSameLap [
 { #category : 'tests' }
 GameTest >> test13WhenAShipMovesExactlyTheBoardSizeThenItCompletesOneLap [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfEightFaces.
-	self arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
+	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
 
 	aGame := Game
 		         createWithName: 'Ludo'
@@ -497,8 +512,9 @@ GameTest >> test13WhenAShipMovesExactlyTheBoardSizeThenItCompletesOneLap [
 { #category : 'tests' }
 GameTest >> test14WhenAShipFallsInAWormHoleThenTheGameMovesItBackFourCells [
 
-	self arrangeShipTestWithOneShip.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
 
@@ -517,7 +533,8 @@ GameTest >> test14WhenAShipFallsInAWormHoleThenTheGameMovesItBackFourCells [
 { #category : 'tests' }
 GameTest >> test15WhenAShipFallsInAWormHoleButTheCellIsLeserThanFourOnTheFirstLapThenTheGameMovesItBackToZero [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfThreeFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
@@ -537,8 +554,9 @@ GameTest >> test15WhenAShipFallsInAWormHoleButTheCellIsLeserThanFourOnTheFirstLa
 { #category : 'tests' }
 GameTest >> test16WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEffectIsNotApplied [
 
-	self arrangeShipTestWithOneShip.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 6).
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 2).
@@ -558,7 +576,8 @@ GameTest >> test16WhenAShipFallsInAWormHoleAndMovesToAnotherWormHoleThenSecondEf
 { #category : 'tests' }
 GameTest >> test17WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfThirteenFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
@@ -579,7 +598,8 @@ GameTest >> test17WhenAShipFallsInAWormHoleAndGoesBackPastStartThenItLosesOneLap
 { #category : 'tests' }
 GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfTenFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
 	aChargedBoard replaceACellWith: (WormHole createWithPosition: 3).
@@ -607,7 +627,7 @@ GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 2).
 
@@ -650,7 +670,7 @@ GameTest >> test20WhenAShipFallsInAMoonWalkTheTheEffectIsProperlyAplied [
 GameTest >> test21WhenAShipFallsInAMoonWalkAndMovesAnotherShipBackwardsThenItsPositionDoesNotGoBelowZero [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 3).
 
@@ -671,7 +691,7 @@ GameTest >> test21WhenAShipFallsInAMoonWalkAndMovesAnotherShipBackwardsThenItsPo
 GameTest >> test22WhenAShipFallsInAMoonWalkThenOtherShipLosesOneLap [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
 
@@ -695,7 +715,8 @@ GameTest >> test22WhenAShipFallsInAMoonWalkThenOtherShipLosesOneLap [
 { #category : 'tests' }
 GameTest >> test23WhenAShipFallsInAHyperJumpThenItAdvancesTheNextParsecValueConvertedToCells [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfThreeFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndThreeLaps.
 	aChargedBoard replaceACellWith: (HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
@@ -737,6 +758,7 @@ GameTest >> test24WhenTwoShipsFallInAHyperJumpThenItUsesTheNextParsecValue [
 { #category : 'tests' }
 GameTest >> test25WhenAShipFallsInAHyperJumpAndUsesAllParsecValuesThenItStartsAgainFromTheBeginning [
 
+	self arrangeGameTestWithOneCard.
 	self arrangeGameTestWithThreeShips.
 	self arrangeGameTestWithOneDieOfThreeFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndFiveLaps.
@@ -760,7 +782,8 @@ GameTest >> test25WhenAShipFallsInAHyperJumpAndUsesAllParsecValuesThenItStartsAg
 { #category : 'tests' }
 GameTest >> test26WhenAShipFallsInAHyperJumpAndParsecsDoNotDivideToAnExactIntegerThenItRoundsDown [
 
-	self arrangeShipTestWithOneShip.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
 	self arrangeGameTestWithOneDieOfThreeFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (HyperJump createWithPosition: 3 andParsecs: #( 25 )).
@@ -780,8 +803,9 @@ GameTest >> test26WhenAShipFallsInAHyperJumpAndParsecsDoNotDivideToAnExactIntege
 { #category : 'tests' }
 GameTest >> test27WhenAShipFallsInASpeedUpThenTheGameMovesItForwardFourCells [
 
-	self arrangeShipTestWithOneShip.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (SpeedUp createWithPosition: 6).
 
@@ -800,8 +824,9 @@ GameTest >> test27WhenAShipFallsInASpeedUpThenTheGameMovesItForwardFourCells [
 { #category : 'tests' }
 GameTest >> test28WhenAShipFallsInAnAtomicBombThenTheGameMovesItToTheFirstPosition [
 
-	self arrangeShipTestWithOneShip.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneCard.
+	self arrangeGameTestWithOneShip.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 6).
 
@@ -821,7 +846,7 @@ GameTest >> test28WhenAShipFallsInAnAtomicBombThenTheGameMovesItToTheFirstPositi
 GameTest >> test29WhenOneShipFallsInAnAtomicBombThenTheGameMovesTwoShipsToTheFirstPosition [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -999,7 +1024,7 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 GameTest >> test34WhenAShipWantsToPlayACardAndPlaysOverloadThenItGetsRemoved [
 
 	self arrangeGameTestWithTwoShipsAndOneCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1103,7 +1128,7 @@ GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
 GameTest >> test37WhenAShipCancelsAnOverloadCardThenThePenaltyIsRemoved [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1129,7 +1154,7 @@ GameTest >> test37WhenAShipCancelsAnOverloadCardThenThePenaltyIsRemoved [
 GameTest >> test38WhenAShipCancelsASpeedCardThenThePenaltyIsRemoved [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1155,7 +1180,7 @@ GameTest >> test38WhenAShipCancelsASpeedCardThenThePenaltyIsRemoved [
 GameTest >> test39WhenAShipCancelsAnAccelerationCardThenThePenaltyIsRemoved [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1181,7 +1206,7 @@ GameTest >> test39WhenAShipCancelsAnAccelerationCardThenThePenaltyIsRemoved [
 GameTest >> test40WhenAShipPlaysARedoCardThenItRepeatsTheLastOverloadCard [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1206,7 +1231,7 @@ GameTest >> test40WhenAShipPlaysARedoCardThenItRepeatsTheLastOverloadCard [
 GameTest >> test41WhenAShipPlaysARedoCardThenItRepeatsTheLastSpeedCard [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1231,7 +1256,7 @@ GameTest >> test41WhenAShipPlaysARedoCardThenItRepeatsTheLastSpeedCard [
 GameTest >> test42WhenAShipPlaysARedoCardThenItRepeatsTheLastAccelerationCard [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1413,7 +1438,7 @@ GameTest >> test45WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 GameTest >> test46WhenAShipPlaysARedoCardButNoCardsWerePlayedBeforeThenItFails [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1434,7 +1459,7 @@ GameTest >> test46WhenAShipPlaysARedoCardButNoCardsWerePlayedBeforeThenItFails [
 GameTest >> test47WhenACancellationCardHasNoTargetThenItFails [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
@@ -1456,7 +1481,7 @@ GameTest >> test47WhenACancellationCardHasNoTargetThenItFails [
 GameTest >> test48WhenAShipTriesToPlayTheSameCardTwiceThenItFails [
 
 	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
-	self arrangeShipTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
