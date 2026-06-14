@@ -66,7 +66,7 @@ ShipTests >> test03WhenAShipInANegativePositionTryToBeCreatedThenTheCreationFail
 ShipTests >> test04WhenAShipHasOneCard [
 
 	| aSobreCard |
-	aSobreCard := SobreCarga new.
+	aSobreCard := Overload new.
 	aShip := Ship createWithName: 'juan' andWithCard: [ aSobreCard ].
 
 	self assert: (aShip hasCardLeft) equals: 1

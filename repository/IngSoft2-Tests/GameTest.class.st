@@ -13,7 +13,9 @@ Class {
 		'aBoard',
 		'aChargedBoard',
 		'aShipPositionManager',
-		'aTurnManager'
+		'aTurnManager',
+		'aCollectionOfCards',
+		'anOverload'
 	],
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
@@ -195,10 +197,13 @@ GameTest >> arrangeGameTestWithTwoDiceOfFiveFacesAndThreeFaces [
 ]
 
 { #category : 'tests - initial state' }
-GameTest >> arrangeGameTestWithTwoShips [
+GameTest >> arrangeGameTestWithTwoShipsAndOneCard [
 
-	aShip := Ship createWithName: 'juan'.
-	aSecondShip := Ship createWithName: 'fran'.
+	aCollectionOfCards := OrderedCollection new.
+	anOverload := Overload new.
+	aCollectionOfCards add: anOverload.
+	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
+	aSecondShip := Ship createWithName: 'fran' andWithCard: aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
 	aCollectionOfShips add: aShip.
 	aCollectionOfShips add: aSecondShip.
@@ -334,7 +339,7 @@ GameTest >> test07WhenAGameHasAnEmptyDieCollectionThenTheCreationFails [
 { #category : 'tests' }
 GameTest >> test08WhenAGameMovesTwoShipsTwiceThenTheShipsMovesToTheCells [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfFourFaces.
 	self arrangeGameTestWithOneBoardOfTwentyFiveCellsFiftyParsecsAndOneLap.
 
@@ -377,7 +382,7 @@ GameTest >> test09WhenAShipMovesToTheFinalCellThenTheGameIsFished [
 { #category : 'tests' }
 GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeContinued [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfFourFaces.
 	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndOneLap.
 
@@ -401,7 +406,7 @@ GameTest >> test10WhenAShipMovesToTheFinalCellThenTheGameIsFishedAndItCannotBeCo
 { #category : 'tests' }
 GameTest >> test11WhenAGameIsAskedTheWhereaboutOfTheShipsThenTheGameReturnItsLaps [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps.
 
@@ -572,7 +577,7 @@ GameTest >> test18WhenAShipIsInLapOneAndFallsInAWormHoleThenItGoesBackToLapZero 
 { #category : 'tests' }
 GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 2).
@@ -592,7 +597,7 @@ GameTest >> test19WhenAShipFallsInMoonWalkThenItDoesNotMoveBackwards [
 { #category : 'tests' }
 GameTest >> test20WhenAShipFallsInAMoonWalkTheTheEffectIsProperlyAplied [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfThreeFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 1).
@@ -615,7 +620,7 @@ GameTest >> test20WhenAShipFallsInAMoonWalkTheTheEffectIsProperlyAplied [
 { #category : 'tests' }
 GameTest >> test21WhenAShipFallsInAMoonWalkAndMovesAnotherShipBackwardsThenItsPositionDoesNotGoBelowZero [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 6 withBackwardsMovementOf: 3).
@@ -636,7 +641,7 @@ GameTest >> test21WhenAShipFallsInAMoonWalkAndMovesAnotherShipBackwardsThenItsPo
 { #category : 'tests' }
 GameTest >> test22WhenAShipFallsInAMoonWalkThenOtherShipLosesOneLap [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsFiftyParsecsAndThreeLaps.
 	aChargedBoard replaceACellWith: (MoonWalk createWithPosition: 8 withBackwardsMovementOf: 4).
@@ -682,7 +687,7 @@ GameTest >> test23WhenAShipFallsInAHyperJumpThenItAdvancesTheNextParsecValueConv
 { #category : 'tests' }
 GameTest >> test24WhenTwoShipsFallInAHyperJumpThenItUsesTheNextParsecValue [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfThreeFaces.
 	self arrangeGameTestWithOneChargedBoardOfTenCellsOneHundredParsecsAndFiveLaps.
 	aChargedBoard replaceACellWith: (HyperJump createWithPosition: 3 andParsecs: #( 30 20 10 )).
@@ -786,7 +791,7 @@ GameTest >> test28WhenAShipFallsInAnAtomicBombThenTheGameMovesItToTheFirstPositi
 { #category : 'tests' }
 GameTest >> test29WhenOneShipFallsInAnAtomicBombThenTheGameMovesTwoShipsToTheFirstPosition [
 
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfSixFaces.
 	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
@@ -810,7 +815,7 @@ GameTest >> test29WhenOneShipFallsInAnAtomicBombThenTheGameMovesTwoShipsToTheFir
 GameTest >> test30WhenAShipMovesToTheFinalCellThenTheGameIsFinishedAndReturnsARankingWithStats [
 
 	| aRanking |
-	self arrangeGameTestWithTwoShips.
+	self arrangeGameTestWithTwoShipsAndOneCard.
 	self arrangeGameTestWithOneDieOfFourFaces.
 	self arrangeGameTestWithOneBoardOfEightCellsEightParsecsAndOneLap.
 
@@ -840,7 +845,7 @@ GameTest >> test31WhenAShipWantsToPlayACardandPLaysSobreCarga [
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aSobreCarga aCollectionOfCards |
 	aShip := Ship createWithName: 'juan'.
 	aCollectionOfCards := OrderedCollection new.
-	aSobreCarga := SobreCarga new.
+	aSobreCarga := Overload new.
 	aCollectionOfCards add:aSobreCarga .
 	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
@@ -880,7 +885,7 @@ GameTest >> test32WhenAShipWantsToPlayACardandPLaysSobreCargaRemain [
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aSobreCarga aCollectionOfCards |
 	aShip := Ship createWithName: 'juan'.
 	aCollectionOfCards := OrderedCollection new.
-	aSobreCarga := SobreCarga new.
+	aSobreCarga := Overload new.
 	aCollectionOfCards add:aSobreCarga .
 	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
 	aCollectionOfShips := OrderedCollection new.
@@ -923,7 +928,7 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aSobreCarga aCollectionOfCards |
 	
 	aCollectionOfCards := OrderedCollection new.
-	aSobreCarga := SobreCarga new.
+	aSobreCarga := Overload new.
 	aCollectionOfCards add:aSobreCarga .
 	aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCards.
 	aSecondShip := Ship createWithName: 'pepe' andWithCard: aCollectionOfCards.
@@ -962,47 +967,28 @@ GameTest >> test33WhenAShipWantsToPlayACardandPLaysSobreCargaRemainandanothershi
 ]
 
 { #category : 'tests' }
-GameTest >> test34WhenAShipWantsToPlayACardandPLaysSobreCargaandItGetsRemove [
+GameTest >> test34WhenAShipWantsToPlayACardAndPlaysOverloadThenItGetsRemoved [
 
-	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aSobreCarga aCollectionOfCards |
-	
-	aCollectionOfCards := OrderedCollection new.
-	aSobreCarga := SobreCarga new.
-	aCollectionOfCards add:aSobreCarga .
-	aShip := Ship createWithName: 'juan' andWithCard:aCollectionOfCards.
-	aSecondShip := Ship createWithName: 'pepe' andWithCard:aCollectionOfCards.
-	aCollectionOfShips := OrderedCollection new.
-	aCollectionOfShips add: aShip.
-	aCollectionOfShips add: aSecondShip.
-	aChargedDice := ChargedDice withTotalNumberFaces: 6.
-	aCollectionOfDice := OrderedCollection new.
-	aCollectionOfDice add: aChargedDice.
-
-	aChargedBoard := BoardCharged
-		                 createWithATotalNumberOfCellsOf: 12
-		                 andAnAmountOfParcecsOf: 50.
+	self arrangeGameTestWithTwoShipsAndOneCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
 	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-	aPositionShipManager := ShipPositionManager
-		                        createWith: aCollectionOfShips
-		                        andNumberOfLaps: 1.
-	aTurnManager := TurnManager creatWith: aCollectionOfShips.
+
 	aGame := Game
 		         createWithName: 'Ludo'
-		         andAShipPositionManager: aPositionShipManager
+		         andAShipPositionManager: aShipPositionManager
 		         andATurnManager: aTurnManager
 		         andABord: aChargedBoard
 		         andADice: aCollectionOfDice.
-					
-   aGame PayerShip:aSecondShip PlaysCard:aSobreCarga toTarget:aShip.
-	aGame playturn.
-	
-	
-	self assert: ((aGame Showcardsfromplayer:aSecondShip)=0).
 
+	aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip.
+	aGame playturn.
+
+	self assert: (aGame Showcardsfromplayer: aSecondShip) = 0
 ]
 
 { #category : 'tests' }
-GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
+GameTest >> test37WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aAcceleration aCollectionOfCards |
 	aShip := Ship createWithName: 'juan' andWithCard: OrderedCollection new.
@@ -1047,7 +1033,7 @@ GameTest >> test35WhenAccelerationIsPlayedAllShipsMoveExtraOnNextTurn [
 ]
 
 { #category : 'tests' }
-GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
+GameTest >> test38WhenAShipWantsToPlayACardandPLaysSpeeds [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aSecondShip  aSpeed aCollectionOfCards |
 	aShip := Ship createWithName: 'juan'.
@@ -1087,12 +1073,12 @@ GameTest >> test36WhenAShipWantsToPlayACardandPLaysSpeeds [
 ]
 
 { #category : 'tests' }
-GameTest >> test37WhenAShipCancelsACardThePenaltyIsRemoved [
+GameTest >> test39WhenAShipCancelsACardThePenaltyIsRemoved [
     | aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard 
       aPositionShipManager aTurnManager aSecondShip aSobreCarga aCancellation 
       aCollectionOfCardsForJuan aCollectionOfCardsForPepe |
 
-    aSobreCarga := SobreCarga new.
+    aSobreCarga := Overload new.
     aCancellation := Cancellation targeting: aSobreCarga.
 
     aCollectionOfCardsForJuan := OrderedCollection new.
@@ -1141,12 +1127,12 @@ GameTest >> test37WhenAShipCancelsACardThePenaltyIsRemoved [
 ]
 
 { #category : 'tests' }
-GameTest >> test38WhenAShipPlaysRedoItRepeatsTheLastPlayedCard [
+GameTest >> test40WhenAShipPlaysRedoItRepeatsTheLastPlayedCard [
     | aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard 
       aPositionShipManager aTurnManager aSecondShip aSobreCarga aRedo
       aCollectionOfCardsForJuan aCollectionOfCardsForPepe |
 
-    aSobreCarga := SobreCarga new.
+    aSobreCarga := Overload new.
     aRedo := Redo new.
 
     aCollectionOfCardsForPepe := OrderedCollection new.
@@ -1194,7 +1180,7 @@ GameTest >> test38WhenAShipPlaysRedoItRepeatsTheLastPlayedCard [
 ]
 
 { #category : 'tests' }
-GameTest >> test39WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
+GameTest >> test41WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard
 	  aPositionShipManager aTurnManager aRepeat
@@ -1240,7 +1226,7 @@ GameTest >> test39WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
 ]
 
 { #category : 'tests' }
-GameTest >> test40WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovementEffect [
+GameTest >> test42WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovementEffect [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard
 	  aPositionShipManager aTurnManager aRepeat
@@ -1290,7 +1276,7 @@ GameTest >> test40WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovement
 ]
 
 { #category : 'tests' }
-GameTest >> test41WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
+GameTest >> test43WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 
 	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aRepeat aSecondRepeat aCollectionOfCardsForJuan |
 	aRepeat := Repeat new.

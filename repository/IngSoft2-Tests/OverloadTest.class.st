@@ -1,14 +1,14 @@
 Class {
-	#name : 'SobreCargaTest',
+	#name : 'OverloadTest',
 	#superclass : 'CardTest',
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
 
 { #category : 'tests' }
-SobreCargaTest >> test01CreateCardSobreCarga [
+OverloadTest >> test01CreateCardSobreCarga [
 	| aCard |
-	aCard := SobreCarga new.
+	aCard := Overload new.
 	self assert: (aCard nameIs:'SobreCarga').
 
 
