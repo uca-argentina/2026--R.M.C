@@ -1178,60 +1178,82 @@ GameTest >> test39WhenAShipCancelsAnAccelerationCardThenThePenaltyIsRemoved [
 ]
 
 { #category : 'tests' }
-GameTest >> test40WhenAShipPlaysRedoItRepeatsTheLastPlayedCard [
-    | aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard 
-      aPositionShipManager aTurnManager aSecondShip aSobreCarga aRedo
-      aCollectionOfCardsForJuan aCollectionOfCardsForPepe |
+GameTest >> test40WhenAShipPlaysARedoCardThenItRepeatsTheLastOverloadCard [
 
-    aSobreCarga := Overload new.
-    aRedo := Redo new.
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
 
-    aCollectionOfCardsForPepe := OrderedCollection new.
-    aCollectionOfCardsForPepe add: aSobreCarga.
-    aCollectionOfCardsForPepe add: aRedo.
-    aSecondShip := Ship createWithName: 'pepe' andWithCard: aCollectionOfCardsForPepe.
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
 
-    aCollectionOfCardsForJuan := OrderedCollection new.
-    aShip := Ship createWithName: 'juan' andWithCard: aCollectionOfCardsForJuan.
+	"fran plays Overload on juan → juan gets -2"
+	aGame PayerShip: aSecondShip PlaysCard: anOverload toTarget: aShip.
+	"fran plays Redo also targeting juan → juan gets another -2"
+	aGame PayerShip: aSecondShip PlaysCard: aRedo toTarget: aShip.
+	"juan plays → dice=6, two penalties of -2 = moves 2"
+	aGame playturn.
 
-    aCollectionOfShips := OrderedCollection new.
-    aCollectionOfShips add: aShip.
-    aCollectionOfShips add: aSecondShip.
-
-    aChargedDice := ChargedDice withTotalNumberFaces: 6.
-    aCollectionOfDice := OrderedCollection new.
-    aCollectionOfDice add: aChargedDice.
-
-    aChargedBoard := BoardCharged
-                         createWithATotalNumberOfCellsOf: 12
-                         andAnAmountOfParcecsOf: 50.
-    aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
-
-    aPositionShipManager := ShipPositionManager
-                                createWith: aCollectionOfShips
-                                andNumberOfLaps: 1.
-    aTurnManager := TurnManager creatWith: aCollectionOfShips.
-
-    aGame := Game
-                 createWithName: 'Ludo'
-                 andAShipPositionManager: aPositionShipManager
-                 andATurnManager: aTurnManager
-                 andABord: aChargedBoard
-                 andADice: aCollectionOfDice.
-
-    "pepe plays SobreCarga on juan → juan gets -2"
-    aGame PayerShip: aSecondShip PlaysCard: aSobreCarga toTarget: aShip.
-    "pepe plays Redo also targeting juan → juan gets another -2"
-    aGame PayerShip: aSecondShip PlaysCard: aRedo toTarget: aShip.
-
-    "juan plays → dice=6, two penalties of -2 = moves 2"
-    aGame playturn.
-
-    self assert: (aGame theShip: aShip isAt: 2).
+	self assert: (aGame theShip: aShip isAt: 2)
 ]
 
 { #category : 'tests' }
-GameTest >> test41WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
+GameTest >> test41WhenAShipPlaysARedoCardThenItRepeatsTheLastSpeedCard [
+
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	"fran plays Speed on juan → juan gets +1"
+	aGame PayerShip: aSecondShip PlaysCard: aSpeed toTarget: aShip.
+	"fran plays Redo also targeting juan → juan gets another +1"
+	aGame PayerShip: aSecondShip PlaysCard: aRedo toTarget: aShip.
+	"juan plays → dice=6, two modifiers of +1 = moves 8"
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 8)
+]
+
+{ #category : 'tests' }
+GameTest >> test42WhenAShipPlaysARedoCardThenItRepeatsTheLastAccelerationCard [
+
+	self arrangeGameTestWithTwoShipsAndOneOfEveryCard.
+	self arrangeGameTestWithOneDieOfSixFaces.
+	self arrangeGameTestWithOneChargedBoardOfTwelveCellsFiftyParsecsAndOneLap.
+	aChargedBoard replaceACellWith: (AtomicBomb createWithPosition: 12).
+
+	aGame := Game
+		         createWithName: 'Ludo'
+		         andAShipPositionManager: aShipPositionManager
+		         andATurnManager: aTurnManager
+		         andABord: aChargedBoard
+		         andADice: aCollectionOfDice.
+
+	"fran plays Acceleration on everyone → juan gets +1"
+	aGame PayerShip: aSecondShip PlaysCard: anAcceleration toTarget: aShip.
+	"fran plays Redo also targeting everyone → juan gets another +1"
+	aGame PayerShip: aSecondShip PlaysCard: aRedo toTarget: aShip.
+	"juan plays → dice=6, two modifiers of +1 = moves 8"
+	aGame playturn.
+
+	self assert: (aGame theShip: aShip isAt: 8)
+]
+
+{ #category : 'tests' }
+GameTest >> test43WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard
 	  aPositionShipManager aTurnManager aRepeat
@@ -1277,7 +1299,7 @@ GameTest >> test41WhenAShipPlaysRepeatAndNobodyRolledTheDiceThenItDoesNothing [
 ]
 
 { #category : 'tests' }
-GameTest >> test42WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovementEffect [
+GameTest >> test44WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovementEffect [
 
 	| aGame aShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard
 	  aPositionShipManager aTurnManager aRepeat
@@ -1327,7 +1349,7 @@ GameTest >> test42WhenAShipPlaysRepeatAfterADiceRollThenItRepeatsTheLastMovement
 ]
 
 { #category : 'tests' }
-GameTest >> test43WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
+GameTest >> test45WhenAnotherEffectIsAppliedThenRepeatUsesTheNewLastEffect [
 
 	| aGame aShip aSecondShip aCollectionOfShips aCollectionOfDice aChargedDice aChargedBoard aPositionShipManager aTurnManager aRepeat aSecondRepeat aCollectionOfCardsForJuan |
 	aRepeat := Repeat new.
