@@ -19,10 +19,7 @@ ChargedCellGenerator class >> forBoardOfSize: aNumberOfCells [
 ChargedCellGenerator >> cellForPosition: aPosition [
 
 	self validatePosition: aPosition.
-
-	^ chargedCells
-		  at: aPosition
-		  ifAbsent: [ Cell createWithPosition: aPosition ]
+	^ chargedCells at: aPosition ifAbsent: [ Cell createWithPosition: aPosition ]
 ]
 
 { #category : 'initialization' }
@@ -36,13 +33,11 @@ ChargedCellGenerator >> initializeForBoardOfSize: aNumberOfCells [
 ChargedCellGenerator >> put: aCell at: aPosition [
 
 	self validatePosition: aPosition.
-
 	chargedCells at: aPosition put: aCell
 ]
 
 { #category : 'as yet unclassified' }
 ChargedCellGenerator >> validatePosition: aPosition [
 
-	((aPosition < 0) or: [ aPosition > numberOfCells ]) ifTrue: [
-		Error signal: 'Invalid cell position' ]
+	((aPosition < 0) or: [ aPosition > numberOfCells ]) ifTrue: [ Error signal: 'Invalid cell position' ]
 ]

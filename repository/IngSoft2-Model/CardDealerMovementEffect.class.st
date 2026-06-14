@@ -12,9 +12,7 @@ Class {
 { #category : 'as yet unclassified' }
 CardDealerMovementEffect class >> moving: anAmount andGivingCardFrom: aCardGenerator [
 
-	^ self new
-		  initializeMoving: anAmount
-		  andGivingCardFrom: aCardGenerator
+	^ self new initializeMoving: anAmount andGivingCardFrom: aCardGenerator
 ]
 
 { #category : 'as yet unclassified' }

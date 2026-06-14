@@ -14,7 +14,7 @@ CellTestWormHole >> test01WhenTheWhormHoleIsCreatedThenItKnowsItsPosition [
 ]
 
 { #category : 'tests' }
-CellTestWormHole >> test02WhenTheWhormHoleHasNegativeBackwardsMovementThenCreationFailed [
+CellTestWormHole >> test02WhenTheWhormHoleHasNegativeBackwardsMovementThenTheCreationFails [
 
 	self
 		should: [ MoonWalk createWithPosition: 1 withBackwardsMovementOf: -2 ]

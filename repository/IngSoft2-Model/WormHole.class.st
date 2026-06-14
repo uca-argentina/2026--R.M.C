@@ -6,8 +6,9 @@ Class {
 }
 
 { #category : 'api' }
-WormHole class >> createWithPosition: aPosition [ 
-	^ self new  initializeWithPosition: aPosition.
+WormHole class >> createWithPosition: aPosition [
+
+	^ self new initializeWithPosition: aPosition
 ]
 
 { #category : 'as yet unclassified' }

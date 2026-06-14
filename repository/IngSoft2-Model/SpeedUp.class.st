@@ -6,8 +6,9 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-SpeedUp class >> createWithPosition: aPosition [ 
-	^ self new initializeWithPosition: aPosition.
+SpeedUp class >> createWithPosition: aPosition [
+
+	^ self new initializeWithPosition: aPosition
 ]
 
 { #category : 'as yet unclassified' }

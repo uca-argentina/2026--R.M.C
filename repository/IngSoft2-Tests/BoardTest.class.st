@@ -26,26 +26,22 @@ BoardTest >> arrangeBoardTestWithOneShip [
 	aCollectionOfShips := OrderedCollection with: aShip.
 ]
 
-{ #category : 'tests - initial state' }
-BoardTest >> arrangeBoardTestWithOneShipAndOneBoardWithEightCells [
-
-	self arrangeBoardTestWithOneCard.
-	self arrangeBoardTestWithOneShip.
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50
-]
-
 { #category : 'tests' }
 BoardTest >> test01WhenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 
-	self arrangeBoardTestWithOneShipAndOneBoardWithEightCells.
+	self arrangeBoardTestWithOneCard.
+	self arrangeBoardTestWithOneShip.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 
 	self assert: (aBoard numberOfCells) positive
 ]
 
 { #category : 'tests' }
-BoardTest >> test02WhenABoardIsCreatedWithTenCellsThenItHasTenCells [
+BoardTest >> test02WhenABoardIsCreatedWithEightCellsThenItHasEightCells [
 
-	self arrangeBoardTestWithOneShipAndOneBoardWithEightCells.
+	self arrangeBoardTestWithOneCard.
+	self arrangeBoardTestWithOneShip.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 
 	self assert: (aBoard numberOfCells) equals: 8
 ]
@@ -53,7 +49,8 @@ BoardTest >> test02WhenABoardIsCreatedWithTenCellsThenItHasTenCells [
 { #category : 'tests' }
 BoardTest >> test03WhenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 
-	aShip := Ship createWithName: 'juan'.
+	self arrangeBoardTestWithOneCard.
+	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 0 andAnAmountOfParcecsOf: 50 ]
@@ -64,7 +61,8 @@ BoardTest >> test03WhenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 { #category : 'tests' }
 BoardTest >> test04WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreated [
 
-	aShip := Ship createWithName: 'juan'.
+	self arrangeBoardTestWithOneCard.
+	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: '8' 	andAnAmountOfParcecsOf: 50 ]
@@ -75,7 +73,9 @@ BoardTest >> test04WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreate
 { #category : 'tests' }
 BoardTest >> test05WhenABoardIsCreatedThenItHaveANumberOfParsecs [
 
-	self arrangeBoardTestWithOneShipAndOneBoardWithEightCells.
+	self arrangeBoardTestWithOneCard.
+	self arrangeBoardTestWithOneShip.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
 
 	self assert: (aBoard parcecs) equals: 50
 ]
@@ -83,7 +83,8 @@ BoardTest >> test05WhenABoardIsCreatedThenItHaveANumberOfParsecs [
 { #category : 'tests' }
 BoardTest >> test06WhenABoardHasNegativeAmountOfParcecsThenTheBoardCannotBeCreated [
 
-	aShip := Ship createWithName: 'juan'.
+	self arrangeBoardTestWithOneCard.
+	self arrangeBoardTestWithOneShip.
 
 	self
 		should: [ Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: -50 ]

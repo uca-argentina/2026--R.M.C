@@ -12,9 +12,7 @@ Class {
 { #category : 'as yet unclassified' }
 Deck class >> using: aRandom andCardClasses: aCollectionOfCardClasses [
 
-	^ self new
-		  initializeWithRandom: aRandom
-		  andCardClasses: aCollectionOfCardClasses
+	^ self new initializeWithRandom: aRandom andCardClasses: aCollectionOfCardClasses
 ]
 
 { #category : 'as yet unclassified' }

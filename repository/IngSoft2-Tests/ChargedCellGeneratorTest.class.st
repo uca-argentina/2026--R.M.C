@@ -12,10 +12,9 @@ Class {
 
 { #category : 'tests' }
 ChargedCellGeneratorTest >> test01WhenChargedCellGeneratorCreatesCommonCellWhenNoCellWasChargedThenCelAreCell [
+
 	| generator cell |
-
 	generator := ChargedCellGenerator forBoardOfSize: 10.
-
 	cell := generator cellForPosition: 4.
 
 	self assert: cell class equals: Cell.
@@ -23,30 +22,24 @@ ChargedCellGeneratorTest >> test01WhenChargedCellGeneratorCreatesCommonCellWhenN
 ]
 
 { #category : 'tests' }
-ChargedCellGeneratorTest >> test02WhenChargedCellGeneratorChargedCellAtSelectedPositionThenItsTheEspecificCEll [
+ChargedCellGeneratorTest >> test02WhenChargedCellGeneratorChargedCellAtSelectedPositionThenItsTheEspecificCell [
 
 	| generator chargedCell generatedCell |
-
 	generator := ChargedCellGenerator forBoardOfSize: 10.
 	chargedCell := WormHole createWithPosition: 6.
-
 	generator put: chargedCell at: 6.
-
 	generatedCell := generator cellForPosition: 6.
 
 	self assert: generatedCell equals: chargedCell
 ]
 
 { #category : 'tests' }
-ChargedCellGeneratorTest >> test03ChargedCellGeneratorCreatesCommonCellInOtherPositions [
+ChargedCellGeneratorTest >> test03WhenChargedCellGeneratorCreatesCommonCellThenItIsInOtherPositions [
 
 	| generator chargedCell generatedCell |
-
 	generator := ChargedCellGenerator forBoardOfSize: 10.
 	chargedCell := WormHole createWithPosition: 6.
-
 	generator put: chargedCell at: 6.
-
 	generatedCell := generator cellForPosition: 3.
 
 	self assert: generatedCell class equals: Cell.
@@ -54,33 +47,25 @@ ChargedCellGeneratorTest >> test03ChargedCellGeneratorCreatesCommonCellInOtherPo
 ]
 
 { #category : 'tests' }
-ChargedCellGeneratorTest >> test04ChargedCellGeneratorRaisesErrorWhenPuttingCellInNegativePosition [
+ChargedCellGeneratorTest >> test04WhenPuttingCellInNegativePositionThenTheChargedCellGeneratorFails [
 
 	| generator |
-
 	generator := ChargedCellGenerator forBoardOfSize: 10.
 
 	self
-		should: [
-			generator
-				put: (WormHole createWithPosition: -1)
-				at: -1 ]
+		should: [ generator put: (WormHole createWithPosition: -1) at: -1 ]
 		raise: Error
 		withMessageText: 'Invalid cell position'
 ]
 
 { #category : 'tests' }
-ChargedCellGeneratorTest >> test05ChargedCellGeneratorRaisesErrorWhenPuttingCellOutOfBoard [
+ChargedCellGeneratorTest >> test05WhenPuttingCellOutOfBoardThenChargedCellGeneratorFails [
 
 	| generator |
-
 	generator := ChargedCellGenerator forBoardOfSize: 10.
 
 	self
-		should: [
-			generator
-				put: (WormHole createWithPosition: 11)
-				at: 11 ]
+		should: [ generator put: (WormHole createWithPosition: 11) at: 11 ]
 		raise: Error
 		withMessageText: 'Invalid cell position'
 ]

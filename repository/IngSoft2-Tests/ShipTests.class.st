@@ -67,9 +67,7 @@ ShipTests >> test01WhenAShipIsAtZeroStartingPosition [
 { #category : 'tests' }
 ShipTests >> test02WhenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 
-	anOverload := Overload new.
-	aCollectionOfCards := OrderedCollection new.
-	aCollectionOfCards add: anOverload.
+	self arrangeShipTestWithOneCard.
 	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 
 	self assert: (aShip nameIs: 'juan')
@@ -78,9 +76,7 @@ ShipTests >> test02WhenAShipIsCreatedWhitANameThenTheShipKnowsItsName [
 { #category : 'tests' }
 ShipTests >> test03WhenAShipsNameIsNotAStringThenTheCreationFails [
 
-	anOverload := Overload new.
-	aCollectionOfCards := OrderedCollection new.
-	aCollectionOfCards add: anOverload.
+	self arrangeShipTestWithOneCard.
 
 	self
 		should: [ Ship createWithName: 5 andWithACollectionOfCards: aCollectionOfCards ]
@@ -91,9 +87,7 @@ ShipTests >> test03WhenAShipsNameIsNotAStringThenTheCreationFails [
 { #category : 'tests' }
 ShipTests >> test04WhenAShipIsCreatedWithOneCardThenTheShipKnowsHowManyCardsItHasLeft [
 
-	anOverload := Overload new.
-	aCollectionOfCards := OrderedCollection new.
-	aCollectionOfCards add: anOverload.
+	self arrangeShipTestWithOneCard.
 	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 
 	self assert: (aShip hasCardsLeft) equals: 1

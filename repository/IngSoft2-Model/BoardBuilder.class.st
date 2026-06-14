@@ -37,10 +37,8 @@ BoardBuilder >> initializeWithCells: aNumberOfCells andParcecs: anAmountOfParcec
 BoardBuilder >> putting: aCell at: aPosition [
 
 	| generator |
-
 	generator := ChargedCellGenerator forBoardOfSize: numberOfCells.
 	generator put: aCell at: aPosition.
-
 	cellGenerator := generator
 ]
 
@@ -54,11 +52,7 @@ BoardBuilder >> using: aCellGenerator [
 BoardBuilder >> usingRandomCells [
 
 	| random distribution |
-
 	random := Random new.
 	distribution := CellProbabilityDistribution defaultFor: random.
-
-	cellGenerator := RandomCellGenerator
-		                 using: distribution
-		                 andRandom: random
+	cellGenerator := RandomCellGenerator using: distribution andRandom: random
 ]

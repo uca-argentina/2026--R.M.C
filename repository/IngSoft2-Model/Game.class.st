@@ -32,7 +32,7 @@ Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipM
 ]
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice andACardManager:aCardManager [
+Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice andACardManager: aCardManager [
 
 	self validateCollection: aCollectionOfDice.
 	^ self new
@@ -41,8 +41,7 @@ Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipM
 		  andADice: aCollectionOfDice
 		  andATurnManger: aTurnManager
 		  andAPositionManager: aPositionShipManager
-	     andACardManager:aCardManager
-
+		  andACardManager: aCardManager
 ]
 
 { #category : 'as yet unclassified' }
@@ -53,32 +52,17 @@ Game class >> validateCollection: aCollection [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> PayerShip: aShip PlaysCard: aCards toTarget: aTargetShip [
+Game >> appliesCard: aCards [
 
-	targeplayer := aTargetShip.
-	aShip playsCardFromGame: self LookForCardInShip: aCards.
-	self applyRepeatedMovementEffectIfNeededTo: aTargetShip
-]
-
-{ #category : 'as yet unclassified' }
-Game >> Showcardsfromplayer: aShip [ 
-	^aShip hasCardsLeft.
-]
-
-{ #category : 'as yet unclassified' }
-Game >> appliesCard: aCard [
-    aCardsManager applyCard: aCard toTarget: targeplayer.
+	aCardsManager applyCard: aCards toTarget: targeplayer
 ]
 
 { #category : 'as yet unclassified' }
 Game >> applyRepeatedMovementEffectIfNeededTo: aTargetShip [
 
 	| repeatedEffect |
-
 	repeatedEffect := aCardsManager repeatedMovementEffect.
-
 	repeatedEffect ifNil: [ ^ self ].
-
 	repeatedEffect applyTo: aTargetShip in: self.
 	aCardsManager clearRepeatedMovementEffect
 ]
@@ -109,8 +93,7 @@ Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice a
 	diceCollection := aCollectionOfDice.
 	aShipTurnManager := aTurnManager.
 	shipPositionManager := aPositionShipManager.
-	aCardsManager := CardManager new.
-	
+	aCardsManager := CardManager new
 ]
 
 { #category : 'as yet unclassified' }
@@ -127,7 +110,7 @@ Game >> moveAllShipsExcept: aShip by: anAmount [
 
 	shipPositionManager
 		moveAllShipsExcept: aShip
-		by: anAmount  
+		by: anAmount
 		inBoardOfSize: board numberOfCells
 ]
 
@@ -138,8 +121,17 @@ Game >> moveBackToZero: aShip [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> penaltyAppliedToShip: aShip [ 
-  ^ aCardsManager penaltyFor: aShip
+Game >> penaltyAppliedToShip: aShip [
+
+	^ aCardsManager penaltyFor: aShip
+]
+
+{ #category : 'as yet unclassified' }
+Game >> playerShip: aShip playsCard: aCards toTarget: aTargetShip [
+
+	targeplayer := aTargetShip.
+	aShip playsCardFromGame: self lookForCardInShip: aCards.
+	self applyRepeatedMovementEffectIfNeededTo: aTargetShip
 ]
 
 { #category : 'as yet unclassified' }
@@ -149,19 +141,13 @@ Game >> playturn [
 	self canPlay.
 	shipToPlay := aShipTurnManager nextShipToPlayInGame.
 	throwwithpenalty := self penaltyAppliedToShip: shipToPlay.
-	sumOfTheDices := (diceCollection sum: [ :aDie | aDie throw ])
-	                 + throwwithpenalty.
-
-
+	sumOfTheDices := (diceCollection sum: [ :aDie | aDie throw ]) + throwwithpenalty.
 
 	movementEffect := shipPositionManager
 		                  movementEffectFor: shipToPlay
 		                  moving: sumOfTheDices
 		                  inBoardOfSize: board numberOfCells
-		                  modifiedBy: [ :futurePosition |
-			                  board
-				                  effectForLandingAt: futurePosition
-				                  startingWith: sumOfTheDices ].
+		                  modifiedBy: [ :futurePosition | board effectForLandingAt: futurePosition startingWith: sumOfTheDices ].
 
 	aCardsManager updateLastMovementEffect: movementEffect.
 	movementEffect applyTo: shipToPlay in: self
@@ -169,7 +155,14 @@ Game >> playturn [
 
 { #category : 'as yet unclassified' }
 Game >> ranking [
-    ^ shipPositionManager currentRanking
+
+	^ shipPositionManager currentRanking
+]
+
+{ #category : 'as yet unclassified' }
+Game >> showCardsFromPlayer: aShip [
+
+	^ aShip hasCardsLeft
 ]
 
 { #category : 'accessing' }

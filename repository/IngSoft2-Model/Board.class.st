@@ -23,11 +23,7 @@ Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParc
 
 	self validateNumber: aNumberOfCells.
 	self validateParcecs: anAmountOfParcecs.
-
-	^ self new
-		  initializeWithATotalNumberOfCellsOf: aNumberOfCells
-		  andAnAmountOfParcecsOf: anAmountOfParcecs
-		  using: aCellGenerator
+	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator
 ]
 
 { #category : 'testing' }
@@ -57,8 +53,7 @@ Board >> effectForLandingAt: aPosition startingWith: anAmount [
 
 	| cell |
 	cell := cells at: aPosition + 1.
-
-	^ cell effectForMovement: anAmount in: self.
+	^ cell effectForMovement: anAmount in: self
 ]
 
 { #category : 'initialization' }
@@ -73,10 +68,7 @@ Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcec
 Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator [
 
 	numberOfCells := aNumberOfCells.
-
-	cells := (0 to: aNumberOfCells) collect: [ :index |
-		         aCellGenerator cellForPosition: index ].
-
+	cells := (0 to: aNumberOfCells) collect: [ :index | aCellGenerator cellForPosition: index ].
 	amountOfParcecs := anAmountOfParcecs
 ]
 

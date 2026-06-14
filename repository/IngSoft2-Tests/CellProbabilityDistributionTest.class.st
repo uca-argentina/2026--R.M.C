@@ -27,9 +27,7 @@ CellProbabilityDistributionTest >> distributionForTesting [
 CellProbabilityDistributionTest >> test01CellProbabilityDistributionCreatesCommonCell [
 
 	| distribution cell |
-
 	distribution := self distributionForTesting.
-
 	cell := distribution cellFor: 0.35 atPosition: 4.
 
 	self assert: cell class equals: Cell.
@@ -40,9 +38,7 @@ CellProbabilityDistributionTest >> test01CellProbabilityDistributionCreatesCommo
 CellProbabilityDistributionTest >> test02CellProbabilityDistributionCreatesWormHole [
 
 	| distribution cell |
-
 	distribution := self distributionForTesting.
-
 	cell := distribution cellFor: 0.55 atPosition: 4.
 
 	self assert: cell class equals: WormHole.
@@ -53,9 +49,7 @@ CellProbabilityDistributionTest >> test02CellProbabilityDistributionCreatesWormH
 CellProbabilityDistributionTest >> test03CellProbabilityDistributionIncludesUpperLimitInCurrentRange [
 
 	| distribution cell |
-
 	distribution := self distributionForTesting.
-
 	cell := distribution cellFor: 0.40 atPosition: 4.
 
 	self assert: cell class equals: Cell

@@ -52,7 +52,7 @@ CardManager >> clearRepeatedMovementEffect [
 CardManager >> initialize [
 
 	pendingCards := OrderedCollection new.
-	lastPlayedCard := 'no cards'.
+	lastPlayedCard := 'no cards'
 ]
 
 { #category : 'as yet unclassified' }

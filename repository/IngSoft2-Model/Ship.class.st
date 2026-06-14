@@ -32,7 +32,7 @@ Ship class >> validateName: aName [
 { #category : 'as yet unclassified' }
 Ship >> addCard: aCard [
 
-	cards add: aCard.
+	cards add: aCard
 ]
 
 { #category : 'as yet unclassified' }
@@ -41,17 +41,30 @@ Ship >> cards [
 	^ cards copy
 ]
 
+{ #category : 'as yet unclassified' }
+Ship >> hasCardLeft [
+
+	^ cards size
+]
+
 { #category : 'testing' }
 Ship >> hasCardsLeft [
 
-	^ card size
+	^ cards size
+]
+
+{ #category : 'initialization' }
+Ship >> initializeWith: aName [
+
+	name := aName.
+	cards := OrderedCollection new
 ]
 
 { #category : 'as yet unclassified' }
 Ship >> intializeWithName: aName andWithACollectionOfCards: aCollectionOfCards [
 
 	name := aName.
-	card := aCollectionOfCards
+	cards := aCollectionOfCards
 ]
 
 { #category : 'accessing' }
@@ -67,19 +80,17 @@ Ship >> nameIs: aName [
 ]
 
 { #category : 'as yet unclassified' }
-Ship >> playsCardFromGame: aGame LookForCardInShip: aCard [
+Ship >> playsCardFromGame: aGame lookForCardInShip: aCard [
 
 	| aShipHasCard |
-	aShipHasCard := card includes: aCard.
-	aShipHasCard ifTrue: [ card remove: aCard. aGame appliesCard: aCard ]
+	aShipHasCard := cards includes: aCard.
+	aShipHasCard ifTrue: [ cards remove: aCard. aGame appliesCard: aCard ]
 		ifFalse: [ Error signal: 'Ship does not have that card' ]
 ]
 
 { #category : 'as yet unclassified' }
 Ship >> removeCard: aCard [
 
-	(cards includes: aCard)
-		ifFalse: [ Error signal: 'The ship does not have that card' ].
-
-	cards remove: aCard.
+	(cards includes: aCard) ifFalse: [ Error signal: 'The ship does not have that card' ].
+	cards remove: aCard
 ]

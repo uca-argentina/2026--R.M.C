@@ -12,9 +12,7 @@ Class {
 CardDealerCell class >> createWithPosition: aPosition andCardGenerator: aCardGenerator [
 
 	self verificate: aPosition.
-	^ self new
-		  initializeWithPosition: aPosition
-		  andCardGenerator: aCardGenerator
+	^ self new initializeWithPosition: aPosition andCardGenerator: aCardGenerator
 ]
 
 { #category : 'as yet unclassified' }
