@@ -5,12 +5,10 @@ Class {
 		'name',
 		'board',
 		'diceCollection',
-		'shipsInGame',
 		'shipPositionManager',
 		'aShipTurnManager',
-		'targetPlayer',
 		'aCardsManager',
-		'aCard'
+		'targetPlayer'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
