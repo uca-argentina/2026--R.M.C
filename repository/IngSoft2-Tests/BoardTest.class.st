@@ -31,9 +31,12 @@ BoardTest >> test01WhenABoardIsCreatedThenItHasAPositiveNumberOfCells [
 
 	self arrangeBoardTestWithOneCard.
 	self arrangeBoardTestWithOneShip.
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50
+		          using: (ChargedCellGenerator forBoardOfSize: 8).
 
-	self assert: (aBoard numberOfCells) positive
+	self assert: aBoard numberOfCells positive
 ]
 
 { #category : 'tests' }
@@ -41,7 +44,10 @@ BoardTest >> test02WhenABoardIsCreatedWithEightCellsThenItHasEightCells [
 
 	self arrangeBoardTestWithOneCard.
 	self arrangeBoardTestWithOneShip.
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50
+		          using: (ChargedCellGenerator forBoardOfSize: 8).
 
 	self assert: (aBoard numberOfCells) equals: 8
 ]
@@ -53,7 +59,10 @@ BoardTest >> test03WhenABoardHasLessThanTwoCellsThenTheBoardCannotBeCreated [
 	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 
 	self
-		should: [ Board createWithATotalNumberOfCellsOf: 0 andAnAmountOfParcecsOf: 50 ]
+		should: [ 	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 0
+		          andAnAmountOfParcecsOf: 50
+		          using: (ChargedCellGenerator forBoardOfSize: 0). ]
 		raise: Error
 		withMessageText: 'The board must have an integer number of cells greater than two'
 ]
@@ -65,7 +74,10 @@ BoardTest >> test04WhenABoardHasAnInvalidNumberOfCellsThenTheBoardCannotBeCreate
 	aShip := Ship createWithName: 'juan' andWithACollectionOfCards: aCollectionOfCards.
 
 	self
-		should: [ Board createWithATotalNumberOfCellsOf: '8' 	andAnAmountOfParcecsOf: 50 ]
+		should: [ 	aBoard := Board
+		          createWithATotalNumberOfCellsOf: '8'
+		          andAnAmountOfParcecsOf: 50
+		          using: (ChargedCellGenerator forBoardOfSize: 8). ]
 		raise: Error
 		withMessageText: 'The board must have an integer number of cells greater than two'
 ]
@@ -75,7 +87,10 @@ BoardTest >> test05WhenABoardIsCreatedThenItHaveANumberOfParsecs [
 
 	self arrangeBoardTestWithOneCard.
 	self arrangeBoardTestWithOneShip.
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
+	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: 50
+		          using: (ChargedCellGenerator forBoardOfSize: 8)..
 
 	self assert: (aBoard parcecs) equals: 50
 ]
@@ -87,7 +102,10 @@ BoardTest >> test06WhenABoardHasNegativeAmountOfParcecsThenTheBoardCannotBeCreat
 	self arrangeBoardTestWithOneShip.
 
 	self
-		should: [ Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: -50 ]
+		should: [	aBoard := Board
+		          createWithATotalNumberOfCellsOf: 8
+		          andAnAmountOfParcecsOf: -50
+		          using: (ChargedCellGenerator forBoardOfSize: 8).]
 		raise: Error
 		withMessageText: 'The board must have an positive integer number of parcecs'
 ]

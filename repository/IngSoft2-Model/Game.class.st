@@ -29,19 +29,6 @@ Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipM
 ]
 
 { #category : 'as yet unclassified' }
-Game class >> createWithName: aBoardName andAShipPositionManager: aPositionShipManager andATurnManager: aTurnManager andABord: aBoard andADice: aCollectionOfDice andACardManager: aCardManager [
-
-	self validateCollection: aCollectionOfDice.
-	^ self new
-		  initializeWithName: aBoardName
-		  andBoard: aBoard
-		  andADice: aCollectionOfDice
-		  andATurnManger: aTurnManager
-		  andAPositionManager: aPositionShipManager
-		  andACardManager: aCardManager
-]
-
-{ #category : 'as yet unclassified' }
 Game class >> validateCollection: aCollection [
 
 	aCollection isEmpty ifTrue: [

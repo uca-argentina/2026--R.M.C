@@ -11,14 +11,6 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs [
-
-	self validateNumber: aNumberOfCells.
-	self validateParcecs: anAmountOfParcecs.
-	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs
-]
-
-{ #category : 'as yet unclassified' }
 Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator [
 
 	self validateNumber: aNumberOfCells.
@@ -54,14 +46,6 @@ Board >> effectForLandingAt: aPosition startingWith: anAmount [
 	| cell |
 	cell := cells at: aPosition + 1.
 	^ cell effectForMovement: anAmount in: self
-]
-
-{ #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs [
-
-	numberOfCells := aNumberOfCells.
-	cells := (0 to: aNumberOfCells) collect: [ :index | Cell createWithPosition: index ].
-	amountOfParcecs := anAmountOfParcecs
 ]
 
 { #category : 'initialization' }

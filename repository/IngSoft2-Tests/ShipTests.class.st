@@ -20,7 +20,7 @@ Class {
 { #category : 'tests - initial state' }
 ShipTests >> arrangeShipTestWithOneBoardOfEightCellsFiftyParsecsAndFiveLaps [
 
-	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50.
+	aBoard := Board createWithATotalNumberOfCellsOf: 8 andAnAmountOfParcecsOf: 50 using: (ChargedCellGenerator forBoardOfSize: 8).
 	aShipPositionManager := ShipPositionManager createWith: aCollectionOfShips andNumberOfLaps: 5.
 	aTurnManager := TurnManager creatWith: aCollectionOfShips.
 ]
