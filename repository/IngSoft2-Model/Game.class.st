@@ -6,14 +6,11 @@ Class {
 		'board',
 		'diceCollection',
 		'shipsInGame',
-		'currentIndexOfShipPlaying',
-		'lapmanager',
 		'shipPositionManager',
 		'aShipTurnManager',
+		'targetPlayer',
 		'aCardsManager',
-		'targeplayer',
-		'aCard',
-		'aPenaltyShips'
+		'aCard'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -54,7 +51,7 @@ Game class >> validateCollection: aCollection [
 { #category : 'as yet unclassified' }
 Game >> appliesCard: aCards [
 
-	aCardsManager applyCard: aCards toTarget: targeplayer
+	aCardsManager applyCard: aCards toTarget: targetPlayer
 ]
 
 { #category : 'as yet unclassified' }
@@ -129,7 +126,7 @@ Game >> penaltyAppliedToShip: aShip [
 { #category : 'as yet unclassified' }
 Game >> playerShip: aShip playsCard: aCards toTarget: aTargetShip [
 
-	targeplayer := aTargetShip.
+	targetPlayer := aTargetShip.
 	aShip playsCardFromGame: self lookForCardInShip: aCards.
 	self applyRepeatedMovementEffectIfNeededTo: aTargetShip
 ]
