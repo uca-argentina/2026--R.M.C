@@ -19,7 +19,7 @@ ShipPositionManager class >> createWith: aCollectionOfShips andNumberOfLaps: aNu
 { #category : 'as yet unclassified' }
 ShipPositionManager class >> validateWithACollectionOfShips: aCollectionOfShips andNumberOfLaps: aNumberOfLaps [
 
-	aCollectionOfShips isEmpty ifTrue: [ 	Error signal: 'There must be one ship in de manager of positions' ].
+	aCollectionOfShips isEmpty ifTrue: [ 	Error signal: 'There must be one ship in the manager of positions' ].
 	aNumberOfLaps >= 0 ifFalse: [ Error signal: 'There must be a lap in race' ]
 ]
 
