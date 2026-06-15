@@ -34,7 +34,7 @@ ShipPositionManagerTest >> test01WhenAPositionManagerHaveAnEmptyShipsCollectionT
 	self
 		should: [ ShipPositionManager createWith: OrderedCollection new andNumberOfLaps: 3 ]
 		raise: Error
-		withMessageText: 'There must be one ship in de manager of positions'
+		withMessageText: 'There must be one ship in the manager of positions'
 ]
 
 { #category : 'tests' }
