@@ -19,8 +19,7 @@ Cell class >> createWithPosition: aPosition [
 Cell class >> verificate: aNumber [
 
 	(aNumber isInteger and: [ aNumber >= 0 ]) ifFalse: [
-			Error signal:
-				'Position cannot be negative (must be integer)' ]
+		Error signal: 'Position cannot be negative (must be integer)' ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -32,7 +31,7 @@ Cell >> effectForMovement: anAmount in: aBoard [
 { #category : 'initialization' }
 Cell >> initializeWithPosition: aPosition [
 
-	position := aPosition.
+	position := aPosition
 ]
 
 { #category : 'as yet unclassified' }

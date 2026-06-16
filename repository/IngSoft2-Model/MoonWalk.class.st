@@ -9,17 +9,17 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-MoonWalk class >> createWithPosition: aPositionInBoard withBackwardsMovementOf: amountOfBackwardCells [ 
-	self verificate: amountOfBackwardCells .
-	^self new initializeWithPosition: aPositionInBoard withBackwardsMovementOf: amountOfBackwardCells
+MoonWalk class >> createWithPosition: aPositionInBoard withBackwardsMovementOf: amountOfBackwardCells [
+
+	self verificate: amountOfBackwardCells.
+	^ self new initializeWithPosition: aPositionInBoard withBackwardsMovementOf: amountOfBackwardCells
 ]
 
 { #category : 'as yet unclassified' }
 MoonWalk class >> verificate: aNumber [
 
 	(aNumber isInteger and: [ aNumber >= 0 ]) ifFalse: [
-			Error signal:
-				'The backwards movement must be positive integer' ]
+		Error signal: 'The backwards movement must be positive integer' ]
 ]
 
 { #category : 'as yet unclassified' }

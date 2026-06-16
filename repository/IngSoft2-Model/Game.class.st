@@ -5,11 +5,10 @@ Class {
 		'name',
 		'board',
 		'diceCollection',
-		'shipsInGame',
-		'currentIndexOfShipPlaying',
-		'lapmanager',
 		'shipPositionManager',
-		'aShipTurnManager'
+		'aShipTurnManager',
+		'aCardsManager',
+		'targetPlayer'
 	],
 	#category : 'IngSoft2-Model',
 	#package : 'IngSoft2-Model'
@@ -32,6 +31,22 @@ Game class >> validateCollection: aCollection [
 
 	aCollection isEmpty ifTrue: [
 		Error signal: 'There must be one dice in the game' ]
+]
+
+{ #category : 'as yet unclassified' }
+Game >> appliesCard: aCards [
+
+	aCardsManager applyCard: aCards toTarget: targetPlayer
+]
+
+{ #category : 'as yet unclassified' }
+Game >> applyRepeatedMovementEffectIfNeededTo: aTargetShip [
+
+	| repeatedEffect |
+	repeatedEffect := aCardsManager repeatedMovementEffect.
+	repeatedEffect ifNil: [ ^ self ].
+	repeatedEffect applyTo: aTargetShip in: self.
+	aCardsManager clearRepeatedMovementEffect
 ]
 
 { #category : 'as yet unclassified' }
@@ -59,7 +74,8 @@ Game >> initializeWithName: aName andBoard: aBoard andADice: aCollectionOfDice a
 	board := aBoard.
 	diceCollection := aCollectionOfDice.
 	aShipTurnManager := aTurnManager.
-	shipPositionManager := aPositionShipManager
+	shipPositionManager := aPositionShipManager.
+	aCardsManager := CardManager new
 ]
 
 { #category : 'as yet unclassified' }
@@ -76,7 +92,7 @@ Game >> moveAllShipsExcept: aShip by: anAmount [
 
 	shipPositionManager
 		moveAllShipsExcept: aShip
-		by: anAmount  
+		by: anAmount
 		inBoardOfSize: board numberOfCells
 ]
 
@@ -87,41 +103,48 @@ Game >> moveBackToZero: aShip [
 ]
 
 { #category : 'as yet unclassified' }
-Game >> nextShipToPlay [
+Game >> penaltyAppliedToShip: aShip [
 
-	| ship |
-	ship := shipsInGame at: currentIndexOfShipPlaying + 1.
+	^ aCardsManager penaltyFor: aShip
+]
 
-	currentIndexOfShipPlaying := currentIndexOfShipPlaying + 1
-	                             \\ shipsInGame size.
+{ #category : 'as yet unclassified' }
+Game >> playerShip: aShip playsCard: aCards toTarget: aTargetShip [
 
-	^ ship
+	targetPlayer := aTargetShip.
+	aShip playsCardFromGame: self lookForCardInShip: aCards.
+	self applyRepeatedMovementEffectIfNeededTo: aTargetShip
 ]
 
 { #category : 'as yet unclassified' }
 Game >> playturn [
 
-	| sumOfTheDices shipToPlay movementEffect |
+	| sumOfTheDices shipToPlay movementEffect throwwithpenalty |
 	self canPlay.
-
-	sumOfTheDices := diceCollection sum: [ :aDie | aDie throw ].
 	shipToPlay := aShipTurnManager nextShipToPlayInGame.
+	throwwithpenalty := self penaltyAppliedToShip: shipToPlay.
+	sumOfTheDices := (diceCollection sum: [ :aDie | aDie throw ]) + throwwithpenalty.
 
 	movementEffect := shipPositionManager
 		                  movementEffectFor: shipToPlay
 		                  moving: sumOfTheDices
 		                  inBoardOfSize: board numberOfCells
-		                  modifiedBy: [ :futurePosition |
-			                  board
-				                  effectForLandingAt: futurePosition
-				                  startingWith: sumOfTheDices ].
+		                  modifiedBy: [ :futurePosition | board effectForLandingAt: futurePosition startingWith: sumOfTheDices ].
 
+	aCardsManager updateLastMovementEffect: movementEffect.
 	movementEffect applyTo: shipToPlay in: self
 ]
 
 { #category : 'as yet unclassified' }
 Game >> ranking [
-    ^ shipPositionManager currentRanking
+
+	^ shipPositionManager currentRanking
+]
+
+{ #category : 'as yet unclassified' }
+Game >> showCardsFromPlayer: aShip [
+
+	^ aShip hasCardsLeft
 ]
 
 { #category : 'accessing' }

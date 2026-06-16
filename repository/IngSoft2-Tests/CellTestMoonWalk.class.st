@@ -8,7 +8,7 @@ Class {
 { #category : 'tests' }
 CellTestMoonWalk >> test01WhenTheMoonWalkIsCreatedThenItKnowsItsPosition [
 
-	| aCell |
 	aCell := MoonWalk createWithPosition: 1 withBackwardsMovementOf: 2.
-	self assert: (aCell numberOfCell )equals: 1
+
+	self assert: (aCell numberOfCell) equals: 1
 ]

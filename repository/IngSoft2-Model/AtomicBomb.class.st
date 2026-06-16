@@ -6,8 +6,9 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-AtomicBomb class >> createWithPosition: aPosition [ 
-	^ self new initializeWithPosition: aPosition.
+AtomicBomb class >> createWithPosition: aPosition [
+
+	^ self new initializeWithPosition: aPosition
 ]
 
 { #category : 'as yet unclassified' }

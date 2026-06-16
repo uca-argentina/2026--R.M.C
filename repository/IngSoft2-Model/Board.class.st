@@ -11,18 +11,18 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs [ 
-	self validateNumber: aNumberOfCells .
-	self validateParcecs: anAmountOfParcecs .
-	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs .
+Board class >> createWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator [
+
+	self validateNumber: aNumberOfCells.
+	self validateParcecs: anAmountOfParcecs.
+	^ self new initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator
 ]
 
 { #category : 'testing' }
 Board class >> validateNumber: aNumber [
 
 	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
-			Error signal:
-				'The board must have an integer number of cells greater than two' ].
+			Error signal: 'The board must have an integer number of cells greater than two' ].
 	^ aNumber
 ]
 
@@ -30,8 +30,7 @@ Board class >> validateNumber: aNumber [
 Board class >> validateParcecs: aNumber [
 
 	(aNumber isInteger and: [ aNumber > 2 ]) ifFalse: [
-			Error signal:
-				'The board must have an positive integer number of parcecs' ].
+			Error signal: 'The board must have an positive integer number of parcecs' ].
 	^ aNumber
 ]
 
@@ -46,16 +45,15 @@ Board >> effectForLandingAt: aPosition startingWith: anAmount [
 
 	| cell |
 	cell := cells at: aPosition + 1.
-
-	^ cell effectForMovement: anAmount in: self.
+	^ cell effectForMovement: anAmount in: self
 ]
 
 { #category : 'initialization' }
-Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf:anAmountOfParcecs [ 
-	 numberOfCells  := aNumberOfCells.
-		cells := (0 to: aNumberOfCells) collect: [ :index |
-		         Cell createWithPosition: index ].
-	 amountOfParcecs := anAmountOfParcecs.
+Board >> initializeWithATotalNumberOfCellsOf: aNumberOfCells andAnAmountOfParcecsOf: anAmountOfParcecs using: aCellGenerator [
+
+	numberOfCells := aNumberOfCells.
+	cells := (0 to: aNumberOfCells) collect: [ :index | aCellGenerator cellForPosition: index ].
+	amountOfParcecs := anAmountOfParcecs
 ]
 
 { #category : 'as yet unclassified' }
@@ -66,5 +64,6 @@ Board >> numberOfCells [
 
 { #category : 'as yet unclassified' }
 Board >> parcecs [
-^ amountOfParcecs .
+
+	^ amountOfParcecs
 ]

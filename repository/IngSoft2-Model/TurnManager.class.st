@@ -10,23 +10,23 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-TurnManager class >> creatWith: aCollectionofShips [ 
-	^self new intializeWith:aCollectionofShips.
+TurnManager class >> creatWith: aCollectionofShips [
+
+	^ self new intializeWith: aCollectionofShips
 ]
 
 { #category : 'as yet unclassified' }
 TurnManager >> intializeWith: aCollectionofShips [
-	allships:=aCollectionofShips .
-	currentIndexOfShipPlaying:=0.
+
+	allships := aCollectionofShips.
+	currentIndexOfShipPlaying := 0
 ]
 
 { #category : 'as yet unclassified' }
 TurnManager >> nextShipToPlayInGame [
-| ship  |
+
+	| ship |
 	ship := allships at: currentIndexOfShipPlaying + 1.
-
-	currentIndexOfShipPlaying := currentIndexOfShipPlaying + 1
-	                             \\ allships size.
-
+	currentIndexOfShipPlaying := currentIndexOfShipPlaying + 1 \\ allships size.
 	^ ship
 ]

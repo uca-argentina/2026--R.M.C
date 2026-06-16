@@ -1,6 +1,9 @@
 Class {
 	#name : 'CellTest',
 	#superclass : 'TestsTools',
+	#instVars : [
+		'aCell'
+	],
 	#category : 'IngSoft2-Tests',
 	#package : 'IngSoft2-Tests'
 }
@@ -8,17 +11,17 @@ Class {
 { #category : 'tests' }
 CellTest >> test01whenTheCellIsCreatedThenItKnowsItsPosition [
 
-	| aCell |
 	aCell := Cell createWithPosition: 1.
-	self assert: (aCell numberOfCell )equals: 1
+
+	self assert: (aCell numberOfCell) equals: 1
 ]
 
 { #category : 'tests' }
 CellTest >> test02whenTheCellIsCreatedAtAnExactPositionThenItCannotBeInAnotherPosition [
 
-	| aCell |
 	aCell := Cell createWithPosition: 1.
-	self deny: (aCell numberOfCell )equals: 2
+
+	self deny: (aCell numberOfCell) equals: 2
 ]
 
 { #category : 'tests' }

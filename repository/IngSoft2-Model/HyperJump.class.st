@@ -19,10 +19,8 @@ HyperJump class >> createWithPosition: aPosition andParsecs: aCollectionOfParsec
 HyperJump >> effectForMovement: anAmount in: aBoard [
 
 	| parsecs cellsToAdvance |
-
 	parsecs := self nextParsecs.
 	cellsToAdvance := aBoard amountOfCellsForParsecs: parsecs.
-
 	^ MovementEffectManager moveOneShipBy: anAmount + cellsToAdvance
 ]
 
@@ -38,13 +36,8 @@ HyperJump >> initializeWithPosition: aPosition andParsecs: aCollectionOfParsecs 
 HyperJump >> nextParsecs [
 
 	| parsecs |
-
 	parsecs := parsecValues at: currentIndex.
-
 	currentIndex := currentIndex + 1.
-	currentIndex > parsecValues size ifTrue: [
-		currentIndex := 1
-	].
-
+	currentIndex > parsecValues size ifTrue: [ currentIndex := 1 ].
 	^ parsecs
 ]
